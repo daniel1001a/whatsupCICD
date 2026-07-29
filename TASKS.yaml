@@ -10,7 +10,7 @@ meta:
   updated: 2026-07-29
   current_phase: 0
   gate_status:
-    P0: awaiting_approval
+    P0: awaiting_approval   # 產出完成、inspector 驗收、critic 有條件放行；等 PO 回答 RISKS.md Q1-Q7
     P1: not_started
     P2: not_started
     P3: not_started
@@ -99,7 +99,8 @@ phase_0:
     effort: low
     level: L0
     dod: [輸出逐條打勾表與缺漏清單]
-    status: todo
+    status: done
+    notes: 回報零缺漏；Tech Lead 抽查後推翻 1 項（§7.3 E_UNKNOWN 無 base 映射）
 
   - id: P0-07
     desc: Phase 0 挑戰 — critic 全量 review，重點：規格是否可實作、鐵則是否有內部矛盾、第 4 週還有人看嗎
@@ -109,7 +110,8 @@ phase_0:
     effort: high
     level: L2
     dod: [輸出打回清單或放行結論]
-    status: todo
+    status: done
+    notes: 有條件放行。4 必須修 + 5 應該修，全部已處置（其中 2 項未採用 critic 建議的修法，見 STATE.md）
 
 # ══════════════════════════════════════════════════════════════════
 # PHASE 1 — 骨架
@@ -459,6 +461,9 @@ phase_3:
       - 匿名模式與 opt-out 正確生效
       - 毒舌強度 0–3 皆有對應文案
       - 底部帶產品連結
+      - ★ 所有 LLM 自由文字一律 type=plain_text / emoji=false（SPEC.md §7.5 第一道）
+      - 測試：含裸網域（無 scheme）的 LLM 文字渲染後不得成為可點擊連結
+      - 測試：含 <!channel> / @mention 的 LLM 文字渲染後不得觸發通知
     status: todo
 
   - id: P3-06
@@ -515,7 +520,8 @@ phase_3:
     dod:
       - 程式碼不含任何場景 ID 字面量（預留項 c）
       - 載入時驗證最後一條為無條件 catch-all
-      - 特徵空間笛卡兒積窮舉測試：每組恰好命中一個場景
+      - 主測試：每條優先序規則各 1 組正例 + 1 組邊界對照組（只差一個特徵就不該命中）
+      - 輔測試：特徵空間笛卡兒積窮舉（16,896 組），每組恰好命中一個場景
       - 同輸入同輸出（Gate P3）
     status: todo
 
@@ -527,7 +533,16 @@ phase_3:
     effort: medium
     level: L2
     outputs: [src/meme/title.ts]
-    dod: [24 display units 計算正確（CJK=2）; 截斷用 Intl.Segmenter; 4 級退路皆有測試; token 驗證（R7）]
+    dod:
+      - 24 display units 計算正確（CJK=2）
+      - 截斷用 Intl.Segmenter，切點落在 grapheme cluster 邊界
+      - 4 級截斷退路皆有測試
+      - ★ R7 四層檢查全部實作（SPEC.md §8.4）：
+        T1 輸入只有已驗證的公訴詞 JSON，絕不含錯誤區段原文
+        T2 語彙拒絕清單（人稱指涉 + 動機指控），存成資料
+        T3 來源涵蓋率：中文 CJK 2-gram ≥60%，ASCII token 100%
+        T4 confidence=insufficient 一律用模板標題，不呼叫 LLM
+      - 測試必須含一個「全中文編造新指控」的案例（原 ASCII token 規則對它是空判斷）
     status: todo
 
   - id: P3-11

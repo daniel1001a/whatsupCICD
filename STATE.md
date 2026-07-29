@@ -47,8 +47,30 @@ Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
 | `docs/MEME_SCENES.md` | 10 個場景、觸發規則、原創性聲明與設計發想 | ✅ |
 | `docs/ARCHITECTURE.md` | 事件流、為什麼非同步、為什麼 log 不落地（骨架，Phase 5 完稿） | 🟡 骨架 |
 
-**尚未驗收**：`P0-06`（inspector 逐條打勾）與 `P0-07`（critic 挑戰）刻意保留到 PO 批准前後執行，
-以免對還可能被推翻的規格做全量 review。
+## Phase 0 驗收結果
+
+**`inspector`（P0-06）**：回報零缺漏——10/10 檔案齊全、62 個 task 無懸空依賴與 ID 碰撞、
+跨文件一致性（場景 ID、規則優先序、error_class、表名欄名、設定鍵、鐵則 R1–R7）全部對齊。
+
+⚠️ **Tech Lead 抽查後推翻其中一項**：inspector 宣稱「§7.3 基準值映射：相同列舉集合」，
+實際上 `E_UNKNOWN` **沒有** base 映射——而那正是 `signature_found = false` 時最常落到的類別，
+會導致算不出 severity、連帶讓場景選擇失去輸入。已修（`E_UNKNOWN → minor`，封頂 `moderate`）。
+另自查出 §8.3 的笛卡兒積數字誤植（100k → 實際 16,896）。
+**教訓：低 effort 的驗收報告要抽查，「全部 PASS」本身就是一個該懷疑的訊號。**
+
+**`critic`（P0-07）**：判定 **有條件放行**。4 項必須修、5 項應該修。
+
+| # | critic 的必須修 | 處置 |
+|---|---|---|
+| 1 | §7.5 只擋 `https?://`，但 Slack 會自動連結**裸網域**（`evil.example.net/patch`），形成規格自稱要擋卻擋不住的釣魚路徑 | ✅ 已修，但**不用它建議的正則方案**。改為渲染層 `plain_text`（結構上不可能自動連結，且不必維護 TLD 清單），正則檢查降為第二道 |
+| 2 | §8.4 的 ASCII token 檢查對預設語系 `zh-TW` 是**空判斷**——全中文的編造指控含零個 ASCII token，驗證恆為真。R7 對預設情境等於沒有技術防線 | ✅ 已修。改為四層（T1 輸入隔離 / T2 語彙拒絕清單 / T3 CJK 2-gram 涵蓋率 ≥60% / T4 insufficient 一律模板），並訂下「redteam 若能穩定突破就退回機械組合」的撤退線 |
+| 3 | `CLAUDE.md` Gate P3 要求 10 個場景，`RISKS.md` R-14 卻寫「4 個即可通過」——兩份治理文件互斥 | ✅ 矛盾已消除，但**不採用它的修法**（它建議把 Gate 改成 ≥4）。改為把降級路徑明確標記成「需 PO 批准的備案」——Tech Lead 不得自行放寬 PO 訂的驗收標準 |
+| 4 | 事件流是「先投遞 Slack、後落庫」，中途失敗會讓回饋按鈕引用不存在的 `case_id`，例外多半被吞掉，**靜默腐蝕北極星指標的分子** | ✅ 已修。順序倒轉為「交易內先建 cases + meme_cards → 投遞 → 回填 slack_ts」，同時解決投遞失敗可重試而不必重跑 LLM |
+
+應該修 5 項，全部採納：快取命中須重新求值健檢與夾制（快取的是文案不是判斷）、
+`cases` 加 `matched_pattern_id`、場景測試改為「每規則正例 + 邊界對照組」為主／窮舉為輔、
+`THREAT_MODEL.md` §5.6 的 `信心程度` 型別走樣（0–100 整數 → 四值 enum）、
+§3 In Scope 補上指向 Q2 的但書。
 
 ---
 
@@ -86,8 +108,8 @@ Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
 | `builder` | sonnet-5 | 0 | — | — |
 | `grunt` | haiku-4.5 | 0 | — | — |
 | `redteam` | sonnet-5 | 0 | — | Phase 1 起每 Phase ≥1 |
-| `critic` | sonnet-5 | 0 | — | `P0-07` 待執行 |
-| `inspector` | haiku-4.5 | 0 | — | `P0-06` 待執行 |
+| `critic` | sonnet-5 (high) | **1** | ~111k tokens · 14 tool calls · 8 min | 有條件放行：4 必須修 + 5 應該修 |
+| `inspector` | haiku-4.5 (low) | **1** | ~102k tokens · 22 tool calls · 3 min | 零缺漏（抽查後推翻 1 項） |
 | `illustrator` | sonnet-5 | 0 | — | Phase 3 |
 
 **architect 額度**：1 / 3 已用。剩餘 2 次保留給重大架構岔路。
