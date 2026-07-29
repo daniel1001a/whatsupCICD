@@ -8,10 +8,10 @@
 meta:
   version: 1
   updated: 2026-07-29
-  current_phase: 0
+  current_phase: 1
   gate_status:
-    P0: awaiting_approval   # 產出完成、inspector 驗收、critic 有條件放行；等 PO 回答 RISKS.md Q1-Q7
-    P1: not_started
+    P0: approved # PO 於 2026-07-29 批准。Q1-Q7 尚未回答，不擋 Phase 1 實作
+    P1: in_progress
     P2: not_started
     P3: not_started
     P4: not_started
@@ -87,7 +87,8 @@ phase_0:
     model: sonnet-5
     effort: medium
     level: L2
-    outputs: [CLAUDE.md, STATE.md, DECISIONS.md, docs/BRAND.md, docs/MEME_SCENES.md, docs/ARCHITECTURE.md]
+    outputs:
+      [CLAUDE.md, STATE.md, DECISIONS.md, docs/BRAND.md, docs/MEME_SCENES.md, docs/ARCHITECTURE.md]
     dod: [每個檔案有實質內容與更新時機; DECISIONS.md ≥ 10 條 ADR 含被否決方案]
     status: done
 
@@ -125,9 +126,20 @@ phase_1:
     model: sonnet-5
     effort: medium
     level: L1
-    outputs: [package.json, tsconfig.json, eslint.config.js, .prettierrc, vitest.config.ts, .gitignore]
-    dod: ["npm run dev/build/test/lint/typecheck 皆存在且可跑", "TS strict 全開含 noUncheckedIndexedAccess"]
-    status: todo
+    outputs:
+      [package.json, tsconfig.json, eslint.config.js, .prettierrc, vitest.config.ts, .gitignore]
+    dod:
+      [
+        'npm run dev/build/test/lint/typecheck 皆存在且可跑',
+        'TS strict 全開含 noUncheckedIndexedAccess',
+      ]
+    status: done
+    notes: >-
+      由 Tech Lead 自己做而非 builder：它是所有其他任務的前置，且需要一次到位。
+      同時把 src/logging.ts 從 P1-08 移到這裡自己寫——pino redaction 是 R2 的實作
+      （THREAT_MODEL.md §6 的側通道防護），不是格式偏好。
+      驗證：typecheck / eslint / prettier / build 全過，npm run dev 起得來，
+      /healthz 與 /readyz 皆回 200。
 
   - id: P1-02
     desc: CI 四關 — lint / typecheck / test / build，加 safe-regex 靜態檢查與 App 權限清單檢查
@@ -179,7 +191,8 @@ phase_1:
     level: L1
     inputs: [SPEC.md]
     outputs: [migrations/0001_init.sql, src/db/*.ts]
-    dod: [表定義與 SPEC.md §10 完全一致; 全 STRICT; migration 可重跑冪等; 無 SQLite 專屬語法於查詢層]
+    dod:
+      [表定義與 SPEC.md §10 完全一致; 全 STRICT; migration 可重跑冪等; 無 SQLite 專屬語法於查詢層]
     status: todo
 
   - id: P1-06
@@ -215,9 +228,15 @@ phase_1:
     model: sonnet-5
     effort: medium
     level: L1
-    outputs: [src/logging.ts, src/routes/health.ts]
-    dod: [pino redaction 明列禁止序列化的欄位; /healthz 與 /readyz; 有測試證明 log 不含 raw 內容]
+    outputs: [src/logging.test.ts, tests/e2e/no-raw-leak.test.ts]
+    dod:
+      - 有測試證明 log 不含 raw 內容（canary string 跨所有錯誤路徑）
+      - 驗證 REDACT_PATHS 涵蓋所有會攜帶 log 內容的欄位
+      - 驗證 Error serializer 剝除 Octokit RequestError 的 response.data 與 authorization
     status: todo
+    notes: >-
+      src/logging.ts 與 src/routes/health.ts 已於 P1-01 由 Tech Lead 實作
+      （R2 相關，不外派）。本 task 縮減為驗證測試。
 
   - id: P1-09
     desc: redteam 第一輪 — 攻擊 webhook 驗簽與 replay
@@ -568,7 +587,10 @@ phase_3:
     effort: medium
     level: L1
     outputs: [src/routes/share.ts]
-    dod: [shareId 128-bit base64url 不可枚舉; OG meta 齊全; 頁面無 repo 名/人名/log 內容（除非設定允許）]
+    dod:
+      [
+        shareId 128-bit base64url 不可枚舉; OG meta 齊全; 頁面無 repo 名/人名/log 內容（除非設定允許）,
+      ]
     status: todo
 
   - id: P3-13
@@ -665,7 +687,7 @@ phase_4:
     model: sonnet-5
     effort: medium
     level: L1
-    dod: ["能回答「這東西一個月花我多少錢」; 含迷因渲染成本; 需驗證存取"]
+    dod: ['能回答「這東西一個月花我多少錢」; 含迷因渲染成本; 需驗證存取']
     status: todo
 
   - id: P4-05
@@ -685,7 +707,10 @@ phase_4:
     model: sonnet-5
     effort: medium
     level: L1
-    dod: [error tracker 有 scrubbing hook（THREAT_MODEL.md §6）; 有測試證明 log 與 error report 皆不含 raw 內容]
+    dod:
+      [
+        error tracker 有 scrubbing hook（THREAT_MODEL.md §6）; 有測試證明 log 與 error report 皆不含 raw 內容,
+      ]
     status: todo
 
   - id: P4-07
@@ -750,7 +775,10 @@ phase_5:
     model: sonnet-5
     effort: medium
     level: L2
-    dod: [首屏一張截圖; 明講原始 log 不落地（R2）; 含 THREAT_MODEL.md §8 的 LLM 可見性說明; 解除安裝與刪除段落]
+    dod:
+      [
+        首屏一張截圖; 明講原始 log 不落地（R2）; 含 THREAT_MODEL.md §8 的 LLM 可見性說明; 解除安裝與刪除段落,
+      ]
     status: todo
 
   - id: P5-03

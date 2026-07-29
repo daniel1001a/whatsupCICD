@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+fixtures/
+*.md
+
+# 大腦檔案：手工維護的排版有意義（對齊的表格、DAG 註解），不讓 prettier 動
+TASKS.yaml
