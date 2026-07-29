@@ -414,21 +414,37 @@ LLM **只**輸出以下結構。任何多餘欄位一律被驗證器拒絕（`ad
 ```
 severity = max(base_by_error_class, modifiers…)
 
-base:   E_LINT               → minor
-        E_TEST, E_COMPILE    → moderate
-        E_DEPENDENCY,
+base:   E_LINT                          → minor
+        E_DEPENDENCY                    → minor
+        E_UNKNOWN                       → minor      ← 不知道就不加重（見下）
+        E_TEST, E_COMPILE               → moderate
+        E_AUTH                          → serious
+        E_DEPLOY                        → serious
         E_NETWORK, E_TIMEOUT,
-        E_INFRA, E_OOM       → minor      ← 這四類「大概不是人的錯」不加重（R5）
-        E_AUTH               → serious
-        E_DEPLOY             → serious
+        E_INFRA,   E_OOM                → minor      ← 「非戰之罪」四類，見下
 
 modifier（取最高）:
-        目標分支 == 預設分支                        → 至少 moderate
-        workflow 名稱符合 deploy/release/publish 樣式 → 至少 serious
-        同 signature 7 天內第 ≥3 次                  → 升一級（上限 serious）
-        同 run 內 ≥3 個 job 失敗                     → 至少 serious
-        以上皆非且 error_class 為前述四類            → 封頂 minor
+        目標分支 == 預設分支                          → 至少 moderate
+        workflow 名稱符合 deploy/release/publish 樣式  → 至少 serious
+        同 signature 7 天內第 ≥3 次                    → 升一級（上限 serious）
+        同 run 內 ≥3 個 job 失敗                       → 至少 serious
+
+夾制（在 modifier 之後套用，優先於 modifier）:
+        error_class ∈ 非戰之罪四類                     → 封頂 minor
+        error_class == E_UNKNOWN                      → 封頂 moderate
 ```
+
+**base 映射必須是全函數**：`error_class` 的每一個 enum 值都必須有 base，否則
+`signature_found = false` 的情況（最常落在 `E_UNKNOWN`）會算不出 severity，
+連帶讓場景選擇失去輸入。載入時以測試斷言 enum 與 base 表的鍵集合完全相等。
+
+**`E_UNKNOWN` 封頂 `moderate` 的理由**：我們連錯誤類型都判斷不出來，
+就沒有立場宣告這是重罪。不確定時往輕的方向走，與 §7.2 的 confidence 夾制同一個原則。
+
+**「非戰之罪」四類**指 `E_NETWORK` / `E_TIMEOUT` / `E_INFRA` / `E_OOM`——
+基礎設施問題，不是人造成的，因此連 modifier 都不該加重（R5）。
+`E_DEPENDENCY` 雖然 base 同為 `minor`，但**不在**此列：依賴地獄通常確實源自
+某次變更，該被 modifier 加重。
 
 `critical` 保留給「預設分支的 deploy workflow 失敗」。
 
@@ -551,7 +567,16 @@ Distracted Boyfriend、Drake、Two Buttons、Woman Yelling at Cat 等全部是�
 | 110 | `repeat_tier == 1` | `SC02_REPEAT_OFFENDER` |
 | 999 | *(catch-all，永遠命中)* | `SC01_FIRST_SUMMONS` |
 
-**完整性保證**：規則載入時驗證最後一條必為無條件 catch-all；測試以特徵空間的笛卡兒積（約 11×4×3×2×2×2×2×2×4 ≈ 100k 組合，可窮舉）驗證每組都得到恰好一個場景。
+**完整性保證**：規則載入時驗證最後一條必為無條件 catch-all；測試以特徵空間的笛卡兒積窮舉，驗證每組都得到**恰好一個**場景。
+
+特徵空間大小：
+`error_class`(11) × `severity`(4) × `repeat_tier`(3) × 5 個布林 × `confidence`(4)
+= 11 × 4 × 3 × 2⁵ × 4 = **16,896** 組（若把 `config.meme.late_night_scene` 也納入則 33,792）。
+這個規模在單元測試中窮舉只需毫秒級，沒有取樣的必要。
+
+其中有相當比例是**現實中不可達**的組合（例如 `confidence = insufficient`
+卻同時 `fix_is_narrow = true`）。測試**仍然涵蓋**它們——完整性的意義正是
+「即使輸入荒謬也不會掉進未定義行為」，而不是「合理的輸入都有處理」。
 
 ### 8.4 迷因標題
 
