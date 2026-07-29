@@ -37,10 +37,7 @@ export type {
   EventRow,
   RetryPolicy,
 } from './events.js';
-export {
-  EVENT_STATUSES,
-  GITHUB_EVENT_TYPES,
-} from './events.js';
+export { EVENT_STATUSES, GITHUB_EVENT_TYPES } from './events.js';
 
 // ════════════════════════════════════════════════════════════════
 // config.ts — .prosecutor.yml 設定檔相關型別
@@ -59,12 +56,7 @@ export type {
   BudgetConfig,
   ProsecutorConfig,
 } from './config.js';
-export {
-  TONE_LEVELS,
-  LOCALES,
-  FEEDBACK_VALUES,
-  DEFAULT_CONFIG,
-} from './config.js';
+export { TONE_LEVELS, LOCALES, FEEDBACK_VALUES, DEFAULT_CONFIG } from './config.js';
 
 // ════════════════════════════════════════════════════════════════
 // scene.ts — 迷因場景相關型別
@@ -80,11 +72,7 @@ export type {
   SceneDefinition,
   CompressionLevel,
 } from './scene.js';
-export {
-  SCENE_IDS,
-  REPEAT_TIERS,
-  COMPRESSION_LEVELS,
-} from './scene.js';
+export { SCENE_IDS, REPEAT_TIERS, COMPRESSION_LEVELS } from './scene.js';
 
 // ════════════════════════════════════════════════════════════════
 // db.ts — 資料庫行型別
@@ -101,7 +89,4 @@ export type {
   TitleSource,
   LLMPurpose,
 } from './db.js';
-export {
-  TITLE_SOURCES,
-  LLM_PURPOSES,
-} from './db.js';
+export { TITLE_SOURCES, LLM_PURPOSES } from './db.js';

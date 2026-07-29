@@ -12,12 +12,12 @@
 
 /** 事件在佇列中的狀態 */
 export const EVENT_STATUSES = [
-  'pending',    // 待處理
+  'pending', // 待處理
   'processing', // 正在處理
-  'done',       // 成功完成
-  'skipped',    // 因設定跳過（例如 enabled=false）
-  'failed',     // 失敗但尚未進入死信
-  'dead',       // 死信：超過重試次數或致命錯誤
+  'done', // 成功完成
+  'skipped', // 因設定跳過（例如 enabled=false）
+  'failed', // 失敗但尚未進入死信
+  'dead', // 死信：超過重試次數或致命錯誤
 ] as const;
 export type EventStatus = (typeof EVENT_STATUSES)[number];
 

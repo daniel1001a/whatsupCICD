@@ -1,0 +1,41 @@
+2026-03-14T08:24:00.1234567Z Run go build -v ./cmd/server
+2026-03-14T08:24:00.2345678Z go: downloading github.com/gin-gonic/gin v1.9.1
+2026-03-14T08:24:01.3456789Z go: downloading github.com/lib/pq v1.10.9
+2026-03-14T08:24:02.4567890Z go: downloading cloud.google.com/go/storage v1.30.0
+2026-03-14T08:24:03.5678901Z go: added 127 direct, 456 indirect dependencies
+2026-03-14T08:24:04.6789012Z
+2026-03-14T08:24:05.1234567Z ##[group]Build output
+2026-03-14T08:24:05.2345678Z cmd/server/main.go:34:12: undefined: config.LoadEnv
+2026-03-14T08:24:05.3456789Z cmd/server/main.go:45:8: undefined: logger.Init
+2026-03-14T08:24:05.4567890Z pkg/database/postgres.go:123:34: not enough arguments to return (got 1, expected 2)
+2026-03-14T08:24:05.5678901Z pkg/auth/jwt.go:78:19: invalid function call: TokenExpired
+2026-03-14T08:24:05.6789012Z ##[endgroup]
+2026-03-14T08:24:05.7890123Z
+2026-03-14T08:24:06.1234567Z ##[error] Build failed
+2026-03-14T08:24:06.2345678Z
+2026-03-14T08:24:06.3456789Z Run go test ./...
+2026-03-14T08:24:06.4567890Z ?   	api/v1	[no test files]
+2026-03-14T08:24:06.5678901Z ok  	api/health	0.002s
+2026-03-14T08:24:06.6789012Z ok  	auth	0.123s
+2026-03-14T08:24:07.1234567Z ok  	database	0.456s
+2026-03-14T08:24:07.2345678Z FAIL	models	0.234s
+2026-03-14T08:24:07.3456789Z --- FAIL: TestUserValidation (0.12s)
+2026-03-14T08:24:07.4567890Z     models_test.go:45: expected email to be required, got: false
+2026-03-14T08:24:07.5678901Z     models_test.go:52: validator returned unexpected error: missing field 'role'
+2026-03-14T08:24:07.6789012Z --- FAIL: TestDataMasking (0.05s)
+2026-03-14T08:24:07.7890123Z     models_test.go:78: expected masked output to contain '*' characters
+2026-03-14T08:24:07.8901234Z     models_test.go:79: got: Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.test_signature
+2026-03-14T08:24:08.1234567Z FAIL	integration	0.789s
+2026-03-14T08:24:08.2345678Z --- FAIL: TestE2ELogin (0.45s)
+2026-03-14T08:24:08.3456789Z     e2e_test.go:156: failed to connect to test postgres server at postgresql://testuser:testpass123@localhost:5432/testdb
+2026-03-14T08:24:08.4567890Z     e2e_test.go:158: connection error: dial tcp localhost:5432: connect: connection refused
+2026-03-14T08:24:08.5678901Z
+2026-03-14T08:24:08.6789012Z ##[group]Coverage summary
+2026-03-14T08:24:08.7890123Z ok	cmd/server	coverage: 67.8% of statements
+2026-03-14T08:24:08.8901234Z ok	pkg/auth	coverage: 82.3% of statements
+2026-03-14T08:24:08.9012345Z FAIL	pkg/models	coverage: 54.2% of statements
+2026-03-14T08:24:09.0123456Z ##[endgroup]
+2026-03-14T08:24:09.1234567Z
+2026-03-14T08:24:09.2345678Z FAIL
+2026-03-14T08:24:09.3456789Z
+2026-03-14T08:24:09.4567890Z ##[error]Process completed with exit code 1

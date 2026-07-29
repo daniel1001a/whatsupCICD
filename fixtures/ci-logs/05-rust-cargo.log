@@ -1,0 +1,44 @@
+2026-03-14T08:25:00.1234567Z Run cargo build --release
+2026-03-14T08:25:00.2345678Z Compiling serde v1.0.152
+2026-03-14T08:25:01.3456789Z Compiling tokio v1.27.0
+2026-03-14T08:25:02.4567890Z Compiling axum v0.6.18
+2026-03-14T08:25:03.5678901Z Compiling sqlx v0.7.1
+2026-03-14T08:25:04.6789012Z
+2026-03-14T08:25:05.1234567Z Compiling app v0.1.0 (/home/runner/work/rust-app/rust-app)
+2026-03-14T08:25:05.2345678Z error[E0308]: mismatched types
+2026-03-14T08:25:05.3456789Z  --> src/main.rs:42:31
+2026-03-14T08:25:05.4567890Z   |
+2026-03-14T08:25:05.5678901Z 42 |   let config = load_config(client_id);
+2026-03-14T08:25:05.6789012Z   |                             ---------- &str value does not match
+2026-03-14T08:25:05.7890123Z   |                      expected `u32`, found `&str`
+2026-03-14T08:25:05.8901234Z
+2026-03-14T08:25:06.1234567Z error[E0425]: cannot find value `DB_CONN` in this scope
+2026-03-14T08:25:06.2345678Z  --> src/db/mod.rs:89:23
+2026-03-14T08:25:06.3456789Z   |
+2026-03-14T08:25:06.4567890Z 89 |   let pool = DB_CONN.lock().unwrap();
+2026-03-14T08:25:06.5678901Z   |             ^^^^^^^ not found in this scope
+2026-03-14T08:25:06.6789012Z
+2026-03-14T08:25:06.7890123Z error[E0504]: cannot move out of `self.session` because it is borrowed
+2026-03-14T08:25:06.8901234Z   --> src/auth/session.rs:145:22
+2026-03-14T08:25:06.9012345Z   |
+2026-03-14T08:25:07.0123456Z 145 |   self.session = Session::new(AKIAIOSFODNN7EXAMPLE, secret_key);
+2026-03-14T08:25:07.1234567Z   |   ^^^^^^^^^^^^ move occurs because `self.session` has type `Session`, which does not implement the `Copy` trait
+2026-03-14T08:25:07.2345678Z
+2026-03-14T08:25:07.3456789Z error[E0382]: use of moved value: `request`
+2026-03-14T08:25:07.4567890Z   --> src/handlers/user.rs:201:17
+2026-03-14T08:25:07.5678901Z   |
+2026-03-14T08:25:07.6789012Z 198 |   let body = request.text().await?;
+2026-03-14T08:25:07.7890123Z 199 |   validate_json(&body)?;
+2026-03-14T08:25:07.8901234Z 200 |   let parsed = serde_json::from_str(&body)?;
+2026-03-14T08:25:07.9012345Z 201 |   let sig = request.headers().get("x-signature").ok_or(MissingHeader)?;
+2026-03-14T08:25:08.0123456Z   |            ^^^^^^^ value used here after move
+2026-03-14T08:25:08.1234567Z
+2026-03-14T08:25:08.2345678Z ##[group]Error summary
+2026-03-14T08:25:08.3456789Z error: could not compile `app` (bin target `app`) due to 4 previous errors
+2026-03-14T08:25:08.4567890Z ##[endgroup]
+2026-03-14T08:25:08.5678901Z
+2026-03-14T08:25:08.6789012Z Run cargo test
+2026-03-14T08:25:08.7890123Z Compiling app v0.1.0 (/home/runner/work/rust-app/rust-app)
+2026-03-14T08:25:09.1234567Z error: build failed
+2026-03-14T08:25:09.2345678Z
+2026-03-14T08:25:09.3456789Z ##[error]Process completed with exit code 1

@@ -1,0 +1,166 @@
+{
+  "fixtures": [
+    {
+      "file": "01-typescript-tsc.log",
+      "language": "typescript",
+      "framework": "tsc",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 27,
+      "anchor_text": "2026-03-14T08:21:42.3456789Z src/api/handlers/profile.ts(45,18): error TS2339: Property 'map' does not exist on type 'never'.",
+      "total_lines": 48,
+      "notes": "Multiple TypeScript compilation errors; anchor is the TS2339 error. Final Process exit code at line 48.",
+      "seeded_secrets": [
+        "database_connection_string",
+        "filesystem_path"
+      ]
+    },
+    {
+      "file": "02-jest-test-failure.log",
+      "language": "javascript",
+      "framework": "jest",
+      "expected_error_class": "E_TEST",
+      "anchor_line": 11,
+      "anchor_text": "2026-03-14T08:22:12.4567890Z   Expected value to equal:",
+      "total_lines": 49,
+      "notes": "Jest test suite failure with 1 failed, 3 passed. Expected output assertion mismatch. Process exit at line 49.",
+      "seeded_secrets": [
+        "oauth_client_id",
+        "internal_url"
+      ]
+    },
+    {
+      "file": "03-python-pytest.log",
+      "language": "python",
+      "framework": "pytest",
+      "expected_error_class": "E_TEST",
+      "anchor_line": 18,
+      "anchor_text": "2026-03-14T08:23:03.1234567Z E   AttributeError: 'NoneType' object has no attribute 'encode'",
+      "total_lines": 40,
+      "notes": "Pytest test failure with AttributeError in auth module; also includes psycopg2 connection error. Process exit at line 40.",
+      "seeded_secrets": [
+        "database_credentials",
+        "internal_ip_address"
+      ]
+    },
+    {
+      "file": "04-go-build-test.log",
+      "language": "go",
+      "framework": "go test",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 8,
+      "anchor_text": "2026-03-14T08:24:05.2345678Z cmd/server/main.go:34:12: undefined: config.LoadEnv",
+      "total_lines": 41,
+      "notes": "Go compilation undefined symbols followed by test failures (--- FAIL). Process exit code 1 at line 41.",
+      "seeded_secrets": [
+        "jwt_bearer_token",
+        "database_url"
+      ]
+    },
+    {
+      "file": "05-rust-cargo.log",
+      "language": "rust",
+      "framework": "cargo",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 8,
+      "anchor_text": "2026-03-14T08:25:05.2345678Z error[E0308]: mismatched types",
+      "total_lines": 44,
+      "notes": "Multiple Rust compilation errors with error codes E0308, E0425, E0504, E0382. Process exit at line 44.",
+      "seeded_secrets": [
+        "aws_access_key_id",
+        "database_credentials"
+      ]
+    },
+    {
+      "file": "06-java-maven.log",
+      "language": "java",
+      "framework": "maven",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 10,
+      "anchor_text": "2026-03-14T08:26:05.1234567Z [ERROR] COMPILATION ERROR",
+      "total_lines": 45,
+      "notes": "Maven compilation error followed by test suite failures with SQL connection exception. Process exit at line 45.",
+      "seeded_secrets": [
+        "database_host_and_port",
+        "filesystem_path"
+      ]
+    },
+    {
+      "file": "07-npm-dependency.log",
+      "language": "javascript",
+      "framework": "npm",
+      "expected_error_class": "E_DEPENDENCY",
+      "anchor_line": 11,
+      "anchor_text": "2026-03-14T08:27:03.3456789Z npm ERR! ERESOLVE unable to resolve dependency tree",
+      "total_lines": 46,
+      "notes": "npm dependency resolution failure (peer dependency conflict) followed by ELIFECYCLE. Process exit at line 46.",
+      "seeded_secrets": [
+        "registry_url",
+        "scoped_package_name"
+      ]
+    },
+    {
+      "file": "08-docker-build.log",
+      "language": "dockerfile",
+      "framework": "docker/buildkit",
+      "expected_error_class": "E_INFRA",
+      "anchor_line": 47,
+      "anchor_text": "2026-03-14T08:28:07.9012345Z #7 ERROR: failed to solve: failed to fetch AWS credential: AccessDenied: User: arn:aws:iam::EXAMPLE:user/ci-runner is not authorized",
+      "total_lines": 53,
+      "notes": "Docker BuildKit multi-stage build with AWS credential access denial error. Process exit at line 53.",
+      "seeded_secrets": [
+        "aws_arn",
+        "aws_account_id"
+      ]
+    },
+    {
+      "file": "09-eslint-lint.log",
+      "language": "javascript",
+      "framework": "eslint",
+      "expected_error_class": "E_LINT",
+      "anchor_line": 62,
+      "anchor_text": "2026-03-14T08:29:08.2345678Z   34:4   error   Unexpected console statement             no-console",
+      "total_lines": 73,
+      "notes": "ESLint violations with 5 errors and 1 warning; includes JSON-formatted output. Process exit at line 73.",
+      "seeded_secrets": [
+        "source_paths",
+        "rule_names"
+      ]
+    },
+    {
+      "file": "10-infra-timeout.log",
+      "language": "shell",
+      "framework": "docker/orchestration",
+      "expected_error_class": "E_TIMEOUT",
+      "anchor_line": 44,
+      "anchor_text": "2026-03-14T08:30:25.8989012Z The runner hit timeout while waiting for integration test environment setup",
+      "total_lines": 53,
+      "notes": "Infrastructure timeout due to OOMKilled postgres and failed service startup. Also includes E_OOM error markers. Process exit code 124 at line 53.",
+      "seeded_secrets": [
+        "memory_limits",
+        "container_ids"
+      ]
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-03-14T08:30:00Z",
+    "total_fixtures": 10,
+    "languages_covered": [
+      "typescript",
+      "javascript",
+      "python",
+      "go",
+      "rust",
+      "java",
+      "dockerfile",
+      "shell"
+    ],
+    "error_classes_covered": [
+      "E_COMPILE",
+      "E_TEST",
+      "E_DEPENDENCY",
+      "E_LINT",
+      "E_TIMEOUT",
+      "E_INFRA"
+    ]
+  }
+}

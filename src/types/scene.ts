@@ -71,8 +71,21 @@ export interface SceneRule {
  * 支援各種條件型別，但整個系統只用布林組合
  */
 export type SceneCondition =
-  | { readonly type: 'enum'; readonly field: keyof SceneFeatures; readonly values: readonly unknown[] }
-  | { readonly type: 'boolean'; readonly field: 'is_deploy_workflow' | 'is_friday' | 'is_late_night' | 'fix_is_narrow' | 'test_files_changed'; readonly value: boolean }
+  | {
+      readonly type: 'enum';
+      readonly field: keyof SceneFeatures;
+      readonly values: readonly unknown[];
+    }
+  | {
+      readonly type: 'boolean';
+      readonly field:
+        | 'is_deploy_workflow'
+        | 'is_friday'
+        | 'is_late_night'
+        | 'fix_is_narrow'
+        | 'test_files_changed';
+      readonly value: boolean;
+    }
   | { readonly type: 'and'; readonly conditions: readonly SceneCondition[] }
   | { readonly type: 'or'; readonly conditions: readonly SceneCondition[] };
 

@@ -1,0 +1,53 @@
+2026-03-14T08:30:00.1234567Z Run ./scripts/integration-tests.sh --verbose
+2026-03-14T08:30:00.2345678Z Starting integration test suite...
+2026-03-14T08:30:00.3456789Z ##[group]Setting up test environment
+2026-03-14T08:30:00.4567890Z Creating docker network: ci_test_net
+2026-03-14T08:30:00.5678901Z Pulling postgres:13 image...
+2026-03-14T08:30:00.6789012Z Pulling redis:7 image...
+2026-03-14T08:30:00.7890123Z Pulling localstack:latest image...
+2026-03-14T08:30:00.8901234Z ##[endgroup]
+2026-03-14T08:30:01.1234567Z Waiting for postgres to be ready...
+2026-03-14T08:30:01.2345678Z Waiting for postgres to be ready (attempt 1/10)
+2026-03-14T08:30:02.3456789Z Waiting for postgres to be ready (attempt 2/10)
+2026-03-14T08:30:03.4567890Z Waiting for postgres to be ready (attempt 3/10)
+2026-03-14T08:30:04.5678901Z Waiting for postgres to be ready (attempt 4/10)
+2026-03-14T08:30:05.6789012Z Waiting for postgres to be ready (attempt 5/10)
+2026-03-14T08:30:06.7890123Z Waiting for postgres to be ready (attempt 6/10)
+2026-03-14T08:30:07.8901234Z Waiting for postgres to be ready (attempt 7/10)
+2026-03-14T08:30:08.9012345Z Waiting for postgres to be ready (attempt 8/10)
+2026-03-14T08:30:09.1123456Z Waiting for redis to be ready...
+2026-03-14T08:30:09.2234567Z Waiting for redis to be ready (attempt 1/15)
+2026-03-14T08:30:10.3345678Z Waiting for redis to be ready (attempt 2/15)
+2026-03-14T08:30:11.4456789Z Waiting for redis to be ready (attempt 3/15)
+2026-03-14T08:30:12.5567890Z Waiting for redis to be ready (attempt 4/15)
+2026-03-14T08:30:13.6678901Z Waiting for redis to be ready (attempt 5/15)
+2026-03-14T08:30:14.7789012Z Waiting for redis to be ready (attempt 6/15)
+2026-03-14T08:30:15.8890123Z Waiting for redis to be ready (attempt 7/15)
+2026-03-14T08:30:16.9901234Z Waiting for redis to be ready (attempt 8/15)
+2026-03-14T08:30:17.1012345Z Waiting for redis to be ready (attempt 9/15)
+2026-03-14T08:30:18.2123456Z Waiting for redis to be ready (attempt 10/15)
+2026-03-14T08:30:19.3234567Z Waiting for redis to be ready (attempt 11/15)
+2026-03-14T08:30:20.4345678Z Waiting for redis to be ready (attempt 12/15)
+2026-03-14T08:30:21.5456789Z Waiting for redis to be ready (attempt 13/15)
+2026-03-14T08:30:22.6567890Z Waiting for redis to be ready (attempt 14/15)
+2026-03-14T08:30:23.7678901Z Waiting for redis to be ready (attempt 15/15)
+2026-03-14T08:30:24.8789012Z ##[group]Services Status
+2026-03-14T08:30:24.9890123Z PostgreSQL container: CREATED but not responding
+2026-03-14T08:30:25.0901234Z Redis container: TIMEOUT waiting for connection
+2026-03-14T08:30:25.1912345Z LocalStack container: Failed to start - out of memory
+2026-03-14T08:30:25.2923456Z ##[endgroup]
+2026-03-14T08:30:25.3934567Z Error: Service startup failure - insufficient resources
+2026-03-14T08:30:25.4945678Z docker: Error response from daemon: OOMKilled
+2026-03-14T08:30:25.5956789Z   memory used: 10.2GB / 10.0GB limit
+2026-03-14T08:30:25.6967890Z   process that caused OOM: postgres (PID 1234)
+2026-03-14T08:30:25.7978901Z
+2026-03-14T08:30:25.8989012Z The runner hit timeout while waiting for integration test environment setup
+2026-03-14T08:30:25.9990123Z Total time elapsed: 26.12 minutes (max 30 minutes)
+2026-03-14T08:30:26.0901234Z Attempting cleanup...
+2026-03-14T08:30:26.1912345Z docker: error during connect: Post "http+unix:///var/run/docker.sock/v1.40/containers/json": context deadline exceeded
+2026-03-14T08:30:26.2923456Z
+2026-03-14T08:30:26.3934567Z ##[group]Runner logs
+2026-03-14T08:30:26.4945678Z ##[warning]Timeout: The step "Test Integration" took longer than the maximum 30 minutes and was terminated.
+2026-03-14T08:30:26.5956789Z ##[endgroup]
+2026-03-14T08:30:26.6967890Z
+2026-03-14T08:30:26.7978901Z ##[error]Process completed with exit code 124

@@ -1,0 +1,46 @@
+2026-03-14T08:27:00.1234567Z Run npm ci
+2026-03-14T08:27:00.2345678Z npm WARN npm does not currently support engines declarations in package.json
+2026-03-14T08:27:01.3456789Z npm notice created a lockfile as package-lock.json
+2026-03-14T08:27:02.4567890Z up to date, audited 523 packages in 12.45s
+2026-03-14T08:27:02.5678901Z 31 packages are looking for funding
+2026-03-14T08:27:02.6789012Z   run `npm fund` for details
+2026-03-14T08:27:02.7890123Z found 0 vulnerabilities
+2026-03-14T08:27:02.8901234Z
+2026-03-14T08:27:03.1234567Z Run npm install --save-dev
+2026-03-14T08:27:03.2345678Z npm ERR! code ERESOLVE
+2026-03-14T08:27:03.3456789Z npm ERR! ERESOLVE unable to resolve dependency tree
+2026-03-14T08:27:03.4567890Z npm ERR!
+2026-03-14T08:27:03.5678901Z npm ERR! While resolving: @myorg/app@1.5.0
+2026-03-14T08:27:03.6789012Z npm ERR! Found: react@18.2.0
+2026-03-14T08:27:03.7890123Z npm ERR! node_modules/react
+2026-03-14T08:27:03.8901234Z npm ERR!   react@"^18.0.0" from the root project
+2026-03-14T08:27:03.9012345Z npm ERR!
+2026-03-14T08:27:04.0123456Z npm ERR! Could not resolve dependency:
+2026-03-14T08:27:04.1234567Z npm ERR! peer react@"^16.8.0" from @myorg/ui-lib@3.2.1
+2026-03-14T08:27:04.2345678Z npm ERR! node_modules/@myorg/ui-lib
+2026-03-14T08:27:04.3456789Z npm ERR!   @myorg/ui-lib@"^3.0.0" from the root project
+2026-03-14T08:27:04.4567890Z npm ERR!
+2026-03-14T08:27:04.5678901Z npm ERR! Fix the upstream dependency conflict, or retry
+2026-03-14T08:27:04.6789012Z npm ERR! this command with --force, or --legacy-peer-deps
+2026-03-14T08:27:04.7890123Z npm ERR! to accept an incorrect resolution.
+2026-03-14T08:27:04.8901234Z
+2026-03-14T08:27:04.9012345Z ##[group]ERESOLVE background
+2026-03-14T08:27:05.0123456Z While resolving @myorg/ui-lib@3.2.1, it lists as peer dependency
+2026-03-14T08:27:05.1234567Z react@"^16.8.0" but "react@18.2.0" is installed
+2026-03-14T08:27:05.2345678Z Check the correct versions at:
+2026-03-14T08:27:05.3456789Z   https://registry.npmjs.org/@myorg/ui-lib
+2026-03-14T08:27:05.4567890Z ##[endgroup]
+2026-03-14T08:27:05.5678901Z
+2026-03-14T08:27:05.6789012Z npm ERR! A complete log of this run can be found in:
+2026-03-14T08:27:05.7890123Z npm ERR! /home/runner/.npm/_logs/npm-debug.log
+2026-03-14T08:27:05.8901234Z
+2026-03-14T08:27:05.9012345Z npm ERR! code ELIFECYCLE
+2026-03-14T08:27:06.0123456Z npm ERR! errno 1
+2026-03-14T08:27:06.1234567Z npm ERR! @myorg/app@1.5.0 prepare: `npm run compile && npm run build`
+2026-03-14T08:27:06.2345678Z npm ERR! Exit status 1
+2026-03-14T08:27:06.3456789Z npm ERR!
+2026-03-14T08:27:06.4567890Z npm ERR! Failed at the @myorg/app@1.5.0 prepare script.
+2026-03-14T08:27:06.5678901Z npm ERR! This is probably not a problem with npm. There is probably something wrong with your project.
+2026-03-14T08:27:06.6789012Z npm ERR! See /home/runner/.npm/_logs/npm-debug.log
+2026-03-14T08:27:06.7890123Z
+2026-03-14T08:27:06.8901234Z ##[error]Process completed with exit code 1

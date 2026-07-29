@@ -1,0 +1,67 @@
+2026-03-14T08:23:00.1234567Z Current runner version: '2.309.0'
+2026-03-14T08:23:00.2345678Z ##[group]Run actions/checkout@v3
+2026-03-14T08:23:00.0456789Z Fetching...
+2026-03-14T08:23:00.1456789Z Fetching...
+2026-03-14T08:23:00.2456789Z Fetching...
+2026-03-14T08:23:00.3456789Z Fetching...
+2026-03-14T08:23:00.4456789Z Fetching...
+2026-03-14T08:23:00.6567890Z ##[endgroup]
+2026-03-14T08:23:00.7678901Z ##[group]Run actions/setup-python@v4
+2026-03-14T08:23:00.8789012Z Found Python 3.11.0 in cache
+2026-03-14T08:23:00.9890123Z Adding /opt/python/3.11/bin to PATH
+2026-03-14T08:23:01.0901234Z ##[endgroup]
+2026-03-14T08:23:01.1012345Z ##[group]Run pip install -r requirements.txt
+2026-03-14T08:23:01.1123456Z Collecting package1...
+2026-03-14T08:23:01.2123456Z Collecting package2...
+2026-03-14T08:23:01.3123456Z Collecting package3...
+2026-03-14T08:23:01.4123456Z Collecting package4...
+2026-03-14T08:23:01.5123456Z Collecting package5...
+2026-03-14T08:23:01.6123456Z Collecting package6...
+2026-03-14T08:23:01.7123456Z Collecting package7...
+2026-03-14T08:23:01.8234567Z Successfully installed 47 packages
+2026-03-14T08:23:01.9345678Z ##[endgroup]
+2026-03-14T08:23:02.0456789Z ##[group]Run python -m pytest tests/ -v --tb=short
+2026-03-14T08:23:02.1567890Z Collecting ... collected 18 items
+2026-03-14T08:23:02.2678901Z 
+2026-03-14T08:23:02.1789012Z tests/test_models_1.py::test_model PASSED [32m[  10%][0m
+2026-03-14T08:23:02.2789012Z tests/test_models_2.py::test_model PASSED [32m[  20%][0m
+2026-03-14T08:23:02.3789012Z tests/test_models_3.py::test_model PASSED [32m[  30%][0m
+2026-03-14T08:23:02.4789012Z tests/test_models_4.py::test_model PASSED [32m[  40%][0m
+2026-03-14T08:23:02.5789012Z tests/test_models_5.py::test_model PASSED [32m[  50%][0m
+2026-03-14T08:23:02.6789012Z tests/test_models_6.py::test_model PASSED [32m[  60%][0m
+2026-03-14T08:23:02.7789012Z tests/test_models_7.py::test_model PASSED [32m[  70%][0m
+2026-03-14T08:23:02.8890123Z tests/test_auth.py::test_login_success PASSED        [ 50%]
+2026-03-14T08:23:02.9901234Z tests/test_auth.py::test_login_failure FAILED         [ 55%]
+2026-03-14T08:23:03.0012345Z 
+2026-03-14T08:23:03.1123456Z =================================== FAILURES ===================================
+2026-03-14T08:23:03.2234567Z __________________________ test_login_failure __________________________
+2026-03-14T08:23:03.3345678Z 
+2026-03-14T08:23:03.4456789Z apps/backend/auth.py:127: in login_user
+2026-03-14T08:23:03.5567890Z     result = verify_password(stored_hash, input_password)
+2026-03-14T08:23:03.6678901Z apps/backend/auth.py:89: in verify_password
+2026-03-14T08:23:03.7789012Z E   AttributeError: 'NoneType' object has no attribute 'encode'
+2026-03-14T08:23:03.8890123Z 
+2026-03-14T08:23:03.1901234Z tests/test_db_1.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.2901234Z tests/test_db_2.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.3901234Z tests/test_db_3.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.4901234Z tests/test_db_4.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.5901234Z tests/test_db_5.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.6901234Z tests/test_db_6.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.7901234Z tests/test_db_7.py PASSED [32m[  +10%][0m
+2026-03-14T08:23:03.8012345Z 
+2026-03-14T08:23:03.9123456Z ##[group]Test summary
+2026-03-14T08:23:04.0234567Z Total tests: 18
+2026-03-14T08:23:04.1345678Z Passed: 16
+2026-03-14T08:23:04.2456789Z Failed: 2
+2026-03-14T08:23:04.3567890Z ##[endgroup]
+2026-03-14T08:23:04.4678901Z 
+2026-03-14T08:23:04.5789012Z [31mFAILED[0m tests/test_auth.py::test_login_failure
+2026-03-14T08:23:04.6890123Z [31mFAILED[0m tests/test_database.py::test_db_connection
+2026-03-14T08:23:04.7901234Z 
+2026-03-14T08:23:04.8012345Z ====== 2 failed, 16 passed in 3.45s ======
+2026-03-14T08:23:04.1123456Z Closing database connections...
+2026-03-14T08:23:04.2123456Z Closing database connections...
+2026-03-14T08:23:04.3123456Z Closing database connections...
+2026-03-14T08:23:04.4123456Z Closing database connections...
+2026-03-14T08:23:04.5123456Z Closing database connections...
+2026-03-14T08:23:04.6234567Z ##[error]Process completed with exit code 1

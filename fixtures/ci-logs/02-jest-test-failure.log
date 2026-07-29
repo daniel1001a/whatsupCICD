@@ -1,0 +1,79 @@
+2026-03-14T08:22:10.1234567Z Current runner version: '2.309.0'
+2026-03-14T08:22:10.2345678Z 
+2026-03-14T08:22:10.3456789Z ##[group]Run actions/checkout@v3
+2026-03-14T08:22:10.0567890Z Fetching repository...
+2026-03-14T08:22:10.1567890Z Fetching repository...
+2026-03-14T08:22:10.2567890Z Fetching repository...
+2026-03-14T08:22:10.3567890Z Fetching repository...
+2026-03-14T08:22:10.4567890Z Fetching repository...
+2026-03-14T08:22:10.6789012Z HEAD is now at xyz9876
+2026-03-14T08:22:10.7890123Z ##[endgroup]
+2026-03-14T08:22:10.8901234Z ##[group]Run actions/setup-node@v3
+2026-03-14T08:22:10.9012345Z Found Node v18.16.0 in cache
+2026-03-14T08:22:11.0123456Z ##[endgroup]
+2026-03-14T08:22:11.1234567Z ##[group]Run npm ci
+2026-03-14T08:22:11.0345678Z npm WARN deprecated pkg0: deprecated message
+2026-03-14T08:22:11.1345678Z npm WARN deprecated pkg1: deprecated message
+2026-03-14T08:22:11.2345678Z npm WARN deprecated pkg2: deprecated message
+2026-03-14T08:22:11.3345678Z npm WARN deprecated pkg3: deprecated message
+2026-03-14T08:22:11.4345678Z npm WARN deprecated pkg4: deprecated message
+2026-03-14T08:22:11.5456789Z added 523 packages
+2026-03-14T08:22:11.6567890Z ##[endgroup]
+2026-03-14T08:22:11.7678901Z ##[group]Run npm test -- --ci --coverage
+2026-03-14T08:22:11.8789012Z > app@1.0.0 test
+2026-03-14T08:22:11.9890123Z > jest --ci --coverage
+2026-03-14T08:22:12.0901234Z 
+2026-03-14T08:22:12.1012345Z PASS  src/utils/__tests__/string-1.test.ts
+2026-03-14T08:22:12.1123456Z [32m  ✓[0m should pass test-1
+2026-03-14T08:22:12.2012345Z PASS  src/utils/__tests__/string-2.test.ts
+2026-03-14T08:22:12.2123456Z [32m  ✓[0m should pass test-2
+2026-03-14T08:22:12.3012345Z PASS  src/utils/__tests__/string-3.test.ts
+2026-03-14T08:22:12.3123456Z [32m  ✓[0m should pass test-3
+2026-03-14T08:22:12.4012345Z PASS  src/utils/__tests__/string-4.test.ts
+2026-03-14T08:22:12.4123456Z [32m  ✓[0m should pass test-4
+2026-03-14T08:22:12.5012345Z PASS  src/utils/__tests__/string-5.test.ts
+2026-03-14T08:22:12.5123456Z [32m  ✓[0m should pass test-5
+2026-03-14T08:22:12.6012345Z PASS  src/utils/__tests__/string-6.test.ts
+2026-03-14T08:22:12.6123456Z [32m  ✓[0m should pass test-6
+2026-03-14T08:22:12.7012345Z PASS  src/utils/__tests__/string-7.test.ts
+2026-03-14T08:22:12.7123456Z [32m  ✓[0m should pass test-7
+2026-03-14T08:22:12.8012345Z PASS  src/utils/__tests__/string-8.test.ts
+2026-03-14T08:22:12.8123456Z [32m  ✓[0m should pass test-8
+2026-03-14T08:22:12.8234567Z FAIL  src/api/__tests__/auth.test.ts
+2026-03-14T08:22:12.9345678Z 
+2026-03-14T08:22:13.0456789Z ● Auth › loginWithOAuth › should redirect to provider
+2026-03-14T08:22:13.1567890Z 
+2026-03-14T08:22:13.2678901Z   Expected value to equal:
+2026-03-14T08:22:13.3789012Z     "https://oauth.example.com/authorize?client_id=EXAMPLE&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback"
+2026-03-14T08:22:13.4890123Z   Received:
+2026-03-14T08:22:13.5901234Z     "https://oauth.example.com/authorize?client_id=&redirect_uri="
+2026-03-14T08:22:13.6012345Z 
+2026-03-14T08:22:13.7123456Z     at src/api/__tests__/auth.test.ts:127:21
+2026-03-14T08:22:13.8234567Z     at processTicksAndRejections (internal/timers.js:455:21)
+2026-03-14T08:22:13.9345678Z 
+2026-03-14T08:22:14.0456789Z ##[group]Coverage metrics
+2026-03-14T08:22:14.1567890Z File  1: 76% coverage
+2026-03-14T08:22:14.2567890Z File  2: 77% coverage
+2026-03-14T08:22:14.3567890Z File  3: 78% coverage
+2026-03-14T08:22:14.4567890Z File  4: 79% coverage
+2026-03-14T08:22:14.5567890Z File  5: 80% coverage
+2026-03-14T08:22:14.6567890Z File  6: 81% coverage
+2026-03-14T08:22:14.7567890Z File  7: 82% coverage
+2026-03-14T08:22:14.7678901Z ##[endgroup]
+2026-03-14T08:22:14.8789012Z 
+2026-03-14T08:22:14.9890123Z Test Suites: 1 failed, 6 passed, 7 total
+2026-03-14T08:22:15.0901234Z Tests:       1 failed, 42 passed, 43 total
+2026-03-14T08:22:15.1012345Z Snapshots:   0 total
+2026-03-14T08:22:15.2123456Z Time:        4.523 s
+2026-03-14T08:22:15.1234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-1
+2026-03-14T08:22:15.2234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-2
+2026-03-14T08:22:15.3234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-3
+2026-03-14T08:22:15.4234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-4
+2026-03-14T08:22:15.5234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-5
+2026-03-14T08:22:15.6234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-6
+2026-03-14T08:22:15.7234567Z [33m⚠[0m  WARN: Snapshot mismatch in test-7
+2026-03-14T08:22:15.8345678Z ##[group]Post cleanup
+2026-03-14T08:22:15.9456789Z Saving coverage data...
+2026-03-14T08:22:16.0567890Z ##[endgroup]
+2026-03-14T08:22:16.1678901Z 
+2026-03-14T08:22:16.2789012Z ##[error]Process completed with exit code 1

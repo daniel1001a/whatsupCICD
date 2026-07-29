@@ -1,0 +1,124 @@
+2026-03-14T08:21:33.0000001Z Current runner version: '2.309.0'
+2026-03-14T08:21:33.0000002Z Runner name: 'GitHub Actions 2'
+2026-03-14T08:21:33.0000003Z Runner OS: 'Linux'
+2026-03-14T08:21:33.0000004Z Runner temp directory: '/run/user/1001/tmp'
+2026-03-14T08:21:33.0000005Z 
+2026-03-14T08:21:33.0000006Z ##[group]Run actions/checkout@v3
+2026-03-14T08:21:33.0000007Z Syncing repository: myorg/typescript-app
+2026-03-14T08:21:33.0000008Z Getting Git version info
+2026-03-14T08:21:33.0000009Z Getting Git version info using git -c 'versionsort.suffix=-' -s --git-dir=/home/runner/work/typescript-app/typescript-app/.git describe --all --long
+2026-03-14T08:21:33.0000010Z git config --global --add safe.directory /home/runner/work/typescript-app/typescript-app
+2026-03-14T08:21:33.0000011Z git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+2026-03-14T08:21:34.0000012Z Fetching the repository
+2026-03-14T08:21:34.0000013Z git fetch --progress --no-recurse-submodules origin +refs/heads/main:refs/remotes/origin/main
+2026-03-14T08:21:34.0000014Z remote: Enumerating objects: 800 (29%), done.
+2026-03-14T08:21:34.0000015Z remote: Enumerating objects: 1600 (58%), done.
+2026-03-14T08:21:34.0000016Z remote: Enumerating objects: 2400 (87%), done.
+2026-03-14T08:21:35.0000017Z remote: Enumerating objects: 4200, done.
+2026-03-14T08:21:35.0000018Z Receiving objects: 25%
+2026-03-14T08:21:35.0000019Z Receiving objects: 50%
+2026-03-14T08:21:35.0000020Z Receiving objects: 75%
+2026-03-14T08:21:35.0000021Z Receiving objects: 100%
+2026-03-14T08:21:35.0000022Z Resolving deltas: 100%
+2026-03-14T08:21:35.0000023Z Checking out reference: refs/heads/main
+2026-03-14T08:21:35.0000024Z git checkout main
+2026-03-14T08:21:35.0000025Z HEAD is now at abc1234567890def feat: add comprehensive auth module
+2026-03-14T08:21:35.0000026Z ##[endgroup]
+2026-03-14T08:21:35.0000027Z 
+2026-03-14T08:21:36.0000028Z ##[group]Run actions/setup-node@v3
+2026-03-14T08:21:36.0000029Z Searching for Node version 18.x in the local cache
+2026-03-14T08:21:36.0000030Z Found in cache @ /opt/hostedtoolcache/node/18.16.0/x64
+2026-03-14T08:21:36.0000031Z Adding /opt/hostedtoolcache/node/18.16.0/x64/bin to PATH
+2026-03-14T08:21:36.0000032Z Evaluating node and npm cache directory
+2026-03-14T08:21:36.0000033Z Restoring node cache
+2026-03-14T08:21:36.0000034Z Cache restored from key: Linux-node_modules-abc123
+2026-03-14T08:21:36.0000035Z npm --version && node --version
+2026-03-14T08:21:36.0000036Z 9.6.7
+2026-03-14T08:21:36.0000037Z v18.16.0
+2026-03-14T08:21:36.0000038Z ##[endgroup]
+2026-03-14T08:21:36.0000039Z 
+2026-03-14T08:21:36.0000040Z ##[group]Run npm ci --legacy-peer-deps
+2026-03-14T08:21:36.0000041Z npm notice created a lockfile as package-lock.json
+2026-03-14T08:21:36.0000042Z npm WARN deprecated uuid@3.4.0: Please upgrade to version 7 or higher.
+2026-03-14T08:21:36.0000043Z npm WARN deprecated request@2.88.2: request has been deprecated
+2026-03-14T08:21:36.0000044Z npm WARN deprecated flatten@1.0.3: flatten is deprecated, use flatten-deep
+2026-03-14T08:21:36.0000045Z npm WARN deprecated har-validator@5.1.5: This library is no longer maintained
+2026-03-14T08:21:36.0000046Z npm WARN deprecated fsevents@2.3.2: Watching file system events not available
+2026-03-14T08:21:36.0000047Z added 427 packages, and audited 428 packages in 8.23s
+2026-03-14T08:21:36.0000048Z 43 packages are looking for funding
+2026-03-14T08:21:36.0000049Z found 0 vulnerabilities
+2026-03-14T08:21:36.0000050Z ##[endgroup]
+2026-03-14T08:21:36.0000051Z 
+2026-03-14T08:21:37.0000052Z ##[group]Run npm run lint
+2026-03-14T08:21:37.0000053Z > app@1.0.0 lint
+2026-03-14T08:21:37.0000054Z > eslint src --ext .ts,.tsx
+2026-03-14T08:21:38.0000055Z npm WARN does not currently support engines declarations in package.json
+2026-03-14T08:21:38.0000056Z ✓ Linting src/utils/string-1.ts
+2026-03-14T08:21:38.0000057Z ✓ Linting src/utils/string-2.ts
+2026-03-14T08:21:38.0000058Z ✓ Linting src/api/health.ts
+2026-03-14T08:21:38.0000059Z Lint passed - 0 errors, 0 warnings
+2026-03-14T08:21:38.0000060Z ##[endgroup]
+2026-03-14T08:21:38.0000061Z 
+2026-03-14T08:21:38.0000062Z ##[group]Run npm run build
+2026-03-14T08:21:38.0000063Z > build-app@1.0.0 build
+2026-03-14T08:21:38.0000064Z > tsc --strict --skipLibCheck false --noEmit
+2026-03-14T08:21:38.0000065Z npm WARN npm does not currently support engines
+2026-03-14T08:21:38.0000066Z 
+2026-03-14T08:21:38.0000067Z Compiling src/types/index.ts...
+2026-03-14T08:21:38.0000068Z Compiling src/utils/string-1.ts...
+2026-03-14T08:21:38.0000069Z Compiling src/utils/string-2.ts...
+2026-03-14T08:21:38.0000070Z Compiling src/utils/string-3.ts...
+2026-03-14T08:21:38.0000071Z Compiling src/utils/date-utils.ts...
+2026-03-14T08:21:38.0000072Z Compiling src/api/health.ts...
+2026-03-14T08:21:38.0000073Z 
+2026-03-14T08:21:39.0000074Z Compiling src/api/handlers/auth.ts
+2026-03-14T08:21:39.0000075Z src/api/handlers/auth.ts(123,45): error TS7006: Parameter 'req' implicitly has an 'any' type.
+2026-03-14T08:21:39.0000076Z 
+2026-03-14T08:21:39.0000077Z [31m  123 |   export const loginHandler = (req, res) => {[0m
+2026-03-14T08:21:39.0000078Z [31m      |                                     ~~~[0m
+2026-03-14T08:21:39.0000079Z 
+2026-03-14T08:21:39.0000080Z Compiling src/api/handlers/profile.ts
+2026-03-14T08:21:39.0000081Z src/api/handlers/profile.ts(45,18): error TS2339: Property 'map' does not exist on type 'never'.
+2026-03-14T08:21:39.0000082Z 
+2026-03-14T08:21:39.0000083Z [1;33m   45 |   const result = users.map(u => u.email);[0m
+2026-03-14T08:21:39.0000084Z [1;33m      |                  ^^^^^^^^^^^[0m
+2026-03-14T08:21:39.0000085Z 
+2026-03-14T08:21:39.0000086Z Compiling src/data/client.ts
+2026-03-14T08:21:39.0000087Z src/data/client.ts(89,22): error TS2322: Type 'string' is not assignable to type 'number'.
+2026-03-14T08:21:39.0000088Z [31m   89 |   this.timeout = env.TIMEOUT;[0m
+2026-03-14T08:21:39.0000089Z [31m      |                  ^^^^^^^^^^^[0m
+2026-03-14T08:21:39.0000090Z 
+2026-03-14T08:21:39.0000091Z Compiling src/config/secrets.ts
+2026-03-14T08:21:39.0000092Z src/config/secrets.ts(12,33): error TS7030: Not all code paths return a value.
+2026-03-14T08:21:39.0000093Z [1;31m   12 |   function getDbPassword(): string {[0m
+2026-03-14T08:21:39.0000094Z [1;31m      |                            ^^^^^^[0m
+2026-03-14T08:21:40.0000095Z 
+2026-03-14T08:21:40.0000096Z Compiling src/middleware/auth.ts
+2026-03-14T08:21:40.0000097Z Compiling src/middleware/logging.ts
+2026-03-14T08:21:40.0000098Z Compiling src/middleware/cors.ts
+2026-03-14T08:21:40.0000099Z Compiling src/routes/index.ts
+2026-03-14T08:21:40.0000100Z Compiling src/routes/auth-routes.ts
+2026-03-14T08:21:40.0000101Z Compiling src/routes/user-routes.ts
+2026-03-14T08:21:40.0000102Z 
+2026-03-14T08:21:40.0000103Z [1;31mFound 5 errors in 6 files.[0m
+2026-03-14T08:21:40.0000104Z [1;31mErrors  TS2322  TS2339  TS7005  TS7006  TS7030[0m
+2026-03-14T08:21:40.0000105Z 
+2026-03-14T08:21:40.0000106Z ##[endgroup]
+2026-03-14T08:21:40.0000107Z 
+2026-03-14T08:21:40.0000108Z ##[group]Run linter diagnostics
+2026-03-14T08:21:40.0000109Z Collecting compiler diagnostics...
+2026-03-14T08:21:40.0000110Z - 5 compilation errors found
+2026-03-14T08:21:40.0000111Z - Skipping test phase due to build failure
+2026-03-14T08:21:40.0000112Z ##[endgroup]
+2026-03-14T08:21:40.0000113Z 
+2026-03-14T08:21:41.0000114Z ##[group]Post job cleanup
+2026-03-14T08:21:41.0000115Z Deleting 0 files from runner tool cache
+2026-03-14T08:21:41.0000116Z Cleaning up Docker containers
+2026-03-14T08:21:41.0000117Z Cleaning up orphan processes
+2026-03-14T08:21:41.0000118Z Cleaning temporary files
+2026-03-14T08:21:41.0000119Z ##[endgroup]
+2026-03-14T08:21:41.0000120Z 
+2026-03-14T08:21:41.0000121Z ##[notice]JavaScript Action detection: Main file: 'lib/index.js' not found
+2026-03-14T08:21:41.0000122Z ##[warning]Update your action to NodeJS 16
+2026-03-14T08:21:41.0000123Z 
+2026-03-14T08:21:41.0000124Z ##[error]Process completed with exit code 1

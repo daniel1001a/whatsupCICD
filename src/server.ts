@@ -2,20 +2,29 @@
  * Fastify 應用組裝。
  *
  * 這裡只負責把各個路由與外掛接起來，不含業務邏輯。
- * webhook 路由（含 HMAC 驗簽與 raw body 保留）於 `P1-04` 加入。
  */
 import Fastify, { type FastifyInstance } from 'fastify';
 import type { AppEnv } from './config/env.js';
 import { buildLoggerOptions } from './logging.js';
 import { registerHealthRoutes } from './routes/health.js';
+import {
+  registerWebhookRoutes,
+  type EnqueueOutcome,
+  type IncomingEvent,
+} from './routes/webhook.js';
 
 export interface BuildServerOptions {
   readonly env: AppEnv;
   /** 就緒判定。尚未接上 DB 與 queue 前，預設永遠就緒。 */
   readonly isReady?: () => boolean;
+  /**
+   * 事件落庫與排程。`P1-06` 的持久化 queue 完成後由 `main.ts` 注入真正的實作；
+   * 未注入時用一個明確會告警的 no-op，**不會靜默丟事件**（R4）。
+   */
+  readonly enqueue?: (event: IncomingEvent) => Promise<EnqueueOutcome> | EnqueueOutcome;
 }
 
-export function buildServer({ env, isReady }: BuildServerOptions): FastifyInstance {
+export function buildServer({ env, isReady, enqueue }: BuildServerOptions): FastifyInstance {
   const app = Fastify({
     logger: buildLoggerOptions(env.logLevel, env.nodeEnv === 'development'),
 
@@ -33,6 +42,21 @@ export function buildServer({ env, isReady }: BuildServerOptions): FastifyInstan
   });
 
   registerHealthRoutes(app, { isReady: isReady ?? (() => true) });
+
+  registerWebhookRoutes(app, {
+    webhookSecret: env.githubWebhookSecret,
+    enqueue:
+      enqueue ??
+      ((event): EnqueueOutcome => {
+        // R4 不靜默失敗：queue 還沒接上時，回 unavailable 讓 GitHub 重送，
+        // 而不是假裝收下再丟掉。這個分支在 P1-06 完成後就不會再被走到。
+        app.log.error(
+          { deliveryId: event.deliveryId, eventType: event.eventType },
+          'webhook: queue 尚未接上（P1-06），拒收以觸發 GitHub 重送',
+        );
+        return 'unavailable';
+      }),
+  });
 
   return app;
 }

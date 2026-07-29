@@ -1,0 +1,45 @@
+2026-03-14T08:26:00.1234567Z Run mvn clean test
+2026-03-14T08:26:00.2345678Z [INFO] Scanning for projects...
+2026-03-14T08:26:01.3456789Z [INFO] Building myapp 2.1.0-SNAPSHOT
+2026-03-14T08:26:01.4567890Z [INFO] ----
+2026-03-14T08:26:02.5678901Z [INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
+2026-03-14T08:26:03.6789012Z [INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar (382 KB at 1.2 MB/s)
+2026-03-14T08:26:04.7890123Z [INFO]
+2026-03-14T08:26:04.8901234Z [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ myapp ---
+2026-03-14T08:26:04.9012345Z [INFO] Compiling 24 source files to /home/runner/work/myapp/myapp/target/classes
+2026-03-14T08:26:05.1234567Z [ERROR] COMPILATION ERROR
+2026-03-14T08:26:05.2345678Z [ERROR] /home/runner/work/myapp/myapp/src/main/java/com/example/auth/AuthController.java:[112,5] error: method getName() is not found in class java.lang.User
+2026-03-14T08:26:05.3456789Z [ERROR] /home/runner/work/myapp/myapp/src/main/java/com/example/db/DbConnector.java:[67,22] error: incompatible types: String cannot be converted to Integer
+2026-03-14T08:26:05.4567890Z [ERROR] /home/runner/work/myapp/myapp/src/main/java/com/example/security/SecretManager.java:[98,8] error: cannot find symbol
+2026-03-14T08:26:05.5678901Z [ERROR]   symbol:   variable DB_PASSWORD
+2026-03-14T08:26:05.6789012Z [ERROR]   location: class SecretManager
+2026-03-14T08:26:05.7890123Z [ERROR]
+2026-03-14T08:26:05.8901234Z [INFO] BUILD FAILURE
+2026-03-14T08:26:05.9012345Z [INFO]
+2026-03-14T08:26:06.0123456Z [ERROR] FATAL BUILD ERROR
+2026-03-14T08:26:06.1234567Z [ERROR] The build could not read 1 project -> [Help 1]
+2026-03-14T08:26:06.2345678Z
+2026-03-14T08:26:06.3456789Z [INFO] Run 'mvn help:active-profiles' to see which profiles are active
+2026-03-14T08:26:06.4567890Z [INFO] Total time: 12.23 s
+2026-03-14T08:26:06.5678901Z [INFO] Finished at: 2026-03-14T08:26:06Z
+2026-03-14T08:26:06.6789012Z [INFO] Final Memory: 42M/412M
+2026-03-14T08:26:06.7890123Z
+2026-03-14T08:26:07.1234567Z Continuing with next test target...
+2026-03-14T08:26:07.2345678Z
+2026-03-14T08:26:07.3456789Z [INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ myapp ---
+2026-03-14T08:26:07.4567890Z [INFO] Tests run: 34, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 8.234 s
+2026-03-14T08:26:07.5678901Z [ERROR] Tests run: 34, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 8.234 s <<< FAILURE!
+2026-03-14T08:26:07.6789012Z [INFO]
+2026-03-14T08:26:07.7890123Z [ERROR] -------- -----  -----
+2026-03-14T08:26:07.8901234Z [ERROR] TestAuthService.testLoginWithInvalidCredentials
+2026-03-14T08:26:07.9012345Z [ERROR] -------- -----  -----
+2026-03-14T08:26:08.0123456Z java.sql.SQLException: Connection refused: host=db.internal.example.com port=5432
+2026-03-14T08:26:08.1234567Z     at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:167)
+2026-03-14T08:26:08.2345678Z     at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:30)
+2026-03-14T08:26:08.3456789Z     at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+2026-03-14T08:26:08.4567890Z     at com.example.db.DbConnector.getConnection(DbConnector.java:54)
+2026-03-14T08:26:08.5678901Z     at com.example.auth.AuthService.loginUser(AuthService.java:123)
+2026-03-14T08:26:08.6789012Z     at com.example.auth.AuthService.loginUser(AuthService.java:120)
+2026-03-14T08:26:08.7890123Z     at com.example.test.TestAuthService.testLoginWithInvalidCredentials(TestAuthService.java:45)
+2026-03-14T08:26:08.8901234Z
+2026-03-14T08:26:08.9012345Z ##[error]Process completed with exit code 1

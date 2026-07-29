@@ -1,0 +1,53 @@
+2026-03-14T08:28:00.1234567Z Run docker build -t myapp:latest -f Dockerfile .
+2026-03-14T08:28:00.2345678Z #1 [internal] load build definition from Dockerfile
+2026-03-14T08:28:00.3456789Z #1 sha256:abc1234567890abcdef
+2026-03-14T08:28:00.4567890Z #1 transferring dockerfile: 892B done
+2026-03-14T08:28:00.5678901Z #2 [internal] load .dockerignore
+2026-03-14T08:28:00.6789012Z #2 sha256:def4567890abcdef
+2026-03-14T08:28:00.7890123Z #2 transferring context: 45B done
+2026-03-14T08:28:00.8901234Z #3 [internal] load metadata for docker.io/library/node:18-alpine
+2026-03-14T08:28:00.9012345Z #3 sha256:ghi7890abcdefghi
+2026-03-14T08:28:01.0123456Z #3 ...pulling node:18-alpine sha256:c8a8f0dc16c0ee7590c6...
+2026-03-14T08:28:01.1234567Z #4 [1/5] FROM docker.io/library/node:18-alpine@sha256:c8a8f0dc16c0ee7590c6
+2026-03-14T08:28:01.2345678Z #4 sha256:jkl2345678abcdefghjkl
+2026-03-14T08:28:02.3456789Z #4 resolve docker.io/library/node:18-alpine@sha256:c8a8f0dc16c0ee7590c6 done
+2026-03-14T08:28:02.4567890Z #4 CACHED
+2026-03-14T08:28:02.5678901Z #5 [2/5] WORKDIR /app
+2026-03-14T08:28:02.6789012Z #5 sha256:mno5678901234567890mno
+2026-03-14T08:28:02.7890123Z #5 DONE 0.0s
+2026-03-14T08:28:02.8901234Z #6 [3/5] COPY package.json package-lock.json ./
+2026-03-14T08:28:02.9012345Z #6 sha256:pqr8901234567890pqr
+2026-03-14T08:28:03.0123456Z #6 CACHED
+2026-03-14T08:28:03.1234567Z #7 [4/5] RUN npm ci
+2026-03-14T08:28:03.2345678Z #7 sha256:stu1234567890stuv
+2026-03-14T08:28:05.3456789Z #7 104.1 npm notice found 0 vulnerabilities
+2026-03-14T08:28:05.4567890Z #7 CACHED
+2026-03-14T08:28:05.5678901Z #8 [5/5] COPY . .
+2026-03-14T08:28:05.6789012Z #8 sha256:vwx3456789012vwx
+2026-03-14T08:28:05.7890123Z #8 DONE 0.1s
+2026-03-14T08:28:05.8901234Z #9 exporting to image
+2026-03-14T08:28:05.9012345Z #9 sha256:yza5678901234567890yza
+2026-03-14T08:28:05.9876543Z #9 exporting layers done
+2026-03-14T08:28:06.1234567Z #9 writing image sha256:failed_image_id done
+2026-03-14T08:28:06.2345678Z #9 naming to docker.io/myorg/myapp:latest done
+2026-03-14T08:28:06.3456789Z
+2026-03-14T08:28:06.4567890Z Run docker build -t myapp:ci-test --build-arg API_TOKEN=test123 .
+2026-03-14T08:28:06.5678901Z #1 [internal] load build definition from Dockerfile
+2026-03-14T08:28:06.6789012Z #2 [internal] load .dockerignore
+2026-03-14T08:28:06.7890123Z #3 [internal] load metadata for docker.io/library/node:18-alpine
+2026-03-14T08:28:06.8901234Z #4 [1/5] FROM docker.io/library/node:18-alpine
+2026-03-14T08:28:07.1234567Z #5 [2/5] WORKDIR /app
+2026-03-14T08:28:07.2345678Z #5 DONE 0.0s
+2026-03-14T08:28:07.3456789Z #6 [3/5] COPY package.json package-lock.json ./
+2026-03-14T08:28:07.4567890Z #6 DONE 0.2s
+2026-03-14T08:28:07.5678901Z #7 [4/5] RUN npm ci
+2026-03-14T08:28:07.6789012Z #7 12.34 added 523 packages, and audited 524 packages in 12.21s
+2026-03-14T08:28:07.7890123Z #7 12.35
+2026-03-14T08:28:07.8901234Z #7 12.36 added 2 packages, and audited 526 packages in 0.5s
+2026-03-14T08:28:07.9012345Z #7 ERROR: failed to solve: failed to fetch AWS credential: AccessDenied: User: arn:aws:iam::EXAMPLE:user/ci-runner is not authorized
+2026-03-14T08:28:08.0123456Z
+2026-03-14T08:28:08.1234567Z ------
+2026-03-14T08:28:08.2345678Z Executor.BuildExec: failed to solve with frontend dockerfile.v0
+2026-03-14T08:28:08.3456789Z Error: failed to fetch AWS credential for ECR registry auth
+2026-03-14T08:28:08.4567890Z
+2026-03-14T08:28:08.5678901Z ##[error]Process completed with exit code 1
