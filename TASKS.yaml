@@ -1,0 +1,811 @@
+# TASKS.yaml — Build Failure Prosecutor 任務 DAG
+#
+# status: todo | in_progress | blocked | review | done | cancelled
+# level:  L0(grunt/haiku) | L1(builder/sonnet) | L2(tech-lead) | L3(architect/opus) | VIS(illustrator)
+# 分派規則見 CLAUDE.md。sanitizer 與錯誤擷取器一律 L2，不外派。
+# 每個 task 的 prompt 必含：目標 / 輸入檔案 / 輸出檔案 / DoD / 禁止事項。
+
+meta:
+  version: 1
+  updated: 2026-07-29
+  current_phase: 0
+  gate_status:
+    P0: awaiting_approval
+    P1: not_started
+    P2: not_started
+    P3: not_started
+    P4: not_started
+    P5: not_started
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 0 — 規格與威脅模型
+# ══════════════════════════════════════════════════════════════════
+phase_0:
+  - id: P0-01
+    desc: SPEC.md — 定位、指標、範圍、事件流、權限論證、擷取演算法、公訴詞 schema、場景決策表、設定檔、DB schema、決策
+    deps: []
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    outputs: [SPEC.md]
+    dod:
+      - 含 ASCII 事件流圖
+      - GitHub App 每項權限有必要性論證，且列出明確不申請的權限與理由
+      - 錯誤擷取演算法含 Tier 分級、反錨點、壓縮階梯、失敗退路
+      - 公訴詞 JSON schema 含 confidence 的可稽核判定標準
+      - 場景決策表為 first-match-wins 且有 catch-all
+      - .prosecutor.yml 所有欄位皆有預設值
+      - SQLite schema 有 Postgres 相容性原則
+      - 第 4 週留存有可實作的量測定義
+    status: done
+
+  - id: P0-02
+    desc: THREAT_MODEL.md — 12+ 類敏感資訊、偵測策略、誤判風險、測試案例、webhook 攻擊面、LLM 供應商可見性誠實說明
+    deps: []
+    agent: architect
+    model: opus-5
+    effort: high
+    level: L3
+    outputs: [THREAT_MODEL.md]
+    dod:
+      - 至少 12 類敏感資訊，每類有穩定 ID (S##)、偵測策略、誤判/漏判風險、≥3 個測試案例
+      - webhook 攻擊面涵蓋偽造/replay/DoS/SSRF/設定檔注入/prompt injection/分享連結
+      - sanitizer 失效模式含 fail-closed、ReDoS、Unicode 規避、出站健檢
+      - 有可直接放進 README 的「LLM 供應商看得到什麼」章節
+      - 殘餘風險登記表
+    status: done
+    notes: architect 呼叫 1/3
+
+  - id: P0-03
+    desc: TASKS.yaml — 完整 DAG
+    deps: [P0-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [TASKS.yaml]
+    dod: [每 task 有 id/描述/依賴/agent/model/effort/DoD/狀態]
+    status: done
+
+  - id: P0-04
+    desc: RISKS.md — 風險登記表 (≥8) + 待拍板問題 (≤7，每題附建議答案)
+    deps: [P0-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [RISKS.md]
+    dod: [≥8 條風險，每條有可能性/影響/對策/負責 Phase; ≤7 個問題，每題附建議與理由]
+    status: done
+
+  - id: P0-05
+    desc: 大腦檔案骨架 — CLAUDE.md / STATE.md / DECISIONS.md / docs/BRAND.md / docs/MEME_SCENES.md / docs/ARCHITECTURE.md
+    deps: [P0-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [CLAUDE.md, STATE.md, DECISIONS.md, docs/BRAND.md, docs/MEME_SCENES.md, docs/ARCHITECTURE.md]
+    dod: [每個檔案有實質內容與更新時機; DECISIONS.md ≥ 10 條 ADR 含被否決方案]
+    status: done
+
+  - id: P0-06
+    desc: Phase 0 驗收 — inspector 逐條打勾 DoD、檢查檔案齊全
+    deps: [P0-01, P0-02, P0-03, P0-04, P0-05]
+    agent: inspector
+    model: haiku-4.5
+    effort: low
+    level: L0
+    dod: [輸出逐條打勾表與缺漏清單]
+    status: todo
+
+  - id: P0-07
+    desc: Phase 0 挑戰 — critic 全量 review，重點：規格是否可實作、鐵則是否有內部矛盾、第 4 週還有人看嗎
+    deps: [P0-06]
+    agent: critic
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [輸出打回清單或放行結論]
+    status: todo
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 1 — 骨架
+# Gate: npm run dev 一鍵起 / CI 四關全過 / 假 webhook 驗簽並回 200 < 3s / fixtures ≥ 8 種語言
+# ══════════════════════════════════════════════════════════════════
+phase_1:
+  - id: P1-01
+    desc: 專案初始化 — package.json、tsconfig(strict)、ESLint、Prettier、Vitest、目錄結構
+    deps: [P0-07]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [package.json, tsconfig.json, eslint.config.js, .prettierrc, vitest.config.ts, .gitignore]
+    dod: ["npm run dev/build/test/lint/typecheck 皆存在且可跑", "TS strict 全開含 noUncheckedIndexedAccess"]
+    status: todo
+
+  - id: P1-02
+    desc: CI 四關 — lint / typecheck / test / build，加 safe-regex 靜態檢查與 App 權限清單檢查
+    deps: [P1-01]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [.github/workflows/ci.yml, scripts/check-app-permissions.ts]
+    dod: [四關皆跑; app-manifest 出現 SPEC.md §5 之外的權限即失敗; Dependabot 設定]
+    status: todo
+
+  - id: P1-03
+    desc: 型別定義骨架 — 公訴詞 JSON、設定檔、事件、error_class、場景等所有共用型別
+    deps: [P1-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    inputs: [SPEC.md]
+    outputs: [src/types/*.ts]
+    dod: [型別與 SPEC.md §7/§8/§9/§10 一致; 無 any; 通過 typecheck]
+    forbidden: [不碰 sanitizer, 不碰擷取器]
+    status: todo
+
+  - id: P1-04
+    desc: Fastify 骨架 + webhook 路由 + HMAC-SHA256 驗簽（raw body、timing-safe）+ X-GitHub-Delivery 去重
+    deps: [P1-01, P1-03]
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    outputs: [src/server.ts, src/routes/webhook.ts, src/security/verify-signature.ts]
+    dod:
+      - 驗簽對 raw bytes 進行，於任何 JSON parse 之前
+      - 使用 timingSafeEqual
+      - 缺簽章 → 401（不是略過）
+      - 重複 delivery_id → 200 no-op
+      - 假 webhook 端到端 < 3 秒回 200
+    status: todo
+    notes: 安全關鍵路徑，L2 自己做
+
+  - id: P1-05
+    desc: SQLite 層 — migration 機制 + 全部表（SPEC.md §10）+ repository 封裝
+    deps: [P1-03]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    inputs: [SPEC.md]
+    outputs: [migrations/0001_init.sql, src/db/*.ts]
+    dod: [表定義與 SPEC.md §10 完全一致; 全 STRICT; migration 可重跑冪等; 無 SQLite 專屬語法於查詢層]
+    status: todo
+
+  - id: P1-06
+    desc: 持久化 queue — events 表驅動的 in-process worker、開機掃描孤兒事件、next_attempt_at 退避
+    deps: [P1-05]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/queue/*.ts]
+    dod: [Queue 介面隔離; 開機重排 processing 孤兒; 指數退避; 死信狀態]
+    status: todo
+
+  - id: P1-07
+    desc: Fixtures — 8+ 種語言/框架的真實失敗 CI log（TS/Python/Go/Rust/Java/Ruby/PHP/Docker/Terraform）
+    deps: [P1-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    outputs: [fixtures/ci-logs/*.log, fixtures/README.md]
+    dod:
+      - ≥8 種語言/框架
+      - 每份記錄來源 repo / run URL / 取得日期
+      - 入庫前已人工目視確認無真實敏感資訊
+    blocked_by_question: Q7
+    status: todo
+
+  - id: P1-08
+    desc: pino 結構化日誌 + redaction 設定 + 健康檢查端點
+    deps: [P1-04]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/logging.ts, src/routes/health.ts]
+    dod: [pino redaction 明列禁止序列化的欄位; /healthz 與 /readyz; 有測試證明 log 不含 raw 內容]
+    status: todo
+
+  - id: P1-09
+    desc: redteam 第一輪 — 攻擊 webhook 驗簽與 replay
+    deps: [P1-04]
+    agent: redteam
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [輸出破得掉的案例清單; 每條可重現]
+    forbidden: [不改程式碼]
+    status: todo
+
+  - id: P1-10
+    desc: Phase 1 驗收 + 挑戰
+    deps: [P1-02, P1-06, P1-07, P1-08, P1-09]
+    agent: inspector, critic
+    model: haiku-4.5, sonnet-5
+    effort: low, high
+    dod: [Gate P1 逐條打勾]
+    status: todo
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 2 — 管線（全部確定性、全測試）
+# Gate: sanitizer 對 12 類 100% 攔截（含變形）/ 擷取器對 8 fixture 定位正確
+# ══════════════════════════════════════════════════════════════════
+phase_2:
+  - id: P2-01
+    desc: ★ Sanitizer 核心 — 12+ 類、分層（結構化 → 行級 → 熵值）、fail-closed、時間預算、placeholder 慣例
+    deps: [P1-10]
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    inputs: [THREAT_MODEL.md]
+    outputs: [src/sanitizer/**]
+    dod:
+      - 零外部依賴、不 import 專案內其他模組（預留項 a）
+      - 多行/結構化 pattern 先於行級 pattern
+      - placeholder 不會被二次匹配
+      - 所有 regex 有界量詞，通過 safe-regex 檢查
+      - 2 秒時間預算，超時 fail-closed
+      - 回傳 redaction_ratio
+    forbidden: [不外派]
+    status: todo
+
+  - id: P2-02
+    desc: Sanitizer 測試套件 — 每類 ≥3 案例（明確正例/變形正例/近似負例），100% 分支覆蓋
+    deps: [P2-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    inputs: [THREAT_MODEL.md, src/sanitizer/index.ts]
+    outputs: [src/sanitizer/__tests__/*.test.ts]
+    dod: [覆蓋 THREAT_MODEL.md 全部 S## ID; 分支覆蓋 100%]
+    forbidden: [不改 sanitizer 實作，只寫測試]
+    status: todo
+
+  - id: P2-03
+    desc: 出站前置健檢 — 獨立實作的高訊號掃描（AKIA / -----BEGIN / ghp_ / xox / sk- …），命中即 abort
+    deps: [P2-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [src/sanitizer/preflight.ts]
+    dod: [實作與 P2-01 獨立（不共用 pattern 定義）; 命中即回傳 abort 並記 P0 告警]
+    status: todo
+
+  - id: P2-04
+    desc: Log 清洗器 — ANSI / GHA 時間戳 / group marker / 進度條噪音，保留 raw_index
+    deps: [P1-10]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    inputs: [SPEC.md]
+    outputs: [src/pipeline/normalize.ts]
+    dod: [SPEC.md §6.1 N1–N7 全部實作; 對 8 個 fixture 皆可跑; 純函式]
+    status: todo
+
+  - id: P2-05
+    desc: ★ 錯誤區段擷取器 — pattern registry、Tier 分級、反錨點、計分、取樣、壓縮階梯、失敗退路
+    deps: [P2-04]
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    inputs: [SPEC.md]
+    outputs: [src/extractor/**]
+    dod:
+      - 對 8 個 fixture 皆定位到正確錯誤行（人工標註 ground truth）
+      - Tier D 反錨點不會被選中
+      - 壓縮階梯能把任意輸入壓到 4k tokens 內
+      - 產出 error_class / signature_hash / signature_found / compression_level
+      - 確定性：同輸入同輸出，有測試
+    forbidden: [不外派]
+    status: todo
+
+  - id: P2-06
+    desc: Octokit 封裝 + CiAdapter 介面 + GitHubAdapter（串流下載、大小上限、重定向驗證）
+    deps: [P1-10]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/adapters/ci-adapter.ts, src/adapters/github.ts]
+    dod: [介面隔離（預留項 b）; 串流且有硬性大小上限; 404/410/403 有明確錯誤型別; 重定向目標驗證]
+    status: todo
+
+  - id: P2-07
+    desc: .prosecutor.yml 解析器 — 安全 YAML 載入、schema 驗證、夾制、預設值、大小限制
+    deps: [P1-03]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    inputs: [SPEC.md]
+    outputs: [src/config/*.ts]
+    dod: [SPEC.md §9 全欄位與預設值; 未知欄位忽略不報錯; 值超範圍夾制; >64KB 拒絕; 無 YAML 炸彈風險]
+    status: todo
+
+  - id: P2-08
+    desc: redteam 第二輪 — 專攻 sanitizer：變形/編碼/Unicode/ReDoS/分割規避
+    deps: [P2-02, P2-03]
+    agent: redteam
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [破得掉的案例清單，含 ReDoS 構造; 每條對應 S## ID; 結果寫回 THREAT_MODEL.md §9]
+    forbidden: [不改程式碼]
+    status: todo
+
+  - id: P2-09
+    desc: 根因可讀性驗收 — 8 個 fixture 遮罩後人工判讀是否仍看得出錯誤原因（R-02）
+    deps: [P2-01, P2-05]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [≥7/8 可判讀; 不合格者調整為部分遮罩策略]
+    status: todo
+
+  - id: P2-10
+    desc: Phase 2 驗收 + 挑戰
+    deps: [P2-08, P2-09, P2-06, P2-07]
+    agent: inspector, critic
+    model: haiku-4.5, sonnet-5
+    effort: low, high
+    dod: [Gate P2 逐條打勾]
+    status: todo
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 3 — 生成與投遞
+# Gate: 10 golden case JSON 恆合法 / fallback 正常 / 真實 Slack 收到 /
+#       場景同輸入同輸出 / 場景中英標題不破版 / 超限有截斷
+# ══════════════════════════════════════════════════════════════════
+phase_3:
+  - id: P3-01
+    desc: LLM 層 — Anthropic client、prompt 組裝、JSON schema 驗證、重試 1 次、伺服器端夾制、usage 記錄
+    deps: [P2-10]
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    inputs: [SPEC.md]
+    outputs: [src/llm/**]
+    dod:
+      - 指令與資料結構化分離（prompt injection 防護）
+      - Ajv strict + additionalProperties false
+      - 驗證失敗重試 1 次（temperature 0），再失敗走 fallback
+      - confidence 夾制、severity 伺服器計算
+      - 每次呼叫落 llm_usage
+      - 4k token 硬上限在送出前檢查
+    status: todo
+
+  - id: P3-02
+    desc: 出站健檢 — mention/URL/秘密二次掃描/迷因標題 token 驗證
+    deps: [P3-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [src/llm/outbound-check.ts]
+    dod: [SPEC.md §7.5 全部檢查項; 每項有測試; 秘密命中即 fallback 並記 P0 告警]
+    status: todo
+
+  - id: P3-03
+    desc: 10 個 golden case — 涵蓋各 error_class、含「應該說證據不足卻硬掰」的反例
+    deps: [P3-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    outputs: [tests/golden/*.json]
+    dod: [10 個; 涵蓋 ≥8 個 error_class; 含 2 個 insufficient 期望案例]
+    status: todo
+
+  - id: P3-04
+    desc: R4 模板 fallback — 全部失敗路徑的模板訊息與人話原因
+    deps: [P3-01]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/render/fallback.ts]
+    dod: [SPEC.md §7.6 全部原因; fallback 仍含回饋按鈕; 不含迷因卡; LLM 斷線測試通過]
+    status: todo
+
+  - id: P3-05
+    desc: Slack Block Kit 判決書渲染 — 案號/被告/罪名/證據/根因/建議/量刑 + 回饋按鈕
+    deps: [P3-01]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    inputs: [SPEC.md, docs/BRAND.md]
+    outputs: [src/render/slack-verdict.ts]
+    dod:
+      - 公文感：分隔線 + 等寬區塊，非一坨 emoji
+      - 匿名模式與 opt-out 正確生效
+      - 毒舌強度 0–3 皆有對應文案
+      - 底部帶產品連結
+    status: todo
+
+  - id: P3-06
+    desc: Slack 互動端點 — 回饋按鈕、簽章驗證、user id HMAC 後落庫
+    deps: [P3-05, P1-05]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/routes/slack-interact.ts]
+    dod: [Slack 簽章驗證; slack_user_hash 為 HMAC 不存明文; 一人一票可改; 3 秒內回應]
+    status: todo
+
+  - id: P3-07
+    desc: 迷因場景庫視覺驗收 — 先做 2 個場景（SC01 + SC09）做風格定調
+    deps: [P2-10]
+    agent: illustrator
+    model: sonnet-5
+    effort: medium
+    level: VIS
+    inputs: [docs/BRAND.md, SPEC.md]
+    outputs: [scenes/SC01_FIRST_SUMMONS/*, scenes/SC09_COURT_CLOSED/*]
+    dod:
+      - 扁平向量、有限色階（深色 + 黃銅）、無漸層陰影堆疊
+      - 法庭母題，場景本身好看到值得單獨欣賞
+      - 文字插槽定義完整（位置/對齊/字級範圍/色塊）
+      - 附設計發想來源說明
+    forbidden:
+      - 不得參照任何既有梗圖的構圖/人物配置/姿勢/標誌性元素（R7）
+      - 不寫場景選擇邏輯程式碼
+    status: todo
+    notes: 風格未通過就停下來回報 PO，不硬做（R-11 / R-14）
+
+  - id: P3-08
+    desc: 剩餘 8 個場景
+    deps: [P3-07]
+    agent: illustrator
+    model: sonnet-5
+    effort: medium
+    level: VIS
+    outputs: [scenes/SC02..SC08, SC10/*]
+    dod: [同 P3-07; 10 個場景風格一致]
+    status: todo
+
+  - id: P3-09
+    desc: 場景選擇引擎 — 載入 scenes/rules.json、schema 驗證、first-match-wins 求值
+    deps: [P1-03]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    inputs: [SPEC.md]
+    outputs: [src/meme/scene-select.ts, scenes/rules.json, scenes/rules.schema.json]
+    dod:
+      - 程式碼不含任何場景 ID 字面量（預留項 c）
+      - 載入時驗證最後一條為無條件 catch-all
+      - 特徵空間笛卡兒積窮舉測試：每組恰好命中一個場景
+      - 同輸入同輸出（Gate P3）
+    status: todo
+
+  - id: P3-10
+    desc: 迷因標題 — 長度計算（display units）、截斷階梯、grapheme 邊界、模板退路
+    deps: [P3-02]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    outputs: [src/meme/title.ts]
+    dod: [24 display units 計算正確（CJK=2）; 截斷用 Intl.Segmenter; 4 級退路皆有測試; token 驗證（R7）]
+    status: todo
+
+  - id: P3-11
+    desc: PNG 渲染 — SVG 插槽填字、CJK 字型內嵌、resvg → 1200×630
+    deps: [P3-07, P3-09, P3-10]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/meme/render.ts, assets/fonts/*]
+    dod:
+      - 中英文標題皆不破版（最長 24 units / 最短 2 units 各驗收）
+      - CJK 字型內嵌，無豆腐（R-06）
+      - 標題色塊不壓在插畫主體上
+      - 渲染時間與位元組數落 meme_cards
+    status: todo
+
+  - id: P3-12
+    desc: 分享頁 — GET /c/:shareId、OG/Twitter meta、128-bit shareId、view_count
+    deps: [P3-11]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    outputs: [src/routes/share.ts]
+    dod: [shareId 128-bit base64url 不可枚舉; OG meta 齊全; 頁面無 repo 名/人名/log 內容（除非設定允許）]
+    status: todo
+
+  - id: P3-13
+    desc: template-only 模式（llm.enabled false）
+    deps: [P3-04]
+    agent: builder
+    model: sonnet-5
+    effort: low
+    level: L1
+    dod: [完全不呼叫 LLM 仍能產出判決書與迷因卡（模板標題）]
+    blocked_by_question: Q5
+    status: todo
+
+  - id: P3-14
+    desc: redteam 第三輪（Phase 3 第一次）— prompt injection：誣告、指令劫持、標題加戲
+    deps: [P3-02]
+    agent: redteam
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [注入 fixture 清單; 驗證 LLM 是否曾輸出人名/mention/新事實]
+    forbidden: [不改程式碼]
+    status: todo
+
+  - id: P3-15
+    desc: redteam 第四輪（Phase 3 第二次）— 分享連結列舉、迷因卡內容外洩、Slack 端點偽造
+    deps: [P3-12, P3-06]
+    agent: redteam
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [破得掉的案例清單]
+    forbidden: [不改程式碼]
+    status: todo
+
+  - id: P3-16
+    desc: 真實 Slack workspace 端到端驗證
+    deps: [P3-05, P3-06, P3-11]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [真實 workspace 收到判決書 + 迷因卡; 按鈕可點且落庫]
+    status: todo
+
+  - id: P3-17
+    desc: Phase 3 驗收 + 挑戰
+    deps: [P3-14, P3-15, P3-16, P3-03, P3-13]
+    agent: inspector, critic
+    model: haiku-4.5, sonnet-5
+    effort: low, high
+    dod: [Gate P3 逐條打勾]
+    status: todo
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 4 — 硬化
+# Gate: redteam 二輪無新破口 / rate limit 與退避 / /stats 可查成本 / pino 無未遮罩內容
+# ══════════════════════════════════════════════════════════════════
+phase_4:
+  - id: P4-01
+    desc: Rate limit 與節流 — 每 installation、每 channel 序列化投遞、max_cases_per_hour 合併摘要
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [Slack Retry-After 尊重; 超額改發摘要; webhook 端有 per-installation 限流]
+    status: todo
+
+  - id: P4-02
+    desc: 重試與指數退避 + 死信處理 + 手動重跑指令
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [退避有 jitter; dead 狀態可列出可重跑; 有 CLI 或端點]
+    status: todo
+
+  - id: P4-03
+    desc: 優雅關閉 — SIGTERM 停收新任務、等待當前任務、狀態回寫
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: low
+    level: L1
+    dod: [SIGTERM 後無 processing 孤兒殘留（有測試）]
+    status: todo
+
+  - id: P4-04
+    desc: /stats 端點 — 成本（LLM + 渲染）、事件量、fallback 率、W4ER
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: ["能回答「這東西一個月花我多少錢」; 含迷因渲染成本; 需驗證存取"]
+    status: todo
+
+  - id: P4-05
+    desc: 預算上限行為 — budget.monthly_usd 達標 → 全面模板 fallback + 頻道公告一次
+    deps: [P4-04]
+    agent: builder
+    model: sonnet-5
+    effort: low
+    level: L1
+    dod: [達標後不再呼叫 LLM; 公告只發一次; 不靜默（R4）]
+    status: todo
+
+  - id: P4-06
+    desc: 可觀測性 — pino 全鏈路 correlation id、錯誤追蹤 + scrubbing hook、指標
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [error tracker 有 scrubbing hook（THREAT_MODEL.md §6）; 有測試證明 log 與 error report 皆不含 raw 內容]
+    status: todo
+
+  - id: P4-07
+    desc: 週報產生器 — 最快修復獎、最常見失敗類型、遮罩率提醒
+    deps: [P3-17]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [無任何以人為單位的負面排行（R5）; 最快修復獎用 cases.resolved_at; 可設定投遞日/時]
+    status: todo
+
+  - id: P4-08
+    desc: 端到端整合測試（假 webhook → 假 Slack）
+    deps: [P4-01, P4-02, P4-03]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [1 條完整 e2e; 管線層單元測試 > 85%]
+    status: todo
+
+  - id: P4-09
+    desc: redteam 第五輪 — 全面複攻，驗證 Phase 2/3 的破口已修補且無新破口
+    deps: [P4-06]
+    agent: redteam
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [無新破口; 舊破口逐條驗證已修; 結果寫回 THREAT_MODEL.md §9]
+    forbidden: [不改程式碼]
+    status: todo
+
+  - id: P4-10
+    desc: Phase 4 驗收 + 挑戰
+    deps: [P4-04, P4-05, P4-07, P4-08, P4-09]
+    agent: inspector, critic
+    model: haiku-4.5, sonnet-5
+    effort: low, high
+    dod: [Gate P4 逐條打勾]
+    status: todo
+
+# ══════════════════════════════════════════════════════════════════
+# PHASE 5 — 發射
+# Gate: 三步驟內完成安裝 / README 首屏有判決書截圖（含迷因卡）/ ARCHITECTURE.md 完成
+# ══════════════════════════════════════════════════════════════════
+phase_5:
+  - id: P5-01
+    desc: 安裝流程 — GitHub App manifest、Slack App manifest、Dockerfile、Fly.io 設定、一鍵部署
+    deps: [P4-10]
+    agent: builder
+    model: sonnet-5
+    effort: medium
+    level: L1
+    dod: [權限與 SPEC.md §5 一致; Dockerfile 多階段; secret 全走環境變數; 安裝步驟數符合 Q1 的結論]
+    status: todo
+
+  - id: P5-02
+    desc: README — 首屏判決書 + 迷因卡截圖、三步驟安裝、隱私聲明、解除安裝與資料刪除說明
+    deps: [P5-01]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [首屏一張截圖; 明講原始 log 不落地（R2）; 含 THREAT_MODEL.md §8 的 LLM 可見性說明; 解除安裝與刪除段落]
+    status: todo
+
+  - id: P5-03
+    desc: docs/ARCHITECTURE.md 完稿 — 事件流圖、非同步理由、log 不落地理由、sanitizer 設計、場景選擇邏輯
+    deps: [P4-10]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [有圖; 五個主題各有一節]
+    status: todo
+
+  - id: P5-04
+    desc: SECURITY.md — 回報管道、支援版本、揭露政策
+    deps: [P4-10]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    dod: [有回報管道與回應時限承諾]
+    status: todo
+
+  - id: P5-05
+    desc: 落地頁 — 極簡單頁，上半判決書截圖、下半三步驟安裝，深色 + 黃銅
+    deps: [P5-02]
+    agent: illustrator
+    model: sonnet-5
+    effort: medium
+    level: VIS
+    inputs: [docs/BRAND.md]
+    dod:
+      - 法庭感深色調 + 一個克制的暖色
+      - 明確避開：米白+大襯線+陶土橘 / 純黑+螢光綠 / 大數字漸層 hero / 三欄圖示卡
+    status: todo
+
+  - id: P5-06
+    desc: 技術文章（2000–3000 字）— 「把公司 log 送進 LLM 之前，我做了哪 12 種遮罩、以及 red team 怎麼破它」
+    deps: [P4-09]
+    agent: tech-lead
+    model: sonnet-5
+    effort: high
+    level: L2
+    dod: [含真實 redteam 破口與修補過程; 誠實承認殘餘風險]
+    status: todo
+
+  - id: P5-07
+    desc: Demo 影片 60 秒腳本 + 錄製指引（CI 失敗 → Slack 判決書 + 迷因卡）
+    deps: [P5-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    dod: [分鏡腳本; 60 秒內]
+    status: todo
+
+  - id: P5-08
+    desc: 發射素材 — HN 標題 ×3 / r/devops 貼文 / X thread 6–8 則（每則配一張迷因卡）/ Marketplace 文案
+    deps: [P5-05, P5-06]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [X thread 每則有對應迷因卡; HN 標題不誇大]
+    status: todo
+
+  - id: P5-09
+    desc: CHANGELOG + 語意化版本 + v0.1.0 標記
+    deps: [P5-01]
+    agent: grunt
+    model: haiku-4.5
+    effort: low
+    level: L0
+    dod: [Keep a Changelog 格式; Conventional Commits 對應]
+    status: todo
+
+  - id: P5-10
+    desc: 找 3 個真實團隊試用並收集回饋
+    deps: [P5-02]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    dod: [3 個團隊; 回饋寫進 README「實測回饋」; 收集自發轉發的迷因卡截圖]
+    status: todo
+    notes: 需 PO 參與，非純技術任務
+
+  - id: P5-11
+    desc: Phase 5 驗收 + 挑戰
+    deps: [P5-02, P5-03, P5-05, P5-08]
+    agent: inspector, critic
+    model: haiku-4.5, sonnet-5
+    effort: low, high
+    dod: [Gate P5 逐條打勾; §9「真的產品」檢查表全項]
+    status: todo
