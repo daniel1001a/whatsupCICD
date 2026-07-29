@@ -33,18 +33,43 @@ export interface InstallationRow {
 export interface EventRow {
   readonly id: string; // ULID, PRIMARY KEY
   readonly delivery_id: string; // UNIQUE
-  readonly installation_id: string; // REFERENCES installations(id)
+  /**
+   * 可為 null。webhook handler 在驗簽後**立刻**落庫並回 200（R3：3 秒預算），
+   * 當下還沒 parse payload、也還沒查 installation。worker 解析後回填。
+   *
+   * `installation.created` 更是本質上先於 installations 列存在——
+   * 若設 NOT NULL + FK，處理它時必定違反外鍵。
+   */
+  readonly installation_id: string | null; // REFERENCES installations(id)
   readonly event_type: GitHubEventType;
-  readonly repo_full_name: string;
+  /** 可為 null，同 `installation_id`：落庫時尚未 parse payload。 */
+  readonly repo_full_name: string | null;
   readonly run_id: number | null;
   readonly run_updated_at: string | null; // ISO-8601 UTC
   readonly received_at: string; // ISO-8601 UTC
   readonly status: EventStatus;
   readonly attempts: number; // DEFAULT 0
+  /**
+   * 進入 `processing` 的時刻。孤兒回收必須用這個而不是 `received_at`——
+   * 一筆在佇列裡等了一小時、一分鐘前才被 claim 的事件，用 `received_at`
+   * 判斷會被誤判成孤兒然後重複處理。
+   */
+  readonly claimed_at: string | null; // ISO-8601 UTC
   readonly next_attempt_at: string | null; // ISO-8601 UTC
   readonly last_error: string | null; // 遮罩後的錯誤摘要
   readonly payload_digest: string; // SHA-256(raw body)
   readonly completed_at: string | null; // ISO-8601 UTC
+}
+
+/** 解除安裝後保留的匿名統計（SPEC.md §10「資料刪除」）。刻意不含任何識別資訊。 */
+export interface RetentionStatsRow {
+  readonly id: string; // ULID
+  readonly deleted_at: string; // ISO-8601 UTC
+  readonly cases_count: number;
+  readonly feedback_count: number;
+  readonly meme_count: number;
+  readonly lifetime_usd: number;
+  readonly install_days: number;
 }
 
 /* ═══════════════════════════════════════════════════════════════════ */

@@ -86,23 +86,13 @@ export interface GitHubInstallationRepositoriesEvent {
 /* Events Table Row Type */
 /* ═══════════════════════════════════════════════════════════════════ */
 
-/** 來自 events SQLite 表的行（SPEC.md §10） */
-export interface EventRow {
-  readonly id: string; // ULID
-  readonly delivery_id: string; // X-GitHub-Delivery
-  readonly installation_id: string; // REFERENCES installations(id)
-  readonly event_type: GitHubEventType;
-  readonly repo_full_name: string;
-  readonly run_id: number | null;
-  readonly run_updated_at: string | null; // ISO-8601 UTC
-  readonly received_at: string; // ISO-8601 UTC
-  readonly status: EventStatus;
-  readonly attempts: number;
-  readonly next_attempt_at: string | null; // ISO-8601 UTC
-  readonly last_error: string | null; // 遮罩後的錯誤摘要
-  readonly payload_digest: string; // SHA-256(raw body)
-  readonly completed_at: string | null; // ISO-8601 UTC
-}
+/**
+ * `EventRow` 的正本在 `db.ts`——所有 DB Row 型別都住在那裡。
+ * 這裡只做 re-export，避免兩份定義各自漂移。
+ *
+ * （原本兩個檔案各定義了一份完全相同的 `EventRow`，是 P1-05 review 時發現的。）
+ */
+export type { EventRow } from './db.js';
 
 /* ═══════════════════════════════════════════════════════════════════ */
 /* Retry Configuration */

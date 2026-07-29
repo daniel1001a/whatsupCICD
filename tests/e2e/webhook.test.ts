@@ -274,6 +274,75 @@ describe('POST /webhooks/github', () => {
     expect(res.statusCode).toBe(401);
   });
 
+  it('未訂閱的事件類型 → 200 skipped，不進佇列（redteam P1-09 #4）', async () => {
+    const { app, seen } = build();
+    current = app;
+    const body = Buffer.from(JSON.stringify(PAYLOAD), 'utf8');
+
+    // 簽章正確，但這是我們沒訂閱的事件。放進佇列會佔用該 installation 的
+    // 處理配額，稀釋掉 per-installation rate limit。
+    const res = await post(app, body, {
+      'x-hub-signature-256': signPayload(body, SECRET),
+      'x-github-delivery': 'unsubscribed-event',
+      'x-github-event': 'push',
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.json()).toEqual({ status: 'skipped' });
+    expect(seen).toHaveLength(0);
+  });
+
+  it.each(['workflow_run', 'installation', 'installation_repositories', 'ping'])(
+    '訂閱的事件類型 %s 會進佇列',
+    async (eventType) => {
+      const { app, seen } = build();
+      current = app;
+      const body = Buffer.from(JSON.stringify(PAYLOAD), 'utf8');
+
+      const res = await post(app, body, {
+        'x-hub-signature-256': signPayload(body, SECRET),
+        'x-github-delivery': `sub-${eventType}`,
+        'x-github-event': eventType,
+      });
+
+      expect(res.statusCode).toBe(200);
+      expect(seen).toHaveLength(1);
+    },
+  );
+
+  it('事件過濾發生在驗簽之後——沒有簽章就沒有機會走到過濾', async () => {
+    const { app } = build();
+    current = app;
+    const body = Buffer.from(JSON.stringify(PAYLOAD), 'utf8');
+
+    // 未訂閱事件 + 錯誤簽章：必須回 401 而不是 200 skipped，
+    // 否則等於免費告訴攻擊者我們訂閱了哪些事件。
+    const res = await post(app, body, {
+      'x-hub-signature-256': signPayload(body, 'wrong'),
+      'x-github-delivery': 'unsub-badsig',
+      'x-github-event': 'push',
+    });
+
+    expect(res.statusCode).toBe(401);
+  });
+
+  it('超過 body 上限 → 413，且不計算 HMAC（redteam P1-09 #2）', async () => {
+    const { app, seen } = build();
+    current = app;
+    // 上限是 512KB。同步的 HMAC 計算是 event loop 阻塞來源，
+    // 攻擊者不需要知道 secret 就能用大 body 拖慢全站。
+    const huge = Buffer.alloc(600 * 1024, 0x61);
+
+    const res = await post(app, huge, {
+      'x-hub-signature-256': signPayload(huge, SECRET),
+      'x-github-delivery': 'too-big',
+      'x-github-event': 'workflow_run',
+    });
+
+    expect(res.statusCode).toBe(413);
+    expect(seen).toHaveLength(0);
+  });
+
   it('連續 20 次合法請求的平均延遲仍遠低於預算', async () => {
     const { app } = build();
     current = app;

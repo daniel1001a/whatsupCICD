@@ -46,6 +46,24 @@ const H_SIGNATURE = 'x-hub-signature-256';
 const H_DELIVERY = 'x-github-delivery';
 const H_EVENT = 'x-github-event';
 
+/**
+ * 我們訂閱的事件類型（必須與 `app-manifest.yml` 的 `default_events` 一致）。
+ *
+ * 這個過濾是**只看標頭、不 parse body** 的——維持 R3 的預算，同時避免
+ * 「簽章正確但完全不相關的事件」佔用該 installation 的處理配額
+ * （redteam P1-09 #4：那會稀釋掉 per-installation rate limit 的效果）。
+ *
+ * ⚠️ 這裡**不做** `conclusion == failure` 的過濾——那需要 parse payload，
+ * 是 worker 的職責。`SPEC.md` §4 的事件流圖原本把它畫在 ① 步驟內，是圖錯了。
+ */
+const SUBSCRIBED_EVENTS: ReadonlySet<string> = new Set([
+  'workflow_run',
+  'installation',
+  'installation_repositories',
+  // GitHub 在設定 webhook 時會送一次，回 200 讓它的 UI 顯示綠勾。
+  'ping',
+]);
+
 function headerValue(req: FastifyRequest, name: string): string | undefined {
   const raw = req.headers[name];
   if (typeof raw === 'string') return raw;
@@ -101,7 +119,20 @@ export function registerWebhookRoutes(app: FastifyInstance, deps: WebhookDeps): 
       return reply.code(200).send({ status: 'ignored' });
     }
 
-    // ── 3. 落庫 + 去重（由 events 表的 UNIQUE(delivery_id) 保證）────────
+    // ── 3. 事件類型過濾（只看標頭，不 parse body）────────────────────
+    // 簽章正確不代表我們要處理。放進佇列的每一筆都會佔用該 installation 的
+    // 處理配額，無關事件會稀釋掉 per-installation rate limit 的效果。
+    if (!SUBSCRIBED_EVENTS.has(eventType)) {
+      req.log.info({ deliveryId, eventType }, 'webhook: 未訂閱的事件類型，略過');
+      return reply.code(200).send({ status: 'skipped' });
+    }
+
+    // ── 4. 落庫 + 去重（由 events 表的 UNIQUE(delivery_id) 保證）────────
+    // ⚠️ 去重發生在 `enqueue` 內（events 表的 UNIQUE 約束），不是這一層。
+    // `SPEC.md` §4 的圖把「去重」畫在 ① 步驟裡容易讓人以為 handler 自己做，
+    // 實際上 handler 只是把它委派出去。P1-06 接上真正的 queue 之前，
+    // 重放防護是**完全空的**——這一點已記在 STATE.md，不要被
+    // 「webhook 測試都過了」誤導成攻擊面已覆蓋。
     let outcome: EnqueueOutcome;
     try {
       outcome = await deps.enqueue({

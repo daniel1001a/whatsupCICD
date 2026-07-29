@@ -1,73 +1,900 @@
-2026-03-14T08:29:00.1234567Z Run npx eslint src/ --format json --max-warnings 5
-2026-03-14T08:29:00.2345678Z npm notice found 0 vulnerabilities
-2026-03-14T08:29:01.3456789Z
-2026-03-14T08:29:02.4567890Z ##[group]ESLint Output
-2026-03-14T08:29:02.5678901Z {
-2026-03-14T08:29:02.6789012Z   "src/api/handlers.ts": [
-2026-03-14T08:29:02.7890123Z     {
-2026-03-14T08:29:02.8901234Z       "ruleId": "no-console",
-2026-03-14T08:29:02.9012345Z       "severity": 2,
-2026-03-14T08:29:03.0123456Z       "message": "Unexpected console statement",
-2026-03-14T08:29:03.1234567Z       "line": 34,
-2026-03-14T08:29:03.2345678Z       "column": 4,
-2026-03-14T08:29:03.3456789Z       "nodeType": "MemberExpression",
-2026-03-14T08:29:03.4567890Z       "messageId": "unexpected"
-2026-03-14T08:29:03.5678901Z     },
-2026-03-14T08:29:03.6789012Z     {
-2026-03-14T08:29:03.7890123Z       "ruleId": "@typescript-eslint/no-explicit-any",
-2026-03-14T08:29:03.8901234Z       "severity": 2,
-2026-03-14T08:29:03.9012345Z       "message": "Unexpected any. Specify a different type.",
-2026-03-14T08:29:04.0123456Z       "line": 56,
-2026-03-14T08:29:04.1234567Z       "column": 12,
-2026-03-14T08:29:04.2345678Z       "nodeType": "TSAnyKeyword"
-2026-03-14T08:29:04.3456789Z     },
-2026-03-14T08:29:04.4567890Z     {
-2026-03-14T08:29:04.5678901Z       "ruleId": "react/prop-types",
-2026-03-14T08:29:04.6789012Z       "severity": 2,
-2026-03-14T08:29:04.7890123Z       "message": "'children' is missing in props validation",
-2026-03-14T08:29:04.8901234Z       "line": 89,
-2026-03-14T08:29:04.9012345Z       "column": 19,
-2026-03-14T08:29:05.0123456Z       "nodeType": "FunctionDeclaration"
-2026-03-14T08:29:05.1234567Z     }
-2026-03-14T08:29:05.2345678Z   ],
-2026-03-14T08:29:05.3456789Z   "src/utils/helpers.ts": [
-2026-03-14T08:29:05.4567890Z     {
-2026-03-14T08:29:05.5678901Z       "ruleId": "no-unused-vars",
-2026-03-14T08:29:05.6789012Z       "severity": 2,
-2026-03-14T08:29:05.7890123Z       "message": "'unusedVar' is assigned a value but never used",
-2026-03-14T08:29:05.8901234Z       "line": 23,
-2026-03-14T08:29:05.9012345Z       "column": 7,
-2026-03-14T08:29:06.0123456Z       "nodeType": "VariableDeclarator"
-2026-03-14T08:29:06.1234567Z     },
-2026-03-14T08:29:06.2345678Z     {
-2026-03-14T08:29:06.3456789Z       "ruleId": "prefer-const",
-2026-03-14T08:29:06.4567890Z       "severity": 1,
-2026-03-14T08:29:06.5678901Z       "message": "'config' is never reassigned; use 'const' instead of 'let'",
-2026-03-14T08:29:06.6789012Z       "line": 45,
-2026-03-14T08:29:06.7890123Z       "column": 3
-2026-03-14T08:29:06.8901234Z     },
-2026-03-14T08:29:06.9012345Z     {
-2026-03-14T08:29:07.0123456Z       "ruleId": "eqeqeq",
-2026-03-14T08:29:07.1234567Z       "severity": 2,
-2026-03-14T08:29:07.2345678Z       "message": "Expected '===' and instead saw '=='",
-2026-03-14T08:29:07.3456789Z       "line": 78,
-2026-03-14T08:29:07.4567890Z       "column": 18,
-2026-03-14T08:29:07.5678901Z       "nodeType": "BinaryExpression"
-2026-03-14T08:29:07.6789012Z     }
-2026-03-14T08:29:07.7890123Z   ]
-2026-03-14T08:29:07.8901234Z }
-2026-03-14T08:29:07.9012345Z ##[endgroup]
-2026-03-14T08:29:08.0123456Z
-2026-03-14T08:29:08.1234567Z src/api/handlers.ts
-2026-03-14T08:29:08.2345678Z   34:4   error   Unexpected console statement             no-console
-2026-03-14T08:29:08.3456789Z   56:12  error   Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-2026-03-14T08:29:08.4567890Z   89:19  error   'children' is missing in props validation  react/prop-types
-2026-03-14T08:29:08.5678901Z
-2026-03-14T08:29:08.6789012Z src/utils/helpers.ts
-2026-03-14T08:29:08.7890123Z   23:7   error    'unusedVar' is assigned a value but never used  no-unused-vars
-2026-03-14T08:29:08.8901234Z   45:3   warning  'config' is never reassigned; use 'const' instead of 'let'  prefer-const
-2026-03-14T08:29:08.9012345Z   78:18  error    Expected '===' and instead saw '=='  eqeqeq
-2026-03-14T08:29:09.0123456Z
-2026-03-14T08:29:09.1234567Z 5 errors and 1 warning found
-2026-03-14T08:29:09.2345678Z
-2026-03-14T08:29:09.3456789Z ##[error]Process completed with exit code 1
+2026-03-14T08:21:33.8575810Z Current runner version: '2.309.0'
+2026-03-14T08:21:34.3190790Z Runner name: 'GitHub Actions 2'
+2026-03-14T08:21:34.9355860Z Using connection string postgres://ciuser:hunter2@db.internal.example.com:5432/appdb
+2026-03-14T08:21:35.8146630Z Authorization header sent: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.fake.signaturepayload
+2026-03-14T08:21:36.1845740Z ##[group]Run actions/checkout@v4
+2026-03-14T08:21:36.3707640Z remote: Compressing objects... 4%
+2026-03-14T08:21:36.6095000Z remote: Compressing objects... 11%
+2026-03-14T08:21:36.8341270Z info: processing step 3/96
+2026-03-14T08:21:37.0630350Z Cache restored successfully (853 MB, key hit)
+2026-03-14T08:21:37.2585810Z npm WARN deprecated uuid-lite@1.1.10: this package is no longer maintained
+2026-03-14T08:21:37.4331760Z remote: Compressing objects... 39%
+2026-03-14T08:21:38.1307340Z info: processing step 7/96
+2026-03-14T08:21:38.7683800Z remote: Compressing objects... 53%
+2026-03-14T08:21:38.9811680Z remote: Compressing objects... 60%
+2026-03-14T08:21:39.0158940Z info: processing step 10/96
+2026-03-14T08:21:39.6936300Z Cache restored successfully (538 MB, key hit)
+2026-03-14T08:21:40.3254930Z [31mnpm WARN deprecated har-validator-lite@0.0.15: this package is no longer maintained[0m
+2026-03-14T08:21:40.3406410Z remote: Compressing objects... 88%
+2026-03-14T08:21:40.5566430Z info: processing step 14/96
+2026-03-14T08:21:41.4398790Z remote: Compressing objects... 100%
+2026-03-14T08:21:41.9655270Z remote: Compressing objects... 9%
+2026-03-14T08:21:42.5132650Z info: processing step 17/96
+2026-03-14T08:21:42.8889310Z Cache restored successfully (617 MB, key hit)
+2026-03-14T08:21:43.1210080Z npm WARN deprecated har-validator-lite@9.6.7: this package is no longer maintained
+2026-03-14T08:21:43.6092380Z remote: Compressing objects... 37%
+2026-03-14T08:21:43.6459800Z info: processing step 21/96
+2026-03-14T08:21:44.2407610Z remote: Compressing objects... 51%
+2026-03-14T08:21:44.8436990Z remote: Compressing objects... 58%
+2026-03-14T08:21:45.6671040Z info: processing step 24/96
+2026-03-14T08:21:45.7066960Z [1;33mCache restored successfully (862 MB, key hit)[0m
+2026-03-14T08:21:46.2432040Z npm WARN deprecated debug-lite@4.7.13: this package is no longer maintained
+2026-03-14T08:21:46.5501880Z remote: Compressing objects... 86%
+2026-03-14T08:21:47.0293440Z info: processing step 28/96
+2026-03-14T08:21:47.4258460Z remote: Compressing objects... 100%
+2026-03-14T08:21:47.5851310Z [1;33mremote: Compressing objects... 7%[0m
+2026-03-14T08:21:48.3274110Z info: processing step 31/96
+2026-03-14T08:21:48.6859960Z [34mCache restored successfully (397 MB, key hit)[0m
+2026-03-14T08:21:48.7847130Z npm WARN deprecated querystring-es3@1.10.5: this package is no longer maintained
+2026-03-14T08:21:49.6076120Z remote: Compressing objects... 35%
+2026-03-14T08:21:49.9761970Z info: processing step 35/96
+2026-03-14T08:21:50.8654800Z remote: Compressing objects... 49%
+2026-03-14T08:21:50.9912840Z remote: Compressing objects... 56%
+2026-03-14T08:21:51.2905660Z info: processing step 38/96
+2026-03-14T08:21:51.9827480Z Cache restored successfully (773 MB, key hit)
+2026-03-14T08:21:52.4878250Z npm WARN deprecated proxy-agent-fake@8.11.3: this package is no longer maintained
+2026-03-14T08:21:53.0738940Z remote: Compressing objects... 84%
+2026-03-14T08:21:53.6774170Z info: processing step 42/96
+2026-03-14T08:21:54.1506940Z remote: Compressing objects... 98%
+2026-03-14T08:21:54.9815090Z remote: Compressing objects... 5%
+2026-03-14T08:21:55.4393190Z info: processing step 45/96
+2026-03-14T08:21:55.7605000Z Cache restored successfully (587 MB, key hit)
+2026-03-14T08:21:56.5735720Z npm WARN deprecated querystring-es3@5.20.12: this package is no longer maintained
+2026-03-14T08:21:56.9929950Z remote: Compressing objects... 33%
+2026-03-14T08:21:57.8679010Z info: processing step 49/96
+2026-03-14T08:21:58.4892520Z remote: Compressing objects... 47%
+2026-03-14T08:21:58.9492290Z remote: Compressing objects... 54%
+2026-03-14T08:21:59.6791670Z info: processing step 52/96
+2026-03-14T08:22:00.4712690Z Cache restored successfully (833 MB, key hit)
+2026-03-14T08:22:01.3462670Z npm WARN deprecated colorz-cli@2.2.6: this package is no longer maintained
+2026-03-14T08:22:02.0745040Z remote: Compressing objects... 82%
+2026-03-14T08:22:02.4207450Z info: processing step 56/96
+2026-03-14T08:22:02.8988570Z remote: Compressing objects... 96%
+2026-03-14T08:22:02.9785240Z remote: Compressing objects... 100%
+2026-03-14T08:22:03.3441130Z info: processing step 59/96
+2026-03-14T08:22:04.1219590Z Cache restored successfully (508 MB, key hit)
+2026-03-14T08:22:05.0198640Z npm WARN deprecated colorz-cli@4.18.11: this package is no longer maintained
+2026-03-14T08:22:05.0277140Z remote: Compressing objects... 31%
+2026-03-14T08:22:05.1799820Z info: processing step 63/96
+2026-03-14T08:22:05.8873910Z remote: Compressing objects... 45%
+2026-03-14T08:22:06.0793580Z remote: Compressing objects... 52%
+2026-03-14T08:22:06.2984950Z info: processing step 66/96
+2026-03-14T08:22:06.7588600Z Cache restored successfully (813 MB, key hit)
+2026-03-14T08:22:06.9169650Z npm WARN deprecated stream-peek@4.20.13: this package is no longer maintained
+2026-03-14T08:22:07.8100920Z remote: Compressing objects... 80%
+2026-03-14T08:22:08.3484110Z [1;33minfo: processing step 70/96[0m
+2026-03-14T08:22:08.5001950Z remote: Compressing objects... 94%
+2026-03-14T08:22:09.3065260Z remote: Compressing objects... 100%
+2026-03-14T08:22:09.8938340Z info: processing step 73/96
+2026-03-14T08:22:09.9222110Z Cache restored successfully (277 MB, key hit)
+2026-03-14T08:22:10.5294170Z npm WARN deprecated glob-walker@9.17.19: this package is no longer maintained
+2026-03-14T08:22:10.8012310Z [1;33mremote: Compressing objects... 29%[0m
+2026-03-14T08:22:11.3568460Z info: processing step 77/96
+2026-03-14T08:22:12.0993480Z remote: Compressing objects... 43%
+2026-03-14T08:22:12.8841370Z remote: Compressing objects... 50%
+2026-03-14T08:22:13.2128480Z info: processing step 80/96
+2026-03-14T08:22:13.5204640Z Cache restored successfully (661 MB, key hit)
+2026-03-14T08:22:14.2606770Z npm WARN deprecated tar-stream-old@0.2.13: this package is no longer maintained
+2026-03-14T08:22:14.9923440Z remote: Compressing objects... 78%
+2026-03-14T08:22:15.4298510Z info: processing step 84/96
+2026-03-14T08:22:15.6100240Z remote: Compressing objects... 92%
+2026-03-14T08:22:15.6527580Z remote: Compressing objects... 99%
+2026-03-14T08:22:16.1156010Z info: processing step 87/96
+2026-03-14T08:22:16.2117070Z Cache restored successfully (788 MB, key hit)
+2026-03-14T08:22:16.6795720Z npm WARN deprecated querystring-es3@4.3.2: this package is no longer maintained
+2026-03-14T08:22:17.5240380Z remote: Compressing objects... 27%
+2026-03-14T08:22:18.3692360Z [2K[1Ainfo: processing step 91/96
+2026-03-14T08:22:18.7379500Z remote: Compressing objects... 41%
+2026-03-14T08:22:19.1644570Z remote: Compressing objects... 48%
+2026-03-14T08:22:19.5595470Z info: processing step 94/96
+2026-03-14T08:22:19.8558820Z Cache restored successfully (336 MB, key hit)
+2026-03-14T08:22:20.2612670Z npm WARN deprecated left-pad-fork@3.12.4: this package is no longer maintained
+2026-03-14T08:22:20.9023730Z ##[endgroup]
+
+2026-03-14T08:22:21.4813570Z ##[group]Run actions/setup-node@v4
+2026-03-14T08:22:22.1812170Z remote: Compressing objects... 4%
+2026-03-14T08:22:22.5778650Z remote: Compressing objects... 11%
+2026-03-14T08:22:23.2214720Z info: processing step 3/96
+2026-03-14T08:22:23.9560990Z Cache restored successfully (589 MB, key hit)
+2026-03-14T08:22:24.7187410Z npm WARN deprecated json-safe-parse@2.4.10: this package is no longer maintained
+2026-03-14T08:22:25.3797940Z [2K[1Aremote: Compressing objects... 39%
+2026-03-14T08:22:25.9790840Z info: processing step 7/96
+2026-03-14T08:22:26.3457200Z remote: Compressing objects... 53%
+2026-03-14T08:22:26.4881020Z remote: Compressing objects... 60%
+2026-03-14T08:22:27.2973960Z info: processing step 10/96
+2026-03-14T08:22:27.8283650Z Cache restored successfully (172 MB, key hit)
+2026-03-14T08:22:27.9183700Z npm WARN deprecated uuid-lite@9.15.20: this package is no longer maintained
+2026-03-14T08:22:27.9987040Z remote: Compressing objects... 88%
+2026-03-14T08:22:28.2852620Z info: processing step 14/96
+2026-03-14T08:22:28.3257240Z remote: Compressing objects... 100%
+2026-03-14T08:22:28.6208320Z remote: Compressing objects... 9%
+2026-03-14T08:22:28.7777520Z info: processing step 17/96
+2026-03-14T08:22:28.8422880Z Cache restored successfully (379 MB, key hit)
+2026-03-14T08:22:28.8827650Z npm WARN deprecated tar-stream-old@1.5.20: this package is no longer maintained
+2026-03-14T08:22:29.1933190Z remote: Compressing objects... 37%
+2026-03-14T08:22:29.2918660Z info: processing step 21/96
+2026-03-14T08:22:29.7311530Z remote: Compressing objects... 51%
+2026-03-14T08:22:30.1723890Z remote: Compressing objects... 58%
+2026-03-14T08:22:30.6490910Z [33minfo: processing step 24/96[0m
+2026-03-14T08:22:31.3335840Z Cache restored successfully (218 MB, key hit)
+2026-03-14T08:22:31.3779070Z npm WARN deprecated stream-peek@6.4.9: this package is no longer maintained
+2026-03-14T08:22:31.6708700Z remote: Compressing objects... 86%
+2026-03-14T08:22:32.4772970Z info: processing step 28/96
+2026-03-14T08:22:32.8387480Z remote: Compressing objects... 100%
+2026-03-14T08:22:33.6039310Z remote: Compressing objects... 7%
+2026-03-14T08:22:34.2819210Z info: processing step 31/96
+2026-03-14T08:22:34.4779230Z Cache restored successfully (271 MB, key hit)
+2026-03-14T08:22:34.5931980Z npm WARN deprecated colorz-cli@8.0.4: this package is no longer maintained
+2026-03-14T08:22:35.3148120Z remote: Compressing objects... 35%
+2026-03-14T08:22:35.3609940Z info: processing step 35/96
+2026-03-14T08:22:35.5646350Z remote: Compressing objects... 49%
+2026-03-14T08:22:36.3605340Z remote: Compressing objects... 56%
+2026-03-14T08:22:37.2261120Z info: processing step 38/96
+2026-03-14T08:22:37.6437490Z Cache restored successfully (406 MB, key hit)
+2026-03-14T08:22:38.3814290Z npm WARN deprecated semver-tiny@3.10.20: this package is no longer maintained
+2026-03-14T08:22:38.6343670Z remote: Compressing objects... 84%
+2026-03-14T08:22:39.0601090Z info: processing step 42/96
+2026-03-14T08:22:39.6228500Z remote: Compressing objects... 98%
+2026-03-14T08:22:40.4907270Z remote: Compressing objects... 5%
+2026-03-14T08:22:40.6721920Z info: processing step 45/96
+2026-03-14T08:22:41.3128100Z Cache restored successfully (505 MB, key hit)
+2026-03-14T08:22:41.7880150Z npm WARN deprecated left-pad-fork@3.16.5: this package is no longer maintained
+2026-03-14T08:22:41.8267520Z remote: Compressing objects... 33%
+2026-03-14T08:22:42.1470680Z info: processing step 49/96
+2026-03-14T08:22:42.2958160Z remote: Compressing objects... 47%
+2026-03-14T08:22:43.0951560Z [32mremote: Compressing objects... 54%[0m
+2026-03-14T08:22:43.3113370Z info: processing step 52/96
+2026-03-14T08:22:43.9291200Z [2K[1ACache restored successfully (212 MB, key hit)
+2026-03-14T08:22:44.0602920Z npm WARN deprecated glob-walker@7.11.15: this package is no longer maintained
+2026-03-14T08:22:44.2594910Z remote: Compressing objects... 82%
+2026-03-14T08:22:44.7738680Z info: processing step 56/96
+2026-03-14T08:22:45.0986420Z [2K[1Aremote: Compressing objects... 96%
+2026-03-14T08:22:45.4990640Z remote: Compressing objects... 100%
+2026-03-14T08:22:46.3155020Z info: processing step 59/96
+2026-03-14T08:22:46.4905810Z Cache restored successfully (848 MB, key hit)
+2026-03-14T08:22:46.9947580Z npm WARN deprecated request-legacy@1.19.10: this package is no longer maintained
+2026-03-14T08:22:47.0413110Z remote: Compressing objects... 31%
+2026-03-14T08:22:47.1732420Z info: processing step 63/96
+2026-03-14T08:22:47.9382680Z remote: Compressing objects... 45%
+2026-03-14T08:22:48.1724300Z remote: Compressing objects... 52%
+2026-03-14T08:22:48.2650320Z info: processing step 66/96
+2026-03-14T08:22:48.2670830Z Cache restored successfully (125 MB, key hit)
+2026-03-14T08:22:48.7711610Z npm WARN deprecated stream-peek@6.0.8: this package is no longer maintained
+2026-03-14T08:22:49.4821550Z remote: Compressing objects... 80%
+2026-03-14T08:22:50.0185640Z info: processing step 70/96
+2026-03-14T08:22:50.4541830Z remote: Compressing objects... 94%
+2026-03-14T08:22:50.8009600Z remote: Compressing objects... 100%
+2026-03-14T08:22:50.8855050Z info: processing step 73/96
+2026-03-14T08:22:51.4912570Z Cache restored successfully (562 MB, key hit)
+2026-03-14T08:22:51.8615840Z npm WARN deprecated mini-glob@9.1.5: this package is no longer maintained
+2026-03-14T08:22:52.3436680Z remote: Compressing objects... 29%
+2026-03-14T08:22:52.6054710Z info: processing step 77/96
+2026-03-14T08:22:53.0831300Z remote: Compressing objects... 43%
+2026-03-14T08:22:53.3183740Z remote: Compressing objects... 50%
+2026-03-14T08:22:53.8914470Z info: processing step 80/96
+2026-03-14T08:22:54.2484830Z Cache restored successfully (186 MB, key hit)
+2026-03-14T08:22:55.0406160Z npm WARN deprecated har-validator-lite@3.8.0: this package is no longer maintained
+2026-03-14T08:22:55.3835080Z remote: Compressing objects... 78%
+2026-03-14T08:22:55.7423540Z info: processing step 84/96
+2026-03-14T08:22:55.9632160Z remote: Compressing objects... 92%
+2026-03-14T08:22:56.6107290Z remote: Compressing objects... 99%
+2026-03-14T08:22:56.9720210Z info: processing step 87/96
+2026-03-14T08:22:57.1122410Z Cache restored successfully (106 MB, key hit)
+2026-03-14T08:22:57.5301720Z npm WARN deprecated debug-lite@8.2.3: this package is no longer maintained
+2026-03-14T08:22:58.3986500Z [2K[1Aremote: Compressing objects... 27%
+2026-03-14T08:22:58.4791580Z info: processing step 91/96
+2026-03-14T08:22:58.8574900Z remote: Compressing objects... 41%
+2026-03-14T08:22:59.5095790Z remote: Compressing objects... 48%
+2026-03-14T08:22:59.5930670Z info: processing step 94/96
+2026-03-14T08:22:59.8239610Z Cache restored successfully (280 MB, key hit)
+2026-03-14T08:23:00.5405890Z npm WARN deprecated chalk-min@5.17.17: this package is no longer maintained
+2026-03-14T08:23:00.5702300Z ##[endgroup]
+
+2026-03-14T08:23:01.0252120Z ##[group]Restore cache
+2026-03-14T08:23:01.2848900Z [2K[1Aremote: Compressing objects... 4%
+2026-03-14T08:23:01.4471980Z remote: Compressing objects... 11%
+2026-03-14T08:23:02.2759390Z info: processing step 3/96
+2026-03-14T08:23:02.3154050Z Cache restored successfully (740 MB, key hit)
+2026-03-14T08:23:02.5343790Z npm WARN deprecated debug-lite@6.5.14: this package is no longer maintained
+2026-03-14T08:23:02.7846420Z remote: Compressing objects... 39%
+2026-03-14T08:23:03.5644600Z info: processing step 7/96
+2026-03-14T08:23:03.8786160Z remote: Compressing objects... 53%
+2026-03-14T08:23:04.5213100Z remote: Compressing objects... 60%
+2026-03-14T08:23:04.9928800Z info: processing step 10/96
+2026-03-14T08:23:05.1816710Z Cache restored successfully (110 MB, key hit)
+2026-03-14T08:23:05.9296250Z npm WARN deprecated querystring-es3@6.10.5: this package is no longer maintained
+2026-03-14T08:23:06.6827620Z remote: Compressing objects... 88%
+2026-03-14T08:23:07.5639320Z info: processing step 14/96
+2026-03-14T08:23:08.0612060Z [1;33mremote: Compressing objects... 100%[0m
+2026-03-14T08:23:08.3466290Z remote: Compressing objects... 9%
+2026-03-14T08:23:08.8255520Z info: processing step 17/96
+2026-03-14T08:23:09.4313560Z Cache restored successfully (794 MB, key hit)
+2026-03-14T08:23:09.9869020Z npm WARN deprecated yaml-min@9.5.0: this package is no longer maintained
+2026-03-14T08:23:10.5046130Z remote: Compressing objects... 37%
+2026-03-14T08:23:11.0655620Z info: processing step 21/96
+2026-03-14T08:23:11.4725600Z remote: Compressing objects... 51%
+2026-03-14T08:23:11.5320250Z remote: Compressing objects... 58%
+2026-03-14T08:23:11.5372830Z info: processing step 24/96
+2026-03-14T08:23:11.7020290Z [2K[1ACache restored successfully (312 MB, key hit)
+2026-03-14T08:23:11.9316820Z npm WARN deprecated ini-parse-fast@0.5.3: this package is no longer maintained
+2026-03-14T08:23:12.2883470Z [1;33mremote: Compressing objects... 86%[0m
+2026-03-14T08:23:13.0594870Z info: processing step 28/96
+2026-03-14T08:23:13.1547970Z remote: Compressing objects... 100%
+2026-03-14T08:23:13.4791410Z remote: Compressing objects... 7%
+2026-03-14T08:23:14.1557100Z info: processing step 31/96
+2026-03-14T08:23:15.0109630Z Cache restored successfully (719 MB, key hit)
+2026-03-14T08:23:15.7520330Z npm WARN deprecated request-legacy@9.20.0: this package is no longer maintained
+2026-03-14T08:23:15.9816030Z remote: Compressing objects... 35%
+2026-03-14T08:23:16.0600430Z [2K[1Ainfo: processing step 35/96
+2026-03-14T08:23:16.7040050Z remote: Compressing objects... 49%
+2026-03-14T08:23:16.9895430Z remote: Compressing objects... 56%
+2026-03-14T08:23:17.0519810Z info: processing step 38/96
+2026-03-14T08:23:17.3490310Z Cache restored successfully (274 MB, key hit)
+2026-03-14T08:23:18.0516390Z npm WARN deprecated semver-tiny@2.2.12: this package is no longer maintained
+2026-03-14T08:23:18.6220550Z remote: Compressing objects... 84%
+2026-03-14T08:23:19.3471440Z info: processing step 42/96
+2026-03-14T08:23:19.9076380Z remote: Compressing objects... 98%
+2026-03-14T08:23:20.6857730Z remote: Compressing objects... 5%
+2026-03-14T08:23:21.0323680Z info: processing step 45/96
+2026-03-14T08:23:21.8412040Z Cache restored successfully (507 MB, key hit)
+2026-03-14T08:23:22.6622150Z [36mnpm WARN deprecated glob-walker@0.8.12: this package is no longer maintained[0m
+2026-03-14T08:23:22.6917410Z [1;33mremote: Compressing objects... 33%[0m
+2026-03-14T08:23:23.3481030Z info: processing step 49/96
+2026-03-14T08:23:23.4852830Z remote: Compressing objects... 47%
+2026-03-14T08:23:24.1912690Z remote: Compressing objects... 54%
+2026-03-14T08:23:25.0771900Z info: processing step 52/96
+2026-03-14T08:23:25.8590970Z Cache restored successfully (229 MB, key hit)
+2026-03-14T08:23:26.4583500Z npm WARN deprecated semver-tiny@7.12.20: this package is no longer maintained
+2026-03-14T08:23:27.1783250Z remote: Compressing objects... 82%
+2026-03-14T08:23:27.4393470Z info: processing step 56/96
+2026-03-14T08:23:28.2582700Z remote: Compressing objects... 96%
+2026-03-14T08:23:28.4451600Z remote: Compressing objects... 100%
+2026-03-14T08:23:29.2479070Z info: processing step 59/96
+2026-03-14T08:23:29.5286610Z Cache restored successfully (756 MB, key hit)
+2026-03-14T08:23:29.9396660Z npm WARN deprecated tar-stream-old@2.18.19: this package is no longer maintained
+2026-03-14T08:23:30.7660350Z [1;33mremote: Compressing objects... 31%[0m
+2026-03-14T08:23:30.9613060Z info: processing step 63/96
+2026-03-14T08:23:31.8188780Z remote: Compressing objects... 45%
+2026-03-14T08:23:32.1143220Z remote: Compressing objects... 52%
+2026-03-14T08:23:32.9468520Z info: processing step 66/96
+2026-03-14T08:23:33.7389980Z Cache restored successfully (107 MB, key hit)
+2026-03-14T08:23:33.9989350Z npm WARN deprecated proxy-agent-fake@8.20.0: this package is no longer maintained
+2026-03-14T08:23:34.0633080Z remote: Compressing objects... 80%
+2026-03-14T08:23:34.3698300Z info: processing step 70/96
+2026-03-14T08:23:35.0985390Z remote: Compressing objects... 94%
+2026-03-14T08:23:35.5008260Z remote: Compressing objects... 100%
+2026-03-14T08:23:35.5349080Z info: processing step 73/96
+2026-03-14T08:23:35.9952400Z Cache restored successfully (535 MB, key hit)
+2026-03-14T08:23:36.5240830Z npm WARN deprecated yaml-min@9.19.13: this package is no longer maintained
+2026-03-14T08:23:37.0857260Z remote: Compressing objects... 29%
+2026-03-14T08:23:37.0872770Z info: processing step 77/96
+2026-03-14T08:23:37.4136150Z remote: Compressing objects... 43%
+2026-03-14T08:23:37.6592260Z remote: Compressing objects... 50%
+2026-03-14T08:23:38.2463360Z info: processing step 80/96
+2026-03-14T08:23:39.0598660Z [31mCache restored successfully (551 MB, key hit)[0m
+2026-03-14T08:23:39.2868180Z npm WARN deprecated colorz-cli@7.14.3: this package is no longer maintained
+2026-03-14T08:23:39.8644110Z remote: Compressing objects... 78%
+2026-03-14T08:23:40.4596540Z info: processing step 84/96
+2026-03-14T08:23:41.1026120Z remote: Compressing objects... 92%
+2026-03-14T08:23:41.4441810Z remote: Compressing objects... 99%
+2026-03-14T08:23:42.2120250Z info: processing step 87/96
+2026-03-14T08:23:42.3802200Z Cache restored successfully (53 MB, key hit)
+2026-03-14T08:23:42.7263590Z npm WARN deprecated proxy-agent-fake@8.3.16: this package is no longer maintained
+2026-03-14T08:23:42.8545840Z remote: Compressing objects... 27%
+2026-03-14T08:23:42.9131070Z info: processing step 91/96
+2026-03-14T08:23:43.5465700Z remote: Compressing objects... 41%
+2026-03-14T08:23:43.7193190Z remote: Compressing objects... 48%
+2026-03-14T08:23:44.0087990Z info: processing step 94/96
+2026-03-14T08:23:44.8745600Z Cache restored successfully (757 MB, key hit)
+2026-03-14T08:23:45.7476940Z npm WARN deprecated retry-once@3.10.13: this package is no longer maintained
+2026-03-14T08:23:46.1405800Z ##[endgroup]
+
+2026-03-14T08:23:46.2502440Z ##[group]Install dependencies
+2026-03-14T08:23:46.3030670Z remote: Compressing objects... 4%
+2026-03-14T08:23:47.0828020Z remote: Compressing objects... 11%
+2026-03-14T08:23:47.5042200Z [33minfo: processing step 3/96[0m
+2026-03-14T08:23:47.6404840Z Cache restored successfully (219 MB, key hit)
+2026-03-14T08:23:47.9545070Z [2K[1Anpm WARN deprecated mini-glob@8.7.19: this package is no longer maintained
+2026-03-14T08:23:48.7353270Z remote: Compressing objects... 39%
+2026-03-14T08:23:48.7448030Z info: processing step 7/96
+2026-03-14T08:23:49.5483450Z [2K[1Aremote: Compressing objects... 53%
+2026-03-14T08:23:49.6758300Z remote: Compressing objects... 60%
+2026-03-14T08:23:49.7932130Z info: processing step 10/96
+2026-03-14T08:23:50.5859100Z Cache restored successfully (97 MB, key hit)
+2026-03-14T08:23:51.0696060Z npm WARN deprecated fetch-lite@9.7.13: this package is no longer maintained
+2026-03-14T08:23:51.4959950Z remote: Compressing objects... 88%
+2026-03-14T08:23:52.3110540Z info: processing step 14/96
+2026-03-14T08:23:52.3443600Z remote: Compressing objects... 100%
+2026-03-14T08:23:52.3692930Z remote: Compressing objects... 9%
+2026-03-14T08:23:52.7996190Z info: processing step 17/96
+2026-03-14T08:23:53.5185420Z Cache restored successfully (271 MB, key hit)
+2026-03-14T08:23:53.9383940Z npm WARN deprecated har-validator-lite@0.11.8: this package is no longer maintained
+2026-03-14T08:23:54.7114290Z remote: Compressing objects... 37%
+2026-03-14T08:23:55.0948170Z info: processing step 21/96
+2026-03-14T08:23:55.4491580Z remote: Compressing objects... 51%
+2026-03-14T08:23:55.7067980Z remote: Compressing objects... 58%
+2026-03-14T08:23:56.2055440Z info: processing step 24/96
+2026-03-14T08:23:56.7602860Z Cache restored successfully (527 MB, key hit)
+2026-03-14T08:23:57.4813010Z npm WARN deprecated fetch-lite@9.18.18: this package is no longer maintained
+2026-03-14T08:23:58.3673340Z remote: Compressing objects... 86%
+2026-03-14T08:23:58.4203490Z info: processing step 28/96
+2026-03-14T08:23:59.0820700Z remote: Compressing objects... 100%
+2026-03-14T08:23:59.1978620Z remote: Compressing objects... 7%
+2026-03-14T08:23:59.7962980Z info: processing step 31/96
+2026-03-14T08:24:00.2760970Z Cache restored successfully (409 MB, key hit)
+2026-03-14T08:24:00.2787380Z npm WARN deprecated left-pad-fork@8.9.5: this package is no longer maintained
+2026-03-14T08:24:00.4851770Z remote: Compressing objects... 35%
+2026-03-14T08:24:00.5794110Z info: processing step 35/96
+2026-03-14T08:24:00.9996000Z [2K[1Aremote: Compressing objects... 49%
+2026-03-14T08:24:01.2714950Z remote: Compressing objects... 56%
+2026-03-14T08:24:01.9006780Z info: processing step 38/96
+2026-03-14T08:24:01.9093470Z Cache restored successfully (218 MB, key hit)
+2026-03-14T08:24:02.2793800Z npm WARN deprecated json-safe-parse@7.7.8: this package is no longer maintained
+2026-03-14T08:24:02.9991750Z remote: Compressing objects... 84%
+2026-03-14T08:24:03.6438570Z info: processing step 42/96
+2026-03-14T08:24:03.7502500Z remote: Compressing objects... 98%
+2026-03-14T08:24:04.3561330Z remote: Compressing objects... 5%
+2026-03-14T08:24:04.8012620Z info: processing step 45/96
+2026-03-14T08:24:04.8808890Z [34mCache restored successfully (450 MB, key hit)[0m
+2026-03-14T08:24:05.5511030Z npm WARN deprecated mini-glob@3.4.7: this package is no longer maintained
+2026-03-14T08:24:06.1117580Z remote: Compressing objects... 33%
+2026-03-14T08:24:06.4374910Z info: processing step 49/96
+2026-03-14T08:24:06.7737780Z remote: Compressing objects... 47%
+2026-03-14T08:24:07.6483830Z remote: Compressing objects... 54%
+2026-03-14T08:24:07.8279060Z info: processing step 52/96
+2026-03-14T08:24:08.1285530Z Cache restored successfully (579 MB, key hit)
+2026-03-14T08:24:08.3180820Z npm WARN deprecated json-safe-parse@1.19.3: this package is no longer maintained
+2026-03-14T08:24:08.4831090Z [34mremote: Compressing objects... 82%[0m
+2026-03-14T08:24:09.2889140Z info: processing step 56/96
+2026-03-14T08:24:09.9448140Z remote: Compressing objects... 96%
+2026-03-14T08:24:10.5395840Z [1;33mremote: Compressing objects... 100%[0m
+2026-03-14T08:24:10.9190140Z info: processing step 59/96
+2026-03-14T08:24:11.1378700Z Cache restored successfully (156 MB, key hit)
+2026-03-14T08:24:11.7552090Z [1;33mnpm WARN deprecated debug-lite@9.8.10: this package is no longer maintained[0m
+2026-03-14T08:24:12.0803750Z remote: Compressing objects... 31%
+2026-03-14T08:24:12.5100430Z info: processing step 63/96
+2026-03-14T08:24:13.2114820Z remote: Compressing objects... 45%
+2026-03-14T08:24:13.7719320Z remote: Compressing objects... 52%
+2026-03-14T08:24:13.9965080Z info: processing step 66/96
+2026-03-14T08:24:14.1882110Z [1;33mCache restored successfully (779 MB, key hit)[0m
+2026-03-14T08:24:14.2660050Z npm WARN deprecated ini-parse-fast@8.15.12: this package is no longer maintained
+2026-03-14T08:24:14.6425570Z remote: Compressing objects... 80%
+2026-03-14T08:24:15.2315220Z info: processing step 70/96
+2026-03-14T08:24:16.0456990Z remote: Compressing objects... 94%
+2026-03-14T08:24:16.5691310Z remote: Compressing objects... 100%
+2026-03-14T08:24:17.4198100Z info: processing step 73/96
+2026-03-14T08:24:18.0393610Z Cache restored successfully (220 MB, key hit)
+2026-03-14T08:24:18.4864500Z npm WARN deprecated proxy-agent-fake@8.17.9: this package is no longer maintained
+2026-03-14T08:24:19.0282210Z remote: Compressing objects... 29%
+2026-03-14T08:24:19.7029360Z info: processing step 77/96
+2026-03-14T08:24:19.7454980Z remote: Compressing objects... 43%
+2026-03-14T08:24:20.1535740Z remote: Compressing objects... 50%
+2026-03-14T08:24:20.3015690Z info: processing step 80/96
+2026-03-14T08:24:20.7306990Z Cache restored successfully (313 MB, key hit)
+2026-03-14T08:24:21.5896900Z npm WARN deprecated mini-glob@4.19.18: this package is no longer maintained
+2026-03-14T08:24:22.3354660Z remote: Compressing objects... 78%
+2026-03-14T08:24:22.9800380Z info: processing step 84/96
+2026-03-14T08:24:23.2710740Z remote: Compressing objects... 92%
+2026-03-14T08:24:23.8907540Z remote: Compressing objects... 99%
+2026-03-14T08:24:23.9572650Z info: processing step 87/96
+2026-03-14T08:24:24.2393300Z [2K[1ACache restored successfully (502 MB, key hit)
+2026-03-14T08:24:24.5725280Z npm WARN deprecated json-safe-parse@0.7.17: this package is no longer maintained
+2026-03-14T08:24:25.0259400Z [2K[1Aremote: Compressing objects... 27%
+2026-03-14T08:24:25.6250990Z info: processing step 91/96
+2026-03-14T08:24:25.9774710Z [2K[1Aremote: Compressing objects... 41%
+2026-03-14T08:24:26.7113740Z remote: Compressing objects... 48%
+2026-03-14T08:24:27.5598140Z info: processing step 94/96
+2026-03-14T08:24:28.0585300Z Cache restored successfully (550 MB, key hit)
+2026-03-14T08:24:28.2323740Z [1;33mnpm WARN deprecated request-legacy@5.19.10: this package is no longer maintained[0m
+2026-03-14T08:24:29.0435360Z ##[endgroup]
+
+2026-03-14T08:24:29.1033760Z ##[group]Run actions/setup-python@v5
+2026-03-14T08:24:29.1354040Z remote: Compressing objects... 4%
+2026-03-14T08:24:29.4404300Z [34mremote: Compressing objects... 11%[0m
+2026-03-14T08:24:29.4982040Z info: processing step 3/96
+2026-03-14T08:24:29.8781190Z Cache restored successfully (308 MB, key hit)
+2026-03-14T08:24:30.1048290Z npm WARN deprecated colorz-cli@3.15.7: this package is no longer maintained
+2026-03-14T08:24:30.4255520Z remote: Compressing objects... 39%
+2026-03-14T08:24:30.7319890Z info: processing step 7/96
+2026-03-14T08:24:31.2172070Z remote: Compressing objects... 53%
+2026-03-14T08:24:31.5465250Z remote: Compressing objects... 60%
+2026-03-14T08:24:32.0953810Z info: processing step 10/96
+2026-03-14T08:24:32.9752150Z Cache restored successfully (290 MB, key hit)
+2026-03-14T08:24:33.2926270Z npm WARN deprecated tar-stream-old@9.12.0: this package is no longer maintained
+2026-03-14T08:24:33.4570970Z remote: Compressing objects... 88%
+2026-03-14T08:24:33.6076420Z info: processing step 14/96
+2026-03-14T08:24:34.4485040Z remote: Compressing objects... 100%
+2026-03-14T08:24:35.1167640Z remote: Compressing objects... 9%
+2026-03-14T08:24:35.7619730Z info: processing step 17/96
+2026-03-14T08:24:36.3386070Z Cache restored successfully (885 MB, key hit)
+2026-03-14T08:24:36.8086420Z npm WARN deprecated proxy-agent-fake@4.12.20: this package is no longer maintained
+2026-03-14T08:24:37.2443930Z [33mremote: Compressing objects... 37%[0m
+2026-03-14T08:24:37.3640760Z info: processing step 21/96
+2026-03-14T08:24:37.5719010Z remote: Compressing objects... 51%
+2026-03-14T08:24:37.6872010Z remote: Compressing objects... 58%
+2026-03-14T08:24:38.4909650Z info: processing step 24/96
+2026-03-14T08:24:39.2489960Z Cache restored successfully (609 MB, key hit)
+2026-03-14T08:24:40.1146200Z npm WARN deprecated tar-stream-old@2.0.17: this package is no longer maintained
+2026-03-14T08:24:40.9096510Z remote: Compressing objects... 86%
+2026-03-14T08:24:41.4807980Z info: processing step 28/96
+2026-03-14T08:24:42.1815030Z remote: Compressing objects... 100%
+2026-03-14T08:24:42.2188800Z remote: Compressing objects... 7%
+2026-03-14T08:24:42.6339650Z info: processing step 31/96
+2026-03-14T08:24:42.9520050Z Cache restored successfully (214 MB, key hit)
+2026-03-14T08:24:43.8007290Z npm WARN deprecated stream-peek@2.4.3: this package is no longer maintained
+2026-03-14T08:24:44.1991460Z remote: Compressing objects... 35%
+2026-03-14T08:24:44.9552940Z info: processing step 35/96
+2026-03-14T08:24:45.2900600Z remote: Compressing objects... 49%
+2026-03-14T08:24:46.0884220Z remote: Compressing objects... 56%
+2026-03-14T08:24:46.1931400Z info: processing step 38/96
+2026-03-14T08:24:46.6177170Z Cache restored successfully (190 MB, key hit)
+2026-03-14T08:24:47.4511210Z npm WARN deprecated querystring-es3@9.14.4: this package is no longer maintained
+2026-03-14T08:24:47.6325650Z remote: Compressing objects... 84%
+2026-03-14T08:24:47.8671210Z info: processing step 42/96
+2026-03-14T08:24:48.1195950Z remote: Compressing objects... 98%
+2026-03-14T08:24:48.6253580Z remote: Compressing objects... 5%
+2026-03-14T08:24:49.1339420Z info: processing step 45/96
+2026-03-14T08:24:49.2369400Z Cache restored successfully (866 MB, key hit)
+2026-03-14T08:24:50.1288080Z npm WARN deprecated request-legacy@2.16.0: this package is no longer maintained
+2026-03-14T08:24:50.5957220Z remote: Compressing objects... 33%
+2026-03-14T08:24:50.9495270Z info: processing step 49/96
+2026-03-14T08:24:51.0066850Z remote: Compressing objects... 47%
+2026-03-14T08:24:51.1491680Z remote: Compressing objects... 54%
+2026-03-14T08:24:51.3588130Z info: processing step 52/96
+2026-03-14T08:24:51.3979940Z Cache restored successfully (535 MB, key hit)
+2026-03-14T08:24:51.8970440Z npm WARN deprecated uuid-lite@3.13.17: this package is no longer maintained
+2026-03-14T08:24:52.4956020Z remote: Compressing objects... 82%
+2026-03-14T08:24:52.9551320Z info: processing step 56/96
+2026-03-14T08:24:53.7405900Z remote: Compressing objects... 96%
+2026-03-14T08:24:53.9616700Z remote: Compressing objects... 100%
+2026-03-14T08:24:54.5346830Z info: processing step 59/96
+2026-03-14T08:24:55.0585490Z [1;33mCache restored successfully (854 MB, key hit)[0m
+2026-03-14T08:24:55.5730640Z npm WARN deprecated json-safe-parse@0.17.6: this package is no longer maintained
+2026-03-14T08:24:56.2188770Z remote: Compressing objects... 31%
+2026-03-14T08:24:56.7861620Z info: processing step 63/96
+2026-03-14T08:24:56.9194550Z [31mremote: Compressing objects... 45%[0m
+2026-03-14T08:24:57.5326950Z remote: Compressing objects... 52%
+2026-03-14T08:24:57.8321580Z info: processing step 66/96
+2026-03-14T08:24:58.5322530Z Cache restored successfully (574 MB, key hit)
+2026-03-14T08:24:58.9541950Z npm WARN deprecated har-validator-lite@4.20.12: this package is no longer maintained
+2026-03-14T08:24:59.6396580Z remote: Compressing objects... 80%
+2026-03-14T08:24:59.7117520Z info: processing step 70/96
+2026-03-14T08:25:00.4821000Z remote: Compressing objects... 94%
+2026-03-14T08:25:01.2877090Z remote: Compressing objects... 100%
+2026-03-14T08:25:01.9306820Z info: processing step 73/96
+2026-03-14T08:25:02.3579750Z [32mCache restored successfully (306 MB, key hit)[0m
+2026-03-14T08:25:02.8220950Z npm WARN deprecated debug-lite@1.7.12: this package is no longer maintained
+2026-03-14T08:25:03.0036300Z remote: Compressing objects... 29%
+2026-03-14T08:25:03.0373070Z info: processing step 77/96
+2026-03-14T08:25:03.6414140Z remote: Compressing objects... 43%
+2026-03-14T08:25:04.3060310Z [31mremote: Compressing objects... 50%[0m
+2026-03-14T08:25:04.4244670Z info: processing step 80/96
+2026-03-14T08:25:05.1013460Z [33mCache restored successfully (493 MB, key hit)[0m
+2026-03-14T08:25:05.1299460Z npm WARN deprecated proxy-agent-fake@8.7.16: this package is no longer maintained
+2026-03-14T08:25:05.9231830Z remote: Compressing objects... 78%
+2026-03-14T08:25:06.2764920Z info: processing step 84/96
+2026-03-14T08:25:06.8203070Z remote: Compressing objects... 92%
+2026-03-14T08:25:07.1001190Z remote: Compressing objects... 99%
+2026-03-14T08:25:07.8415960Z info: processing step 87/96
+2026-03-14T08:25:08.5838000Z [1;33mCache restored successfully (66 MB, key hit)[0m
+2026-03-14T08:25:09.1409640Z npm WARN deprecated glob-walker@0.14.4: this package is no longer maintained
+2026-03-14T08:25:10.0200640Z remote: Compressing objects... 27%
+2026-03-14T08:25:10.8635510Z info: processing step 91/96
+2026-03-14T08:25:11.6605560Z remote: Compressing objects... 41%
+2026-03-14T08:25:11.8480990Z remote: Compressing objects... 48%
+2026-03-14T08:25:12.6878040Z info: processing step 94/96
+2026-03-14T08:25:13.2578330Z Cache restored successfully (641 MB, key hit)
+2026-03-14T08:25:13.7656100Z npm WARN deprecated yaml-min@7.9.11: this package is no longer maintained
+2026-03-14T08:25:14.2455850Z ##[endgroup]
+
+2026-03-14T08:25:15.0884580Z ##[group]Resolve toolchain
+2026-03-14T08:25:15.3353970Z remote: Compressing objects... 4%
+2026-03-14T08:25:15.5861220Z [1;33mremote: Compressing objects... 11%[0m
+2026-03-14T08:25:16.0491610Z info: processing step 3/95
+2026-03-14T08:25:16.6582590Z Cache restored successfully (307 MB, key hit)
+2026-03-14T08:25:17.4072950Z npm WARN deprecated stream-peek@2.4.11: this package is no longer maintained
+2026-03-14T08:25:17.5807920Z remote: Compressing objects... 39%
+2026-03-14T08:25:18.0005810Z info: processing step 7/95
+2026-03-14T08:25:18.0272790Z remote: Compressing objects... 53%
+2026-03-14T08:25:18.5644900Z remote: Compressing objects... 60%
+2026-03-14T08:25:19.1851400Z info: processing step 10/95
+2026-03-14T08:25:19.6453700Z Cache restored successfully (709 MB, key hit)
+2026-03-14T08:25:20.3462960Z npm WARN deprecated tar-stream-old@0.7.12: this package is no longer maintained
+2026-03-14T08:25:20.5652180Z remote: Compressing objects... 88%
+2026-03-14T08:25:21.1701180Z info: processing step 14/95
+2026-03-14T08:25:21.4140200Z [32mremote: Compressing objects... 100%[0m
+2026-03-14T08:25:21.5688780Z remote: Compressing objects... 9%
+2026-03-14T08:25:22.2600030Z info: processing step 17/95
+2026-03-14T08:25:22.3556870Z Cache restored successfully (831 MB, key hit)
+2026-03-14T08:25:23.2040920Z npm WARN deprecated json-safe-parse@5.5.6: this package is no longer maintained
+2026-03-14T08:25:24.0806740Z remote: Compressing objects... 37%
+2026-03-14T08:25:24.7902000Z info: processing step 21/95
+2026-03-14T08:25:25.5300090Z remote: Compressing objects... 51%
+2026-03-14T08:25:26.0493980Z remote: Compressing objects... 58%
+2026-03-14T08:25:26.7459950Z info: processing step 24/95
+2026-03-14T08:25:27.0389190Z Cache restored successfully (858 MB, key hit)
+2026-03-14T08:25:27.2815980Z [1;33mnpm WARN deprecated querystring-es3@3.1.17: this package is no longer maintained[0m
+2026-03-14T08:25:27.3773260Z remote: Compressing objects... 86%
+2026-03-14T08:25:27.8045790Z [34minfo: processing step 28/95[0m
+2026-03-14T08:25:27.8711990Z remote: Compressing objects... 100%
+2026-03-14T08:25:27.8761340Z remote: Compressing objects... 7%
+2026-03-14T08:25:28.4874320Z info: processing step 31/95
+2026-03-14T08:25:29.1646880Z Cache restored successfully (421 MB, key hit)
+2026-03-14T08:25:29.2362830Z npm WARN deprecated request-legacy@1.1.5: this package is no longer maintained
+2026-03-14T08:25:29.7049810Z remote: Compressing objects... 35%
+2026-03-14T08:25:29.8977090Z info: processing step 35/95
+2026-03-14T08:25:30.0234410Z remote: Compressing objects... 49%
+2026-03-14T08:25:30.2929700Z [36mremote: Compressing objects... 56%[0m
+2026-03-14T08:25:31.0366490Z info: processing step 38/95
+2026-03-14T08:25:31.0673620Z Cache restored successfully (130 MB, key hit)
+2026-03-14T08:25:31.1127990Z npm WARN deprecated glob-walker@7.11.9: this package is no longer maintained
+2026-03-14T08:25:31.5991810Z [1;33mremote: Compressing objects... 84%[0m
+2026-03-14T08:25:31.9080510Z info: processing step 42/95
+2026-03-14T08:25:32.5544840Z remote: Compressing objects... 98%
+2026-03-14T08:25:32.9240420Z remote: Compressing objects... 5%
+2026-03-14T08:25:33.3434440Z info: processing step 45/95
+2026-03-14T08:25:33.6675230Z Cache restored successfully (768 MB, key hit)
+2026-03-14T08:25:33.7758450Z npm WARN deprecated chalk-min@6.3.0: this package is no longer maintained
+2026-03-14T08:25:33.9191700Z remote: Compressing objects... 33%
+2026-03-14T08:25:34.1477330Z info: processing step 49/95
+2026-03-14T08:25:34.8081560Z remote: Compressing objects... 47%
+2026-03-14T08:25:35.0860730Z remote: Compressing objects... 54%
+2026-03-14T08:25:35.5167120Z info: processing step 52/95
+2026-03-14T08:25:36.3426800Z Cache restored successfully (800 MB, key hit)
+2026-03-14T08:25:36.9518480Z [2K[1Anpm WARN deprecated glob-walker@9.7.15: this package is no longer maintained
+2026-03-14T08:25:37.3960090Z remote: Compressing objects... 82%
+2026-03-14T08:25:37.9841870Z info: processing step 56/95
+2026-03-14T08:25:38.3221430Z remote: Compressing objects... 96%
+2026-03-14T08:25:38.6086110Z remote: Compressing objects... 100%
+2026-03-14T08:25:39.0129860Z info: processing step 59/95
+2026-03-14T08:25:39.7775710Z [2K[1ACache restored successfully (897 MB, key hit)
+2026-03-14T08:25:40.1093010Z npm WARN deprecated har-validator-lite@8.13.17: this package is no longer maintained
+2026-03-14T08:25:40.9023600Z remote: Compressing objects... 31%
+2026-03-14T08:25:41.4745970Z info: processing step 63/95
+2026-03-14T08:25:41.6995540Z remote: Compressing objects... 45%
+2026-03-14T08:25:42.5471290Z remote: Compressing objects... 52%
+2026-03-14T08:25:42.5833160Z info: processing step 66/95
+2026-03-14T08:25:42.5862680Z Cache restored successfully (166 MB, key hit)
+2026-03-14T08:25:43.4445280Z npm WARN deprecated json-safe-parse@0.4.8: this package is no longer maintained
+2026-03-14T08:25:43.7067680Z remote: Compressing objects... 80%
+2026-03-14T08:25:44.3384850Z info: processing step 70/95
+2026-03-14T08:25:44.3447320Z [31mremote: Compressing objects... 94%[0m
+2026-03-14T08:25:44.9076530Z remote: Compressing objects... 100%
+2026-03-14T08:25:45.7762140Z info: processing step 73/95
+2026-03-14T08:25:45.8197780Z Cache restored successfully (647 MB, key hit)
+2026-03-14T08:25:46.4364320Z npm WARN deprecated debug-lite@5.17.19: this package is no longer maintained
+2026-03-14T08:25:46.4660420Z remote: Compressing objects... 29%
+2026-03-14T08:25:47.3478400Z info: processing step 77/95
+2026-03-14T08:25:47.3786240Z remote: Compressing objects... 43%
+2026-03-14T08:25:47.7343790Z remote: Compressing objects... 50%
+2026-03-14T08:25:48.4722700Z info: processing step 80/95
+2026-03-14T08:25:48.7689470Z Cache restored successfully (469 MB, key hit)
+2026-03-14T08:25:48.8233100Z npm WARN deprecated json-safe-parse@5.13.1: this package is no longer maintained
+2026-03-14T08:25:49.6021190Z remote: Compressing objects... 78%
+2026-03-14T08:25:50.2782470Z info: processing step 84/95
+2026-03-14T08:25:50.2885010Z remote: Compressing objects... 92%
+2026-03-14T08:25:50.6240460Z remote: Compressing objects... 99%
+2026-03-14T08:25:50.9537240Z info: processing step 87/95
+2026-03-14T08:25:51.5866480Z Cache restored successfully (413 MB, key hit)
+2026-03-14T08:25:52.0971840Z npm WARN deprecated tar-stream-old@0.9.0: this package is no longer maintained
+2026-03-14T08:25:52.1713990Z remote: Compressing objects... 27%
+2026-03-14T08:25:52.2676860Z info: processing step 91/95
+2026-03-14T08:25:52.7317840Z [31mremote: Compressing objects... 41%[0m
+2026-03-14T08:25:53.0211290Z remote: Compressing objects... 48%
+2026-03-14T08:25:53.5750260Z info: processing step 94/95
+2026-03-14T08:25:54.1811130Z Cache restored successfully (737 MB, key hit)
+2026-03-14T08:25:54.3359380Z ##[endgroup]
+
+2026-03-14T08:25:54.9049890Z ##[group]Warm build cache
+2026-03-14T08:25:55.7761110Z remote: Compressing objects... 4%
+2026-03-14T08:25:56.6750410Z remote: Compressing objects... 11%
+2026-03-14T08:25:57.4780720Z info: processing step 3/95
+2026-03-14T08:25:58.0738740Z Cache restored successfully (598 MB, key hit)
+2026-03-14T08:25:58.3584780Z npm WARN deprecated colorz-cli@1.18.4: this package is no longer maintained
+2026-03-14T08:25:58.6690840Z remote: Compressing objects... 39%
+2026-03-14T08:25:58.8726330Z info: processing step 7/95
+2026-03-14T08:25:59.0952930Z remote: Compressing objects... 53%
+2026-03-14T08:25:59.4750390Z remote: Compressing objects... 60%
+2026-03-14T08:25:59.5647550Z info: processing step 10/95
+2026-03-14T08:26:00.3113280Z Cache restored successfully (386 MB, key hit)
+2026-03-14T08:26:01.1961130Z npm WARN deprecated chalk-min@2.18.8: this package is no longer maintained
+2026-03-14T08:26:01.9740850Z remote: Compressing objects... 88%
+2026-03-14T08:26:02.7300460Z info: processing step 14/95
+2026-03-14T08:26:03.2903710Z remote: Compressing objects... 100%
+2026-03-14T08:26:03.4269580Z remote: Compressing objects... 9%
+2026-03-14T08:26:03.8244460Z [1;33minfo: processing step 17/95[0m
+2026-03-14T08:26:03.8694010Z Cache restored successfully (795 MB, key hit)
+2026-03-14T08:26:04.5979400Z npm WARN deprecated retry-once@9.20.19: this package is no longer maintained
+2026-03-14T08:26:05.2062690Z remote: Compressing objects... 37%
+2026-03-14T08:26:05.5121140Z info: processing step 21/95
+2026-03-14T08:26:05.7712630Z remote: Compressing objects... 51%
+2026-03-14T08:26:06.2752570Z remote: Compressing objects... 58%
+2026-03-14T08:26:06.7933910Z [2K[1Ainfo: processing step 24/95
+2026-03-14T08:26:07.5032840Z Cache restored successfully (514 MB, key hit)
+2026-03-14T08:26:07.5884000Z npm WARN deprecated left-pad-fork@4.19.7: this package is no longer maintained
+2026-03-14T08:26:07.9564330Z remote: Compressing objects... 86%
+2026-03-14T08:26:08.5959860Z info: processing step 28/95
+2026-03-14T08:26:08.6820380Z remote: Compressing objects... 100%
+2026-03-14T08:26:08.9734170Z remote: Compressing objects... 7%
+2026-03-14T08:26:09.2924560Z info: processing step 31/95
+2026-03-14T08:26:09.7160030Z Cache restored successfully (351 MB, key hit)
+2026-03-14T08:26:10.0841830Z npm WARN deprecated mini-glob@1.2.9: this package is no longer maintained
+2026-03-14T08:26:10.7177450Z remote: Compressing objects... 35%
+2026-03-14T08:26:10.8260830Z info: processing step 35/95
+2026-03-14T08:26:10.9688090Z [33mremote: Compressing objects... 49%[0m
+2026-03-14T08:26:11.3201280Z remote: Compressing objects... 56%
+2026-03-14T08:26:12.2073350Z info: processing step 38/95
+2026-03-14T08:26:12.2167350Z Cache restored successfully (387 MB, key hit)
+2026-03-14T08:26:12.5228280Z [1;33mnpm WARN deprecated semver-tiny@7.7.19: this package is no longer maintained[0m
+2026-03-14T08:26:12.9260720Z remote: Compressing objects... 84%
+2026-03-14T08:26:13.5256190Z info: processing step 42/95
+2026-03-14T08:26:14.3280950Z remote: Compressing objects... 98%
+2026-03-14T08:26:14.9287570Z remote: Compressing objects... 5%
+2026-03-14T08:26:15.5202620Z info: processing step 45/95
+2026-03-14T08:26:16.1018340Z Cache restored successfully (353 MB, key hit)
+2026-03-14T08:26:16.5947300Z npm WARN deprecated request-legacy@6.14.10: this package is no longer maintained
+2026-03-14T08:26:16.7678630Z remote: Compressing objects... 33%
+2026-03-14T08:26:17.1863770Z info: processing step 49/95
+2026-03-14T08:26:17.8791410Z remote: Compressing objects... 47%
+2026-03-14T08:26:18.2736730Z remote: Compressing objects... 54%
+2026-03-14T08:26:18.7114140Z info: processing step 52/95
+2026-03-14T08:26:18.9642300Z Cache restored successfully (814 MB, key hit)
+2026-03-14T08:26:19.3851200Z npm WARN deprecated chalk-min@9.10.16: this package is no longer maintained
+2026-03-14T08:26:19.9466940Z remote: Compressing objects... 82%
+2026-03-14T08:26:20.3507980Z info: processing step 56/95
+2026-03-14T08:26:20.9893740Z remote: Compressing objects... 96%
+2026-03-14T08:26:21.0773590Z remote: Compressing objects... 100%
+2026-03-14T08:26:21.3050150Z info: processing step 59/95
+2026-03-14T08:26:22.0566970Z Cache restored successfully (538 MB, key hit)
+2026-03-14T08:26:22.0643870Z npm WARN deprecated left-pad-fork@1.0.19: this package is no longer maintained
+2026-03-14T08:26:22.8017550Z remote: Compressing objects... 31%
+2026-03-14T08:26:23.3860000Z info: processing step 63/95
+2026-03-14T08:26:23.8094250Z remote: Compressing objects... 45%
+2026-03-14T08:26:24.3278880Z remote: Compressing objects... 52%
+2026-03-14T08:26:24.3405100Z info: processing step 66/95
+2026-03-14T08:26:24.9218120Z Cache restored successfully (579 MB, key hit)
+2026-03-14T08:26:25.8196980Z npm WARN deprecated semver-tiny@0.6.11: this package is no longer maintained
+2026-03-14T08:26:26.7025640Z remote: Compressing objects... 80%
+2026-03-14T08:26:27.1184220Z info: processing step 70/95
+2026-03-14T08:26:27.3052250Z remote: Compressing objects... 94%
+2026-03-14T08:26:28.1223370Z remote: Compressing objects... 100%
+2026-03-14T08:26:28.2416790Z info: processing step 73/95
+2026-03-14T08:26:28.3562440Z [1;33mCache restored successfully (536 MB, key hit)[0m
+2026-03-14T08:26:29.0714280Z npm WARN deprecated chalk-min@1.20.10: this package is no longer maintained
+2026-03-14T08:26:29.8562410Z [1;33mremote: Compressing objects... 29%[0m
+2026-03-14T08:26:30.6584450Z info: processing step 77/95
+2026-03-14T08:26:31.2201470Z remote: Compressing objects... 43%
+2026-03-14T08:26:31.9988340Z remote: Compressing objects... 50%
+2026-03-14T08:26:32.1609440Z info: processing step 80/95
+2026-03-14T08:26:32.6767330Z Cache restored successfully (793 MB, key hit)
+2026-03-14T08:26:32.7861160Z npm WARN deprecated fetch-lite@1.6.14: this package is no longer maintained
+2026-03-14T08:26:33.1583710Z remote: Compressing objects... 78%
+2026-03-14T08:26:33.7209860Z info: processing step 84/95
+2026-03-14T08:26:34.2693180Z remote: Compressing objects... 92%
+2026-03-14T08:26:34.3883870Z remote: Compressing objects... 99%
+2026-03-14T08:26:34.4812060Z info: processing step 87/95
+2026-03-14T08:26:35.1103650Z Cache restored successfully (775 MB, key hit)
+2026-03-14T08:26:35.1722180Z npm WARN deprecated retry-once@5.5.16: this package is no longer maintained
+2026-03-14T08:26:36.0542260Z remote: Compressing objects... 27%
+2026-03-14T08:26:36.3682560Z info: processing step 91/95
+2026-03-14T08:26:37.0825700Z remote: Compressing objects... 41%
+2026-03-14T08:26:37.9727200Z remote: Compressing objects... 48%
+2026-03-14T08:26:38.3368950Z info: processing step 94/95
+2026-03-14T08:26:38.9601850Z Cache restored successfully (759 MB, key hit)
+2026-03-14T08:26:39.1920110Z ##[endgroup]
+
+2026-03-14T08:26:39.9440030Z ##[group]Run eslint
+2026-03-14T08:26:40.4422280Z > eslint . --ext .js,.ts
+2026-03-14T08:26:40.9413200Z 
+2026-03-14T08:26:41.0830080Z src/api/handlers/profile.js
+2026-03-14T08:26:41.9165230Z   12:3  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:26:42.4264420Z   13:4  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:26:42.8760170Z   14:5  error  Unexpected console statement  no-console
+2026-03-14T08:26:43.0614910Z   15:6  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:26:43.6787920Z   16:7  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:26:43.8340960Z   17:8  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:26:44.5285780Z   18:9  error  'value' is not defined  no-undef
+2026-03-14T08:26:45.0389430Z   19:10  error  Empty block statement  no-empty
+2026-03-14T08:26:45.1014270Z   20:11  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:26:45.2800520Z   21:12  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:26:45.7048300Z   22:13  error  Unexpected console statement  no-console
+2026-03-14T08:26:46.5768610Z   23:14  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:26:47.1124760Z   24:15  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:26:47.8158700Z   25:16  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:26:48.1668460Z   26:17  error  'value' is not defined  no-undef
+2026-03-14T08:26:48.7033560Z   27:18  error  Empty block statement  no-empty
+2026-03-14T08:26:49.2742910Z   28:19  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:26:49.9148630Z   29:20  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:26:50.6316940Z   30:21  error  Unexpected console statement  no-console
+2026-03-14T08:26:51.1116370Z   31:22  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:26:51.3297600Z   32:3  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:26:51.4183870Z   33:4  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:26:51.9435670Z   34:5  error  'value' is not defined  no-undef
+2026-03-14T08:26:52.6467970Z   35:6  error  Empty block statement  no-empty
+2026-03-14T08:26:53.4733720Z   36:7  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:26:54.3085650Z   37:8  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:26:54.3454250Z   38:9  error  Unexpected console statement  no-console
+2026-03-14T08:26:55.1480550Z   39:10  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:26:55.6985940Z   40:11  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:26:56.5381260Z   41:12  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:26:57.0879380Z   42:13  error  'value' is not defined  no-undef
+2026-03-14T08:26:57.5880030Z   43:14  error  Empty block statement  no-empty
+2026-03-14T08:26:58.1614060Z   44:15  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:26:58.3691060Z   45:16  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:26:59.0837990Z   46:17  error  Unexpected console statement  no-console
+2026-03-14T08:26:59.4473960Z   47:18  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:26:59.6406620Z   48:19  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:26:59.6715070Z   49:20  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:00.5334710Z   50:21  error  'value' is not defined  no-undef
+2026-03-14T08:27:00.8536270Z   51:22  error  Empty block statement  no-empty
+2026-03-14T08:27:01.0042430Z   12:3  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:01.6205410Z   13:4  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:02.1737790Z   14:5  error  Unexpected console statement  no-console
+2026-03-14T08:27:02.3100820Z   15:6  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:02.6189580Z   16:7  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:02.8384590Z   17:8  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:02.9092410Z   18:9  error  'value' is not defined  no-undef
+2026-03-14T08:27:02.9425450Z   19:10  error  Empty block statement  no-empty
+2026-03-14T08:27:03.3294530Z   20:11  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:03.6199420Z   21:12  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:04.2529650Z   22:13  error  Unexpected console statement  no-console
+2026-03-14T08:27:05.0066240Z   23:14  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:05.7608000Z   24:15  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:06.0729730Z   25:16  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:06.4833530Z   26:17  error  'value' is not defined  no-undef
+2026-03-14T08:27:06.7264870Z   27:18  error  Empty block statement  no-empty
+2026-03-14T08:27:07.2888820Z   28:19  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:07.6935870Z   29:20  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:08.5452000Z   30:21  error  Unexpected console statement  no-console
+2026-03-14T08:27:09.2260840Z   31:22  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:09.8267500Z   32:3  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:10.3133450Z   33:4  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:10.7454400Z   34:5  error  'value' is not defined  no-undef
+2026-03-14T08:27:11.3141200Z   35:6  error  Empty block statement  no-empty
+2026-03-14T08:27:11.5523490Z   36:7  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:11.6245760Z   37:8  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:12.0104680Z   38:9  error  Unexpected console statement  no-console
+2026-03-14T08:27:12.9016600Z   39:10  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:13.4353970Z   40:11  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:13.4785100Z   41:12  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:13.9999940Z   42:13  error  'value' is not defined  no-undef
+2026-03-14T08:27:14.3090520Z   43:14  error  Empty block statement  no-empty
+2026-03-14T08:27:14.9378470Z   44:15  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:15.8111130Z   45:16  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:16.5707200Z   46:17  error  Unexpected console statement  no-console
+2026-03-14T08:27:16.8568260Z   47:18  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:17.0809710Z   48:19  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:17.6372560Z   49:20  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:18.3284520Z   50:21  error  'value' is not defined  no-undef
+2026-03-14T08:27:19.1734910Z   51:22  error  Empty block statement  no-empty
+2026-03-14T08:27:19.9904250Z   12:3  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:20.3709140Z   13:4  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:21.0137710Z   14:5  error  Unexpected console statement  no-console
+2026-03-14T08:27:21.2205460Z   15:6  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:21.3202190Z   16:7  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:21.8377040Z   17:8  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:22.1205520Z   18:9  error  'value' is not defined  no-undef
+2026-03-14T08:27:22.4857200Z   19:10  error  Empty block statement  no-empty
+2026-03-14T08:27:23.3399640Z   20:11  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:24.0900000Z   21:12  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:24.3588980Z   22:13  error  Unexpected console statement  no-console
+2026-03-14T08:27:24.4823200Z   23:14  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:24.7848840Z   24:15  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:25.1528030Z   25:16  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:25.7858070Z   26:17  error  'value' is not defined  no-undef
+2026-03-14T08:27:26.4047330Z   27:18  error  Empty block statement  no-empty
+2026-03-14T08:27:26.9865810Z   28:19  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:27.4488860Z   29:20  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:28.2042020Z   30:21  error  Unexpected console statement  no-console
+2026-03-14T08:27:28.7570320Z   31:22  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:29.1169290Z   32:3  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:29.5365850Z   33:4  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:29.5486350Z   34:5  error  'value' is not defined  no-undef
+2026-03-14T08:27:29.8806750Z   35:6  error  Empty block statement  no-empty
+2026-03-14T08:27:30.2279760Z   36:7  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:30.5969310Z   37:8  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:31.4164480Z   38:9  error  Unexpected console statement  no-console
+2026-03-14T08:27:31.9043060Z   39:10  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:32.3297030Z   40:11  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:33.0791450Z   41:12  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:33.8066820Z   42:13  error  'value' is not defined  no-undef
+2026-03-14T08:27:34.4123170Z   43:14  error  Empty block statement  no-empty
+2026-03-14T08:27:35.1603310Z   44:15  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:35.2308550Z   45:16  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:35.5983550Z   46:17  error  Unexpected console statement  no-console
+2026-03-14T08:27:35.8374140Z   47:18  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:36.4046860Z   48:19  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:37.0558550Z   49:20  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:37.7701560Z   50:21  error  'value' is not defined  no-undef
+2026-03-14T08:27:38.6492070Z   51:22  error  Empty block statement  no-empty
+2026-03-14T08:27:38.7167830Z   12:3  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:39.4622650Z   13:4  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:39.6661370Z   14:5  error  Unexpected console statement  no-console
+2026-03-14T08:27:39.9116510Z   15:6  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:40.3931730Z   16:7  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:40.6002870Z   17:8  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:40.8732280Z   18:9  error  'value' is not defined  no-undef
+2026-03-14T08:27:41.4357440Z   19:10  error  Empty block statement  no-empty
+2026-03-14T08:27:41.5155860Z   20:11  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:41.6044970Z   21:12  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:42.0165260Z   22:13  error  Unexpected console statement  no-console
+2026-03-14T08:27:42.2333490Z   23:14  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:42.6311810Z   24:15  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:43.1551940Z   25:16  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:43.8053570Z   26:17  error  'value' is not defined  no-undef
+2026-03-14T08:27:44.5897920Z   27:18  error  Empty block statement  no-empty
+2026-03-14T08:27:44.8628630Z   28:19  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:45.7404770Z   29:20  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:46.2322870Z   30:21  error  Unexpected console statement  no-console
+2026-03-14T08:27:46.5925150Z   31:22  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:46.9470690Z   32:3  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:47.4627340Z   33:4  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:47.5905030Z   34:5  error  'value' is not defined  no-undef
+2026-03-14T08:27:47.7378190Z   35:6  error  Empty block statement  no-empty
+2026-03-14T08:27:47.9393780Z   36:7  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:48.6772140Z   37:8  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:48.9652500Z   38:9  error  Unexpected console statement  no-console
+2026-03-14T08:27:49.5693030Z   39:10  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:50.2818510Z   40:11  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:51.1744410Z   41:12  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:51.7785950Z   42:13  error  'value' is not defined  no-undef
+2026-03-14T08:27:52.6467710Z   43:14  error  Empty block statement  no-empty
+2026-03-14T08:27:53.3791500Z   44:15  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:53.4035140Z   45:16  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:54.0605710Z   46:17  error  Unexpected console statement  no-console
+2026-03-14T08:27:54.7020680Z   47:18  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:55.4347390Z   48:19  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:55.9071040Z   49:20  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:56.5316310Z   50:21  error  'value' is not defined  no-undef
+2026-03-14T08:27:56.6067570Z   51:22  error  Empty block statement  no-empty
+2026-03-14T08:27:57.1714040Z   12:3  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:57.4616040Z   13:4  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:27:57.9988640Z   14:5  error  Unexpected console statement  no-console
+2026-03-14T08:27:58.1269700Z   15:6  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:27:58.4614710Z   16:7  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:27:58.6802160Z   17:8  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:27:58.8409640Z   18:9  error  'value' is not defined  no-undef
+2026-03-14T08:27:59.3435670Z   19:10  error  Empty block statement  no-empty
+2026-03-14T08:27:59.4043950Z   20:11  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:27:59.6153790Z   21:12  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:28:00.5002100Z   22:13  error  Unexpected console statement  no-console
+2026-03-14T08:28:00.7082540Z   23:14  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:28:01.5226360Z   24:15  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:28:02.0115610Z   25:16  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:28:02.7898570Z   26:17  error  'value' is not defined  no-undef
+2026-03-14T08:28:02.9259120Z   27:18  error  Empty block statement  no-empty
+2026-03-14T08:28:03.8002650Z   28:19  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:28:04.5341120Z   29:20  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:28:04.8690460Z   30:21  error  Unexpected console statement  no-console
+2026-03-14T08:28:05.5244240Z   31:22  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:28:05.5759100Z   32:3  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:28:05.7751960Z   33:4  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:28:06.6377420Z   34:5  error  'value' is not defined  no-undef
+2026-03-14T08:28:07.1998970Z   35:6  error  Empty block statement  no-empty
+2026-03-14T08:28:07.2835690Z   36:7  error  'apiKey' is defined but never used  no-unused-vars
+2026-03-14T08:28:08.1527810Z   37:8  error  'result' is assigned a value but never used  no-unused-vars
+2026-03-14T08:28:09.0267950Z   38:9  error  Unexpected console statement  no-console
+2026-03-14T08:28:09.3502500Z   39:10  error  'req' is defined but never used  no-unused-vars
+2026-03-14T08:28:09.8933740Z   40:11  error  Unexpected var, use let or const instead  no-var
+2026-03-14T08:28:10.4636580Z   41:12  error  Unnecessary escape character  no-useless-escape
+2026-03-14T08:28:10.8116020Z 
+2026-03-14T08:28:11.4692720Z ✖ 190 problems (190 errors, 0 warnings)
+2026-03-14T08:28:12.1069420Z ##[endgroup]
+
+2026-03-14T08:28:12.6652450Z ##[group]Cleanup
+2026-03-14T08:28:13.5277440Z Cleanup completed successfully.
+2026-03-14T08:28:14.3380400Z ##[endgroup]
+2026-03-14T08:28:14.3680940Z [coverage] finalizing report... 3%
+2026-03-14T08:28:15.1450200Z [36mPost job cleanup.[0m
+2026-03-14T08:28:15.9957860Z Removing temporary directory /home/runner/work/_temp/4672
+2026-03-14T08:28:16.0139560Z ##[error]Process completed with exit code 1
