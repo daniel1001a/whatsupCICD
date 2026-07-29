@@ -93,7 +93,7 @@ W4ER = (D22–D28 期間，收到 ≥1 次回饋按鈕點擊的判決書數)
 - HMAC-SHA256 驗簽 + replay 防護
 - 以 Octokit 抓取失敗 job 的 log
 - ANSI 清洗 + GitHub Actions 時間戳／group marker 雜訊移除
-- **Sanitizer**：至少 12 類敏感資訊，獨立模組，獨立紅隊測試套件
+- **Sanitizer**：**20 類**敏感資訊（`S01`–`S20`，超出原訂的 12 類最低要求），獨立模組，獨立紅隊測試套件。分類、偵測策略、遮罩格式、誤判風險與測試案例見 `THREAT_MODEL.md` §3；另有明確**不遮罩**的 `N01`–`N07` 清單（§3.21），作為 §8 對外揭露的精確基礎
 - **錯誤區段擷取**：定位 error signature，取前 30／後 80 行
 - LLM 產出結構化 JSON 公訴詞（schema 驗證 → 重試 1 次 → 模板 fallback）
 - Slack Block Kit 判決書 + 「這則有用嗎 👍👎」回饋按鈕

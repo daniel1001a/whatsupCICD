@@ -50,6 +50,7 @@ phase_0:
     outputs: [THREAT_MODEL.md]
     dod:
       - 至少 12 類敏感資訊，每類有穩定 ID (S##)、偵測策略、誤判/漏判風險、≥3 個測試案例
+        # 實際交付 20 類 (S01-S20) + 7 類明確不遮罩 (N01-N07)
       - webhook 攻擊面涵蓋偽造/replay/DoS/SSRF/設定檔注入/prompt injection/分享連結
       - sanitizer 失效模式含 fail-closed、ReDoS、Unicode 規避、出站健檢
       - 有可直接放進 README 的「LLM 供應商看得到什麼」章節
@@ -355,12 +356,32 @@ phase_2:
     model: sonnet-5
     effort: medium
     level: L2
-    dod: [≥7/8 可判讀; 不合格者調整為部分遮罩策略]
+    dod:
+      - ≥7/8 可判讀
+      - 不合格者調整為部分遮罩策略
+      - 以實測資料校準 redaction_ratio 的 25% / 40% 門檻，回填 DECISIONS.md D-12
     status: todo
+
+  - id: P2-11
+    desc: RawLog 品牌型別 + Octokit 錯誤正規化層 + canary string 測試（原始 log 側通道外洩防護）
+    deps: [P2-06]
+    agent: tech-lead
+    model: sonnet-5
+    effort: medium
+    level: L2
+    inputs: [THREAT_MODEL.md]
+    outputs: [src/types/raw-log.ts, src/adapters/error-normalize.ts]
+    dod:
+      - RawLog 的 toString / toJSON / util.inspect 皆拋錯，無法被意外序列化
+      - Octokit RequestError 在邊界被正規化（剝除 response.data 與 request.headers.authorization）
+      - Node diagnostic report 關閉（會傾印環境變數）
+      - canary string 測試：跨所有錯誤路徑注入標記字串，斷言不出現在任何 log / error report / DB
+    status: todo
+    notes: architect 指出原始 log 最可能從側通道外洩而非主路徑（THREAT_MODEL.md §6）
 
   - id: P2-10
     desc: Phase 2 驗收 + 挑戰
-    deps: [P2-08, P2-09, P2-06, P2-07]
+    deps: [P2-08, P2-09, P2-06, P2-07, P2-11]
     agent: inspector, critic
     model: haiku-4.5, sonnet-5
     effort: low, high

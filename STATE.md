@@ -38,7 +38,7 @@ Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
 | 檔案 | 內容 | 狀態 |
 |---|---|---|
 | `SPEC.md` | 定位／指標／範圍／事件流／權限論證／擷取演算法／公訴詞 schema／場景決策表／設定檔／DB schema／12 條決策 | ✅ |
-| `THREAT_MODEL.md` | 敏感資訊分類、偵測策略、誤判風險、測試案例、webhook 攻擊面、LLM 可見性說明、殘餘風險 | ✅ |
+| `THREAT_MODEL.md` | **20 類**敏感資訊（S01–S20，超出原訂 12 類）+ 7 類明確不遮罩（N01–N07）、每類偵測策略/遮罩格式/誤判漏判/≥3 測試案例、sanitizer 失效模式、webhook 攻擊面、R2 落實、秘密輪替、可發布的 LLM 揭露章節、red team 契約、17 條殘餘風險。3,024 行 | ✅ |
 | `TASKS.yaml` | Phase 0–5 完整 DAG，每 task 有 id/描述/依賴/agent/model/effort/DoD/狀態 | ✅ |
 | `RISKS.md` | 14 條風險 + 7 個待拍板問題（每題附建議） | ✅ |
 | `CLAUDE.md` | 鐵則、團隊分派、成本紀律、流程 | ✅ |
@@ -60,14 +60,18 @@ Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
 3. **累犯綁 error signature，不綁人**（D-10）——R5 的具體落實，且綁 signature 其實更有用。
 4. **遮罩率 > 40% 直接不呼叫 LLM**（D-12）——送滿版 `[REDACTED]` 只會得到編造的根因。
 5. **不申請 `Contents: Read`**（D-06，proposed）——待 Q2 拍板。
+6. **遮罩佔位符帶每事件隨機鹽的關聯後綴**（D-13，architect 提出）——保住「同一個值重複出現」這個高價值訊號，同時讓離線還原在資訊理論上不成立。
+7. **明確列出「不遮罩」清單 N01–N07**（D-14，architect 提出）——「我們沒遮罩什麼」是比「我們遮罩了什麼」更強的公開主張。
 
 ## Phase 0 發現的內部矛盾（已提交拍板）
 
 | 矛盾 | 位置 | 處置 |
 |---|---|---|
-| 「深夜提交」場景 vs R5「不得提及非工作時間行為」 | `SC03` | 預設關閉 + 改為陪伴調性；待 Q3 |
-| 「三步驟安裝」vs 自架模式的實際步驟數 | §9 檢查表 | 待 Q1 |
-| `.prosecutor.yml` 在 private repo 需要的權限 vs R6 | §5 | 待 Q2 |
+| LLM 輸出「量刑」 vs Gate P3「場景選擇同輸入同輸出」 | 【1】schema vs Gate P3 | 已解：量刑改伺服器確定性計算（D-03） |
+| **`.prosecutor.yml` 在 repo 內 vs R5 opt-out** | 【4】In Scope vs R5 | **未解，阻塞 Phase 1**：任何 repo 貢獻者都能把別人從 opt-out 名單刪掉、把毒舌強度調到 3。待 Q2 |
+| `.prosecutor.yml` 在 private repo 需要 `contents:read` vs R6 | 【4】In Scope vs R6 | **未解，阻塞 Phase 1**。待 Q2（同上，兩個理由指向同一個處置） |
+| 「深夜提交」場景 vs R5「不得提及非工作時間行為」 | 【4】場景清單 vs R5 | 預設關閉 + 改為陪伴調性；待 Q3 |
+| 「三步驟安裝」vs 自架模式的實際步驟數 | 【9】檢查表 | 待 Q1 |
 
 ---
 
@@ -78,7 +82,7 @@ Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
 | 角色 | 模型 | 呼叫次數 | 大致規模 | 產出 |
 |---|---|---|---|---|
 | tech-lead | sonnet-5 | — | 8 個檔案 | SPEC / TASKS / RISKS / CLAUDE / DECISIONS / BRAND / MEME_SCENES / ARCHITECTURE |
-| `architect` | opus-5 (high) | **1**（額度 1/3） | 1 個檔案 | `THREAT_MODEL.md` |
+| `architect` | opus-5 (high) | **1**（額度 1/3） | 1 個檔案 · 3,024 行 · ~140k tokens · 11 tool calls · 47 min | `THREAT_MODEL.md` |
 | `builder` | sonnet-5 | 0 | — | — |
 | `grunt` | haiku-4.5 | 0 | — | — |
 | `redteam` | sonnet-5 | 0 | — | Phase 1 起每 Phase ≥1 |
