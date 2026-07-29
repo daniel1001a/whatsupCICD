@@ -35,14 +35,22 @@ export const REDACT_PATHS = [
   '*.lines',
 
   // 憑證
-  'req.headers.authorization',
-  'req.headers.cookie',
-  'req.headers["x-hub-signature-256"]',
-  'request.headers.authorization',
+  //
+  // ⚠️ 裸欄位名與 `*.` 萬用字元版**必須成對出現**。pino 的 `*.x` 只匹配巢狀一層，
+  //    不匹配頂層的 `x`——只寫萬用字元版會讓 `logger.info({ token })` 原封不動地印出來。
+  //    這個坑是被 logging.test.ts 抓到的，不是推理出來的；改動這份清單時請一併更新測試。
+  'privateKey',
+  'token',
+  'apiKey',
+  'secret',
   '*.privateKey',
   '*.token',
   '*.apiKey',
   '*.secret',
+  'req.headers.authorization',
+  'req.headers.cookie',
+  'req.headers["x-hub-signature-256"]',
+  'request.headers.authorization',
   'err.request.headers.authorization',
 
   // Octokit 的錯誤物件會把整個回應塞進來
