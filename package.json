@@ -22,7 +22,7 @@
     "migrate": "tsx scripts/migrate.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.68.0",
+    "@anthropic-ai/sdk": "^0.115.0",
     "@octokit/app": "^16.0.1",
     "@octokit/request-error": "^7.0.0",
     "@octokit/rest": "^22.0.0",
