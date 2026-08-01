@@ -46,12 +46,21 @@ function requireRow<T>(row: T | undefined, what: string): T {
 /* ═══════════════════════════════════════════════════════════════════ */
 
 /** `insertPending` 的輸入。刻意保留 `rawBody`（Buffer）只為了算 digest——
- * 它絕不會被寫進任何欄位，方法內部算完 SHA-256 後就不再使用它（R2）。 */
+ * 它絕不會被寫進任何欄位，方法內部算完 SHA-256 後就不再使用它（R2）。
+ *
+ * ⚠️ 修正（P1-06 builder review）：`installationId` / `repoFullName` 原本
+ * 宣告成必填 `string`，但 `events` 表的這兩欄位本身可為 NULL——理由見本檔
+ * 開頭與 `migrations/0001_init.sql` 的說明：webhook handler 依 R3 在驗簽後
+ * 立刻落庫，當下還沒 parse payload，不可能知道 installation 或 repo 是誰。
+ * `EventRow`（讀側，`types/db.ts`）已經是 `string | null`，這裡（寫側）沒
+ * 跟著改是 P1-05 review 那次修正的遺漏，導致 webhook 唯一合法的呼叫方式
+ * （P1-06 的 `enqueue`）在型別層根本無法呼叫這個方法。改成與 `EventRow`
+ * 一致的 `string | null`；SQL 與底層 DB 欄位本來就允許 NULL，不需要跟著改。 */
 export interface NewEventInput {
   readonly deliveryId: string;
-  readonly installationId: string;
+  readonly installationId: string | null;
   readonly eventType: GitHubEventType;
-  readonly repoFullName: string;
+  readonly repoFullName: string | null;
   readonly runId: number | null;
   readonly runUpdatedAt: string | null;
   readonly receivedAt: string;
@@ -177,17 +186,20 @@ export class EventRepository {
    * 把卡在 `processing` 的孤兒（程序上次被 SIGKILL 掉、沒能走到
    * markDone/markFailed/markDead 的事件）改回 `pending`。
    *
-   * ⚠️ 設計決策（見任務回報）：events 表沒有「進入 processing 的時間」欄位
-   * （SPEC.md §10 沒有定義 `claimed_at`/`updated_at`），這裡用 `received_at`
-   * 當代理判準——「早於 `olderThan` 收到、卻還卡在 processing」視為孤兒。
-   * 在單機、事件到達後很快被 claim 的前提下這是合理近似，但嚴格說不精確
-   * （若 worker 排隊很久才 claim 一筆很新的事件，這筆事件也會被提早誤判為
-   * 孤兒）。若之後要精確判定，建議加一個 `claimed_at` 欄位。
+   * ⚠️ 修正（P1-06 builder review）：這個方法原本用 `received_at` 當孤兒
+   * 判準，但 `claimed_at` 欄位其實早就存在（`migrations/0001_init.sql`、
+   * `claimNext` 早就在寫入它），且 schema 自己的註解與 `idx_events_claimed`
+   * 索引都明講孤兒回收必須用 `claimed_at`——用 `received_at` 會誤判「在
+   * 佇列裡等了很久、剛被 claim 沒多久」的事件為孤兒，導致它被提早重複
+   * 處理。舊的 JSDoc（下方保留）描述的是這個欄位不存在時的權宜之計，
+   * 但欄位一直都在，只是這個方法沒跟著用。改回用 `claimed_at`。
    */
   reclaimOrphans(olderThan: string): number {
     const result = this.db
       .prepare(
-        `UPDATE events SET status = 'pending' WHERE status = 'processing' AND received_at < ?`,
+        `UPDATE events
+           SET status = 'pending'
+           WHERE status = 'processing' AND (claimed_at IS NULL OR claimed_at < ?)`,
       )
       .run(olderThan);
     return result.changes;
