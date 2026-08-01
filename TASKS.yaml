@@ -209,7 +209,7 @@ phase_1:
     level: L1
     outputs: [src/queue/*.ts]
     dod: [Queue 介面隔離; 開機重排 processing 孤兒; 指數退避; 死信狀態]
-    status: todo
+    status: done # 2026-08-01 builder(sonnet)：src/queue/{enqueue,worker,backoff,errors,index} + 測試；同時修 repositories.ts 兩個 bug（NewEventInput nullable、reclaimOrphans 改用 claimed_at），Tech Lead 已核准。EventHandler 介面待 Phase 2 接管線
 
   - id: P1-07
     desc: Fixtures — 8+ 種語言/框架的真實失敗 CI log（TS/Python/Go/Rust/Java/Ruby/PHP/Docker/Terraform）
@@ -238,7 +238,7 @@ phase_1:
       - 有測試證明 log 不含 raw 內容（canary string 跨所有錯誤路徑）
       - 驗證 REDACT_PATHS 涵蓋所有會攜帶 log 內容的欄位
       - 驗證 Error serializer 剝除 Octokit RequestError 的 response.data 與 authorization
-    status: todo
+    status: done # 2026-08-01 builder(sonnet)：tests/e2e/no-raw-leak.test.ts 41 tests，無外洩。附帶發現 REDACT_PATHS 有幾條 err.response.data 因 serializer 先攤平非 Error 而冗餘（無害）
     notes: >-
       src/logging.ts 與 src/routes/health.ts 已於 P1-01 由 Tech Lead 實作
       （R2 相關，不外派）。本 task 縮減為驗證測試。
