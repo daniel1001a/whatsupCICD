@@ -1,0 +1,28 @@
+# app-manifest.yml — GitHub App manifest
+#
+# 這是 GitHub App 權限的「唯一真實來源」（single source of truth）。
+# R6 最小權限：本檔案的 default_permissions 只能是
+#   { actions: read, metadata: read }
+# 多要任何一項，都必須先經產品負責人批准並更新 SPEC.md §5，
+# 否則 CI（scripts/check-app-permissions.ts）會直接擋下這次變更。
+#
+# 詳見 SPEC.md §5「GitHub App 權限」與 §5「明確不申請的權限與理由」。
+
+name: 'Build Failure Prosecutor (placeholder)'
+url: 'https://example.com/build-failure-prosecutor'
+hook_attributes:
+  url: 'https://example.com/webhooks/github'
+redirect_url: 'https://example.com/github/callback'
+description: >-
+  GitHub Actions 掛掉時，自動產生戲劇化的公訴詞與原創插畫迷因卡，推進 Slack，
+  內含根因假設與建議修法。
+public: false
+
+default_permissions:
+  actions: read
+  metadata: read
+
+default_events:
+  - workflow_run
+  - installation
+  - installation_repositories

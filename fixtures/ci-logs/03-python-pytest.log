@@ -1,0 +1,260 @@
+2026-03-14T08:21:33.3070660Z Current runner version: '2.309.0'
+2026-03-14T08:21:33.8759570Z Runner name: 'GitHub Actions 4'
+2026-03-14T08:21:33.9653470Z Using connection string postgres://ciuser:hunter2@db.internal.example.com:5432/appdb
+2026-03-14T08:21:34.0630620Z Working directory resolved to /home/runner/work/whatsupCICD/whatsupCICD
+2026-03-14T08:21:34.5095520Z ##[group]Run actions/checkout@v4
+2026-03-14T08:21:35.3178810Z remote: Compressing objects... 4%
+2026-03-14T08:21:35.7580930Z [36mremote: Compressing objects... 11%[0m
+2026-03-14T08:21:36.5530370Z [2K[1Ainfo: processing step 3/5
+2026-03-14T08:21:37.0702200Z Cache restored successfully (302 MB, key hit)
+2026-03-14T08:21:37.2685320Z npm WARN deprecated json-safe-parse@9.14.12: this package is no longer maintained
+2026-03-14T08:21:37.7589570Z ##[endgroup]
+
+2026-03-14T08:21:37.8990950Z ##[group]Run actions/setup-node@v4
+2026-03-14T08:21:38.0065930Z remote: Compressing objects... 4%
+2026-03-14T08:21:38.1699940Z remote: Compressing objects... 11%
+2026-03-14T08:21:38.9080940Z info: processing step 3/4
+2026-03-14T08:21:38.9431800Z Cache restored successfully (770 MB, key hit)
+2026-03-14T08:21:39.3201550Z ##[endgroup]
+
+2026-03-14T08:21:40.1478410Z ##[group]Restore cache
+2026-03-14T08:21:40.3717750Z remote: Compressing objects... 4%
+2026-03-14T08:21:40.5364530Z remote: Compressing objects... 11%
+2026-03-14T08:21:40.7323760Z info: processing step 3/4
+2026-03-14T08:21:41.0998720Z [2K[1ACache restored successfully (753 MB, key hit)
+2026-03-14T08:21:41.2970640Z ##[endgroup]
+
+2026-03-14T08:21:41.8796810Z ##[group]Install dependencies
+2026-03-14T08:21:42.0106470Z remote: Compressing objects... 4%
+2026-03-14T08:21:42.0992110Z remote: Compressing objects... 11%
+2026-03-14T08:21:42.6854030Z info: processing step 3/4
+2026-03-14T08:21:43.1648520Z Cache restored successfully (396 MB, key hit)
+2026-03-14T08:21:43.7866910Z ##[endgroup]
+
+2026-03-14T08:21:44.3416680Z ##[group]Run pytest
+2026-03-14T08:21:44.5599310Z > pytest -q tests/
+2026-03-14T08:21:44.8733740Z tests/test_auth.py:88: in test_token_refresh
+2026-03-14T08:21:45.4943310Z     token = session.encode()
+2026-03-14T08:21:46.1777450Z E   AttributeError: 'NoneType' object has no attribute 'encode'
+2026-03-14T08:21:46.2182640Z 
+2026-03-14T08:21:46.3462330Z =================================== short test summary info ===================================
+2026-03-14T08:21:46.8111270Z FAILED tests/test_auth.py::test_token_refresh - AttributeError: 'NoneType' object has no attribute 'encode'
+2026-03-14T08:21:47.7054040Z 1 failed, 42 passed in 3.21s
+2026-03-14T08:21:47.7287100Z ##[endgroup]
+
+2026-03-14T08:21:47.9868080Z ##[group]Cleanup
+2026-03-14T08:21:48.5874020Z Cleanup completed successfully.
+2026-03-14T08:21:49.4119310Z ##[endgroup]
+2026-03-14T08:21:49.5617410Z [coverage] finalizing report... 3%
+2026-03-14T08:21:49.6433280Z Post job cleanup.
+2026-03-14T08:21:50.3293780Z Removing temporary directory /home/runner/work/_temp/2152
+2026-03-14T08:21:50.7949850Z info: teardown step 4/212
+2026-03-14T08:21:51.3536980Z [coverage] finalizing report... 47%
+2026-03-14T08:21:51.5031720Z Post job cleanup.
+2026-03-14T08:21:51.5249160Z Removing temporary directory /home/runner/work/_temp/3418
+2026-03-14T08:21:51.5483870Z info: teardown step 8/212
+2026-03-14T08:21:52.0129060Z [coverage] finalizing report... 91%
+2026-03-14T08:21:52.0202890Z Post job cleanup.
+2026-03-14T08:21:52.9140540Z Removing temporary directory /home/runner/work/_temp/5075
+2026-03-14T08:21:53.0976890Z info: teardown step 12/212
+2026-03-14T08:21:53.2226950Z [coverage] finalizing report... 35%
+2026-03-14T08:21:53.8004380Z Post job cleanup.
+2026-03-14T08:21:54.6615440Z Removing temporary directory /home/runner/work/_temp/6001
+2026-03-14T08:21:55.1078720Z info: teardown step 16/212
+2026-03-14T08:21:55.1129750Z [coverage] finalizing report... 79%
+2026-03-14T08:21:55.8084120Z Post job cleanup.
+2026-03-14T08:21:56.4932330Z Removing temporary directory /home/runner/work/_temp/6860
+2026-03-14T08:21:56.5552320Z info: teardown step 20/212
+2026-03-14T08:21:57.1826310Z [coverage] finalizing report... 23%
+2026-03-14T08:21:57.8174730Z Post job cleanup.
+2026-03-14T08:21:58.5798390Z Removing temporary directory /home/runner/work/_temp/4009
+2026-03-14T08:21:59.0599480Z info: teardown step 24/212
+2026-03-14T08:21:59.0774950Z [coverage] finalizing report... 67%
+2026-03-14T08:21:59.9694690Z Post job cleanup.
+2026-03-14T08:22:00.4837150Z Removing temporary directory /home/runner/work/_temp/5779
+2026-03-14T08:22:01.1388900Z info: teardown step 28/212
+2026-03-14T08:22:01.6979910Z [coverage] finalizing report... 11%
+2026-03-14T08:22:02.4580360Z Post job cleanup.
+2026-03-14T08:22:03.0165720Z [36mRemoving temporary directory /home/runner/work/_temp/4824[0m
+2026-03-14T08:22:03.8422940Z info: teardown step 32/212
+2026-03-14T08:22:04.4198570Z [coverage] finalizing report... 55%
+2026-03-14T08:22:04.9581180Z Post job cleanup.
+2026-03-14T08:22:05.7711700Z Removing temporary directory /home/runner/work/_temp/8051
+2026-03-14T08:22:06.6658230Z info: teardown step 36/212
+2026-03-14T08:22:07.3736660Z [coverage] finalizing report... 99%
+2026-03-14T08:22:07.5058380Z Post job cleanup.
+2026-03-14T08:22:07.9426370Z Removing temporary directory /home/runner/work/_temp/8318
+2026-03-14T08:22:08.5047930Z info: teardown step 40/212
+2026-03-14T08:22:09.1223160Z [1;33m[coverage] finalizing report... 43%[0m
+2026-03-14T08:22:09.2329800Z Post job cleanup.
+2026-03-14T08:22:09.9796960Z Removing temporary directory /home/runner/work/_temp/8769
+2026-03-14T08:22:10.2391260Z info: teardown step 44/212
+2026-03-14T08:22:10.5557310Z [coverage] finalizing report... 87%
+2026-03-14T08:22:11.2291690Z Post job cleanup.
+2026-03-14T08:22:11.3736890Z Removing temporary directory /home/runner/work/_temp/1271
+2026-03-14T08:22:11.9500960Z [1;33minfo: teardown step 48/212[0m
+2026-03-14T08:22:12.5607850Z [coverage] finalizing report... 31%
+2026-03-14T08:22:12.9164630Z Post job cleanup.
+2026-03-14T08:22:13.5979070Z Removing temporary directory /home/runner/work/_temp/3133
+2026-03-14T08:22:14.3984030Z info: teardown step 52/212
+2026-03-14T08:22:14.8716850Z [coverage] finalizing report... 75%
+2026-03-14T08:22:15.2050580Z Post job cleanup.
+2026-03-14T08:22:15.2894130Z Removing temporary directory /home/runner/work/_temp/5902
+2026-03-14T08:22:15.8055590Z info: teardown step 56/212
+2026-03-14T08:22:16.4916860Z [coverage] finalizing report... 19%
+2026-03-14T08:22:16.6384920Z Post job cleanup.
+2026-03-14T08:22:16.9682000Z Removing temporary directory /home/runner/work/_temp/7159
+2026-03-14T08:22:17.7298600Z info: teardown step 60/212
+2026-03-14T08:22:18.3400170Z [2K[1A[coverage] finalizing report... 63%
+2026-03-14T08:22:19.0162540Z Post job cleanup.
+2026-03-14T08:22:19.0716940Z Removing temporary directory /home/runner/work/_temp/4436
+2026-03-14T08:22:19.5884680Z info: teardown step 64/212
+2026-03-14T08:22:20.0322650Z [coverage] finalizing report... 7%
+2026-03-14T08:22:20.4896690Z Post job cleanup.
+2026-03-14T08:22:20.8909360Z Removing temporary directory /home/runner/work/_temp/4452
+2026-03-14T08:22:21.0277170Z info: teardown step 68/212
+2026-03-14T08:22:21.4122860Z [coverage] finalizing report... 51%
+2026-03-14T08:22:21.5410500Z Post job cleanup.
+2026-03-14T08:22:22.1180910Z Removing temporary directory /home/runner/work/_temp/7920
+2026-03-14T08:22:22.7378070Z info: teardown step 72/212
+2026-03-14T08:22:23.5755910Z [coverage] finalizing report... 95%
+2026-03-14T08:22:24.0374320Z Post job cleanup.
+2026-03-14T08:22:24.3141650Z Removing temporary directory /home/runner/work/_temp/4321
+2026-03-14T08:22:24.3941250Z info: teardown step 76/212
+2026-03-14T08:22:24.9935860Z [coverage] finalizing report... 39%
+2026-03-14T08:22:25.4017430Z Post job cleanup.
+2026-03-14T08:22:26.2222580Z [1;33mRemoving temporary directory /home/runner/work/_temp/4174[0m
+2026-03-14T08:22:27.0140170Z info: teardown step 80/212
+2026-03-14T08:22:27.9099460Z [coverage] finalizing report... 83%
+2026-03-14T08:22:28.0187540Z Post job cleanup.
+2026-03-14T08:22:28.0917050Z Removing temporary directory /home/runner/work/_temp/7386
+2026-03-14T08:22:28.3384980Z [1;33minfo: teardown step 84/212[0m
+2026-03-14T08:22:28.5257950Z [coverage] finalizing report... 27%
+2026-03-14T08:22:29.3991880Z Post job cleanup.
+2026-03-14T08:22:29.6671010Z Removing temporary directory /home/runner/work/_temp/5786
+2026-03-14T08:22:29.7408860Z info: teardown step 88/212
+2026-03-14T08:22:30.3315800Z [coverage] finalizing report... 71%
+2026-03-14T08:22:31.0259120Z Post job cleanup.
+2026-03-14T08:22:31.7133420Z [34mRemoving temporary directory /home/runner/work/_temp/6962[0m
+2026-03-14T08:22:32.1881260Z info: teardown step 92/212
+2026-03-14T08:22:32.6399110Z [coverage] finalizing report... 15%
+2026-03-14T08:22:33.0559110Z Post job cleanup.
+2026-03-14T08:22:33.9361350Z Removing temporary directory /home/runner/work/_temp/5466
+2026-03-14T08:22:34.2785670Z info: teardown step 96/212
+2026-03-14T08:22:35.1339010Z [coverage] finalizing report... 59%
+2026-03-14T08:22:35.1767870Z Post job cleanup.
+2026-03-14T08:22:35.3645000Z Removing temporary directory /home/runner/work/_temp/7074
+2026-03-14T08:22:35.6290310Z [2K[1Ainfo: teardown step 100/212
+2026-03-14T08:22:35.9259080Z [coverage] finalizing report... 3%
+2026-03-14T08:22:35.9998900Z Post job cleanup.
+2026-03-14T08:22:36.1072730Z Removing temporary directory /home/runner/work/_temp/9957
+2026-03-14T08:22:36.2291130Z info: teardown step 104/212
+2026-03-14T08:22:36.7245200Z [coverage] finalizing report... 47%
+2026-03-14T08:22:36.9481790Z Post job cleanup.
+2026-03-14T08:22:37.7655100Z Removing temporary directory /home/runner/work/_temp/5771
+2026-03-14T08:22:38.0435230Z info: teardown step 108/212
+2026-03-14T08:22:38.5565480Z [coverage] finalizing report... 91%
+2026-03-14T08:22:38.7608220Z Post job cleanup.
+2026-03-14T08:22:38.8427160Z Removing temporary directory /home/runner/work/_temp/8207
+2026-03-14T08:22:39.2198200Z info: teardown step 112/212
+2026-03-14T08:22:39.9045930Z [coverage] finalizing report... 35%
+2026-03-14T08:22:40.5358500Z [2K[1APost job cleanup.
+2026-03-14T08:22:40.5742780Z Removing temporary directory /home/runner/work/_temp/5317
+2026-03-14T08:22:41.2121060Z info: teardown step 116/212
+2026-03-14T08:22:42.0723880Z [coverage] finalizing report... 79%
+2026-03-14T08:22:42.3136590Z Post job cleanup.
+2026-03-14T08:22:42.4406200Z Removing temporary directory /home/runner/work/_temp/4347
+2026-03-14T08:22:42.5441490Z info: teardown step 120/212
+2026-03-14T08:22:43.2966230Z [coverage] finalizing report... 23%
+2026-03-14T08:22:43.5176170Z Post job cleanup.
+2026-03-14T08:22:43.5206030Z Removing temporary directory /home/runner/work/_temp/3494
+2026-03-14T08:22:44.1603240Z [1;33minfo: teardown step 124/212[0m
+2026-03-14T08:22:44.3249740Z [coverage] finalizing report... 67%
+2026-03-14T08:22:44.4846500Z Post job cleanup.
+2026-03-14T08:22:45.0451710Z Removing temporary directory /home/runner/work/_temp/7439
+2026-03-14T08:22:45.1350170Z info: teardown step 128/212
+2026-03-14T08:22:45.8193720Z [coverage] finalizing report... 11%
+2026-03-14T08:22:46.1547260Z Post job cleanup.
+2026-03-14T08:22:46.6332390Z Removing temporary directory /home/runner/work/_temp/3793
+2026-03-14T08:22:47.2673450Z [1;33minfo: teardown step 132/212[0m
+2026-03-14T08:22:47.8100960Z [coverage] finalizing report... 55%
+2026-03-14T08:22:48.4666160Z Post job cleanup.
+2026-03-14T08:22:49.2714570Z Removing temporary directory /home/runner/work/_temp/4859
+2026-03-14T08:22:49.6578920Z [31minfo: teardown step 136/212[0m
+2026-03-14T08:22:50.0857610Z [coverage] finalizing report... 99%
+2026-03-14T08:22:50.6936480Z Post job cleanup.
+2026-03-14T08:22:51.1864080Z Removing temporary directory /home/runner/work/_temp/1473
+2026-03-14T08:22:51.4412880Z info: teardown step 140/212
+2026-03-14T08:22:52.2277310Z [coverage] finalizing report... 43%
+2026-03-14T08:22:52.7435470Z Post job cleanup.
+2026-03-14T08:22:52.8902770Z Removing temporary directory /home/runner/work/_temp/5342
+2026-03-14T08:22:52.9392440Z info: teardown step 144/212
+2026-03-14T08:22:53.7825770Z [1;33m[coverage] finalizing report... 87%[0m
+2026-03-14T08:22:54.1152100Z Post job cleanup.
+2026-03-14T08:22:54.1586090Z Removing temporary directory /home/runner/work/_temp/5883
+2026-03-14T08:22:54.9368610Z info: teardown step 148/212
+2026-03-14T08:22:55.0391400Z [coverage] finalizing report... 31%
+2026-03-14T08:22:55.9085970Z [2K[1APost job cleanup.
+2026-03-14T08:22:56.0322830Z Removing temporary directory /home/runner/work/_temp/5929
+2026-03-14T08:22:56.6339770Z info: teardown step 152/212
+2026-03-14T08:22:57.2069680Z [coverage] finalizing report... 75%
+2026-03-14T08:22:57.6623380Z Post job cleanup.
+2026-03-14T08:22:57.8322810Z Removing temporary directory /home/runner/work/_temp/1460
+2026-03-14T08:22:58.4311900Z info: teardown step 156/212
+2026-03-14T08:22:59.1369060Z [coverage] finalizing report... 19%
+2026-03-14T08:22:59.2402940Z [2K[1APost job cleanup.
+2026-03-14T08:22:59.9791610Z Removing temporary directory /home/runner/work/_temp/8747
+2026-03-14T08:23:00.8642410Z info: teardown step 160/212
+2026-03-14T08:23:01.3336210Z [coverage] finalizing report... 63%
+2026-03-14T08:23:01.7583090Z Post job cleanup.
+2026-03-14T08:23:02.4189080Z Removing temporary directory /home/runner/work/_temp/8946
+2026-03-14T08:23:03.1055320Z info: teardown step 164/212
+2026-03-14T08:23:03.4261540Z [coverage] finalizing report... 7%
+2026-03-14T08:23:04.2746600Z Post job cleanup.
+2026-03-14T08:23:04.5049600Z Removing temporary directory /home/runner/work/_temp/8097
+2026-03-14T08:23:05.2141310Z info: teardown step 168/212
+2026-03-14T08:23:05.3905830Z [coverage] finalizing report... 51%
+2026-03-14T08:23:06.1290900Z [36mPost job cleanup.[0m
+2026-03-14T08:23:06.8304720Z [34mRemoving temporary directory /home/runner/work/_temp/3301[0m
+2026-03-14T08:23:07.4464150Z info: teardown step 172/212
+2026-03-14T08:23:08.2109190Z [coverage] finalizing report... 95%
+2026-03-14T08:23:08.9519960Z [1;33mPost job cleanup.[0m
+2026-03-14T08:23:09.4010200Z Removing temporary directory /home/runner/work/_temp/1171
+2026-03-14T08:23:09.4471060Z info: teardown step 176/212
+2026-03-14T08:23:09.9608420Z [coverage] finalizing report... 39%
+2026-03-14T08:23:10.5773300Z Post job cleanup.
+2026-03-14T08:23:10.6099470Z [1;33mRemoving temporary directory /home/runner/work/_temp/9341[0m
+2026-03-14T08:23:11.2125720Z info: teardown step 180/212
+2026-03-14T08:23:11.9280080Z [coverage] finalizing report... 83%
+2026-03-14T08:23:12.2183450Z Post job cleanup.
+2026-03-14T08:23:13.0650350Z Removing temporary directory /home/runner/work/_temp/3731
+2026-03-14T08:23:13.2206120Z info: teardown step 184/212
+2026-03-14T08:23:13.3939240Z [coverage] finalizing report... 27%
+2026-03-14T08:23:14.2728290Z [1;33mPost job cleanup.[0m
+2026-03-14T08:23:14.7577270Z Removing temporary directory /home/runner/work/_temp/6722
+2026-03-14T08:23:15.5640530Z info: teardown step 188/212
+2026-03-14T08:23:15.8293320Z [coverage] finalizing report... 71%
+2026-03-14T08:23:16.5083260Z Post job cleanup.
+2026-03-14T08:23:17.2531000Z Removing temporary directory /home/runner/work/_temp/7788
+2026-03-14T08:23:17.6783020Z info: teardown step 192/212
+2026-03-14T08:23:17.9560880Z [coverage] finalizing report... 15%
+2026-03-14T08:23:17.9610570Z Post job cleanup.
+2026-03-14T08:23:18.2752200Z Removing temporary directory /home/runner/work/_temp/9701
+2026-03-14T08:23:18.8833250Z info: teardown step 196/212
+2026-03-14T08:23:19.1254910Z [coverage] finalizing report... 59%
+2026-03-14T08:23:19.9920410Z Post job cleanup.
+2026-03-14T08:23:20.3023110Z Removing temporary directory /home/runner/work/_temp/4917
+2026-03-14T08:23:21.1268450Z info: teardown step 200/212
+2026-03-14T08:23:21.1863910Z [coverage] finalizing report... 3%
+2026-03-14T08:23:21.6665420Z Post job cleanup.
+2026-03-14T08:23:22.3760870Z Removing temporary directory /home/runner/work/_temp/8794
+2026-03-14T08:23:22.7625440Z info: teardown step 204/212
+2026-03-14T08:23:23.6172780Z [coverage] finalizing report... 47%
+2026-03-14T08:23:23.8037220Z Post job cleanup.
+2026-03-14T08:23:24.4905090Z Removing temporary directory /home/runner/work/_temp/3979
+2026-03-14T08:23:25.2377660Z info: teardown step 208/212
+2026-03-14T08:23:25.6773480Z [coverage] finalizing report... 91%
+2026-03-14T08:23:26.2192420Z Post job cleanup.
+2026-03-14T08:23:26.4109960Z [1;33mRemoving temporary directory /home/runner/work/_temp/4930[0m
+2026-03-14T08:23:27.2080850Z info: teardown step 212/212
+2026-03-14T08:23:27.6230370Z ##[error]Process completed with exit code 1

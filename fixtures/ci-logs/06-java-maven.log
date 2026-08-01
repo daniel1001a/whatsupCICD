@@ -1,0 +1,240 @@
+2026-03-14T08:21:33.5895830Z Current runner version: '2.309.0'
+2026-03-14T08:21:34.0628970Z Runner name: 'GitHub Actions 3'
+2026-03-14T08:21:34.6384780Z Working directory resolved to /home/runner/work/whatsupCICD/whatsupCICD
+2026-03-14T08:21:35.2565210Z Local cache mirror path: /Users/testuser/Library/Caches/pip/wheels
+2026-03-14T08:21:35.7346120Z ##[group]Run actions/checkout@v4
+2026-03-14T08:21:36.4061390Z [2K[1Aremote: Compressing objects... 4%
+2026-03-14T08:21:37.2727990Z [1;33mremote: Compressing objects... 11%[0m
+2026-03-14T08:21:37.9863560Z info: processing step 3/45
+2026-03-14T08:21:38.5851700Z [32mCache restored successfully (317 MB, key hit)[0m
+2026-03-14T08:21:39.3865510Z npm WARN deprecated ini-parse-fast@4.9.2: this package is no longer maintained
+2026-03-14T08:21:39.6952510Z remote: Compressing objects... 39%
+2026-03-14T08:21:40.2734340Z info: processing step 7/45
+2026-03-14T08:21:40.6917800Z remote: Compressing objects... 53%
+2026-03-14T08:21:40.9383430Z remote: Compressing objects... 60%
+2026-03-14T08:21:41.3627560Z [1;33minfo: processing step 10/45[0m
+2026-03-14T08:21:41.9719020Z [1;33mCache restored successfully (896 MB, key hit)[0m
+2026-03-14T08:21:42.1334600Z npm WARN deprecated debug-lite@0.11.11: this package is no longer maintained
+2026-03-14T08:21:42.1855630Z remote: Compressing objects... 88%
+2026-03-14T08:21:42.8452670Z info: processing step 14/45
+2026-03-14T08:21:42.8532560Z remote: Compressing objects... 100%
+2026-03-14T08:21:43.3726990Z remote: Compressing objects... 9%
+2026-03-14T08:21:43.8741560Z info: processing step 17/45
+2026-03-14T08:21:44.3100840Z Cache restored successfully (341 MB, key hit)
+2026-03-14T08:21:45.0448250Z npm WARN deprecated yaml-min@8.17.12: this package is no longer maintained
+2026-03-14T08:21:45.4632550Z remote: Compressing objects... 37%
+2026-03-14T08:21:46.3348140Z info: processing step 21/45
+2026-03-14T08:21:46.7017710Z [2K[1Aremote: Compressing objects... 51%
+2026-03-14T08:21:47.1333050Z [1;33mremote: Compressing objects... 58%[0m
+2026-03-14T08:21:47.1910440Z info: processing step 24/45
+2026-03-14T08:21:47.3183320Z [1;33mCache restored successfully (228 MB, key hit)[0m
+2026-03-14T08:21:47.3435190Z npm WARN deprecated mini-glob@5.1.1: this package is no longer maintained
+2026-03-14T08:21:47.7241650Z [1;33mremote: Compressing objects... 86%[0m
+2026-03-14T08:21:47.9099100Z info: processing step 28/45
+2026-03-14T08:21:48.2054000Z remote: Compressing objects... 100%
+2026-03-14T08:21:48.6483710Z [1;33mremote: Compressing objects... 7%[0m
+2026-03-14T08:21:49.4301950Z [36minfo: processing step 31/45[0m
+2026-03-14T08:21:50.2682990Z Cache restored successfully (657 MB, key hit)
+2026-03-14T08:21:50.9889560Z [31mnpm WARN deprecated querystring-es3@3.6.4: this package is no longer maintained[0m
+2026-03-14T08:21:51.2805460Z remote: Compressing objects... 35%
+2026-03-14T08:21:52.0347990Z info: processing step 35/45
+2026-03-14T08:21:52.8919090Z remote: Compressing objects... 49%
+2026-03-14T08:21:53.2428830Z remote: Compressing objects... 56%
+2026-03-14T08:21:54.0298320Z [31minfo: processing step 38/45[0m
+2026-03-14T08:21:54.3985860Z Cache restored successfully (670 MB, key hit)
+2026-03-14T08:21:54.7597410Z npm WARN deprecated request-legacy@9.3.8: this package is no longer maintained
+2026-03-14T08:21:55.1108520Z [2K[1Aremote: Compressing objects... 84%
+2026-03-14T08:21:55.8092460Z info: processing step 42/45
+2026-03-14T08:21:56.0199520Z remote: Compressing objects... 98%
+2026-03-14T08:21:56.3139470Z remote: Compressing objects... 5%
+2026-03-14T08:21:56.5694300Z info: processing step 45/45
+2026-03-14T08:21:57.2964770Z ##[endgroup]
+
+2026-03-14T08:21:57.5345690Z ##[group]Run actions/setup-node@v4
+2026-03-14T08:21:57.8434330Z remote: Compressing objects... 4%
+2026-03-14T08:21:58.0115220Z remote: Compressing objects... 11%
+2026-03-14T08:21:58.4757490Z [36minfo: processing step 3/45[0m
+2026-03-14T08:21:59.1960240Z Cache restored successfully (816 MB, key hit)
+2026-03-14T08:22:00.0631570Z npm WARN deprecated ini-parse-fast@2.3.2: this package is no longer maintained
+2026-03-14T08:22:00.6604790Z remote: Compressing objects... 39%
+2026-03-14T08:22:01.4504080Z info: processing step 7/45
+2026-03-14T08:22:02.1540790Z [36mremote: Compressing objects... 53%[0m
+2026-03-14T08:22:02.8556510Z remote: Compressing objects... 60%
+2026-03-14T08:22:03.6009260Z [1;33minfo: processing step 10/45[0m
+2026-03-14T08:22:04.3149200Z Cache restored successfully (312 MB, key hit)
+2026-03-14T08:22:05.1004080Z npm WARN deprecated semver-tiny@0.18.4: this package is no longer maintained
+2026-03-14T08:22:05.8373970Z remote: Compressing objects... 88%
+2026-03-14T08:22:06.5450400Z info: processing step 14/45
+2026-03-14T08:22:07.0191500Z remote: Compressing objects... 100%
+2026-03-14T08:22:07.5117030Z remote: Compressing objects... 9%
+2026-03-14T08:22:07.7224850Z info: processing step 17/45
+2026-03-14T08:22:08.2598740Z Cache restored successfully (703 MB, key hit)
+2026-03-14T08:22:08.4304990Z npm WARN deprecated chalk-min@7.3.11: this package is no longer maintained
+2026-03-14T08:22:09.1613600Z remote: Compressing objects... 37%
+2026-03-14T08:22:09.5557500Z info: processing step 21/45
+2026-03-14T08:22:09.9146120Z remote: Compressing objects... 51%
+2026-03-14T08:22:10.7925740Z remote: Compressing objects... 58%
+2026-03-14T08:22:11.3450620Z info: processing step 24/45
+2026-03-14T08:22:11.8783980Z Cache restored successfully (787 MB, key hit)
+2026-03-14T08:22:12.0450640Z [33mnpm WARN deprecated fetch-lite@1.9.16: this package is no longer maintained[0m
+2026-03-14T08:22:12.1529130Z remote: Compressing objects... 86%
+2026-03-14T08:22:12.3488420Z info: processing step 28/45
+2026-03-14T08:22:13.2301240Z remote: Compressing objects... 100%
+2026-03-14T08:22:13.3608290Z remote: Compressing objects... 7%
+2026-03-14T08:22:13.9711160Z info: processing step 31/45
+2026-03-14T08:22:14.1411250Z Cache restored successfully (121 MB, key hit)
+2026-03-14T08:22:14.3262850Z npm WARN deprecated debug-lite@9.9.11: this package is no longer maintained
+2026-03-14T08:22:15.0653850Z [1;33mremote: Compressing objects... 35%[0m
+2026-03-14T08:22:15.2283400Z info: processing step 35/45
+2026-03-14T08:22:15.6993680Z [1;33mremote: Compressing objects... 49%[0m
+2026-03-14T08:22:16.2321460Z remote: Compressing objects... 56%
+2026-03-14T08:22:16.8826800Z info: processing step 38/45
+2026-03-14T08:22:17.4962770Z Cache restored successfully (104 MB, key hit)
+2026-03-14T08:22:18.0152450Z [1;33mnpm WARN deprecated left-pad-fork@9.17.19: this package is no longer maintained[0m
+2026-03-14T08:22:18.5979830Z remote: Compressing objects... 84%
+2026-03-14T08:22:19.2493190Z info: processing step 42/45
+2026-03-14T08:22:19.8129060Z remote: Compressing objects... 98%
+2026-03-14T08:22:20.2323240Z remote: Compressing objects... 5%
+2026-03-14T08:22:20.5197690Z [2K[1Ainfo: processing step 45/45
+2026-03-14T08:22:20.7181890Z ##[endgroup]
+
+2026-03-14T08:22:21.1991310Z ##[group]Restore cache
+2026-03-14T08:22:21.5856850Z remote: Compressing objects... 4%
+2026-03-14T08:22:21.5999050Z remote: Compressing objects... 11%
+2026-03-14T08:22:21.8980860Z info: processing step 3/44
+2026-03-14T08:22:21.9487800Z [2K[1ACache restored successfully (703 MB, key hit)
+2026-03-14T08:22:22.0094640Z [1;33mnpm WARN deprecated stream-peek@5.12.1: this package is no longer maintained[0m
+2026-03-14T08:22:22.8249800Z remote: Compressing objects... 39%
+2026-03-14T08:22:22.9884400Z info: processing step 7/44
+2026-03-14T08:22:23.7310270Z [2K[1Aremote: Compressing objects... 53%
+2026-03-14T08:22:23.8069960Z remote: Compressing objects... 60%
+2026-03-14T08:22:24.4176860Z info: processing step 10/44
+2026-03-14T08:22:24.9536770Z Cache restored successfully (114 MB, key hit)
+2026-03-14T08:22:25.0344990Z npm WARN deprecated chalk-min@1.5.9: this package is no longer maintained
+2026-03-14T08:22:25.1182040Z remote: Compressing objects... 88%
+2026-03-14T08:22:25.3897830Z [2K[1Ainfo: processing step 14/44
+2026-03-14T08:22:26.1942700Z remote: Compressing objects... 100%
+2026-03-14T08:22:26.5433300Z remote: Compressing objects... 9%
+2026-03-14T08:22:26.7881550Z info: processing step 17/44
+2026-03-14T08:22:27.1537160Z [1;33mCache restored successfully (799 MB, key hit)[0m
+2026-03-14T08:22:27.6697600Z npm WARN deprecated tar-stream-old@4.11.12: this package is no longer maintained
+2026-03-14T08:22:28.0522660Z remote: Compressing objects... 37%
+2026-03-14T08:22:28.2455590Z info: processing step 21/44
+2026-03-14T08:22:28.9926490Z remote: Compressing objects... 51%
+2026-03-14T08:22:29.7806820Z remote: Compressing objects... 58%
+2026-03-14T08:22:30.5338110Z [34minfo: processing step 24/44[0m
+2026-03-14T08:22:31.1420820Z Cache restored successfully (479 MB, key hit)
+2026-03-14T08:22:31.4147180Z [1;33mnpm WARN deprecated glob-walker@4.10.4: this package is no longer maintained[0m
+2026-03-14T08:22:31.9822040Z remote: Compressing objects... 86%
+2026-03-14T08:22:32.3792000Z [1;33minfo: processing step 28/44[0m
+2026-03-14T08:22:32.4157230Z remote: Compressing objects... 100%
+2026-03-14T08:22:33.0051710Z remote: Compressing objects... 7%
+2026-03-14T08:22:33.6503210Z [2K[1Ainfo: processing step 31/44
+2026-03-14T08:22:33.9447280Z Cache restored successfully (565 MB, key hit)
+2026-03-14T08:22:34.1942330Z npm WARN deprecated semver-tiny@2.19.3: this package is no longer maintained
+2026-03-14T08:22:34.4335290Z remote: Compressing objects... 35%
+2026-03-14T08:22:34.4782120Z info: processing step 35/44
+2026-03-14T08:22:34.6362250Z remote: Compressing objects... 49%
+2026-03-14T08:22:35.2108670Z remote: Compressing objects... 56%
+2026-03-14T08:22:35.3422320Z [2K[1Ainfo: processing step 38/44
+2026-03-14T08:22:35.7126380Z Cache restored successfully (838 MB, key hit)
+2026-03-14T08:22:36.3062330Z npm WARN deprecated har-validator-lite@8.11.2: this package is no longer maintained
+2026-03-14T08:22:36.6515480Z remote: Compressing objects... 84%
+2026-03-14T08:22:37.0096630Z info: processing step 42/44
+2026-03-14T08:22:37.4389120Z [2K[1Aremote: Compressing objects... 98%
+2026-03-14T08:22:37.7874070Z remote: Compressing objects... 5%
+2026-03-14T08:22:38.3515380Z ##[endgroup]
+
+2026-03-14T08:22:39.1577930Z ##[group]Run mvn test
+2026-03-14T08:22:39.1686310Z > mvn -B test
+2026-03-14T08:22:39.4014810Z [ERROR] COMPILATION ERROR :
+2026-03-14T08:22:40.0372380Z [ERROR] Failed to execute goal on project acme-server
+2026-03-14T08:22:40.9108610Z java.lang.NullPointerException: Cannot invoke "String.length()" because "name" is null
+2026-03-14T08:22:41.0031930Z 	at com.acme.service.UserService.validate(UserService.java:88)
+2026-03-14T08:22:41.6846410Z 	at com.acme.service.UserService.create(UserService.java:45)
+2026-03-14T08:22:41.9427910Z 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+2026-03-14T08:22:42.7690410Z 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
+2026-03-14T08:22:43.2668440Z 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:123)
+2026-03-14T08:22:43.4094760Z 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+2026-03-14T08:22:44.2304310Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2026-03-14T08:22:44.3031210Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2026-03-14T08:22:44.7051950Z 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2026-03-14T08:22:45.3733280Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2026-03-14T08:22:45.5286630Z 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+2026-03-14T08:22:46.4074910Z 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+2026-03-14T08:22:47.1332400Z 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
+2026-03-14T08:22:47.6333140Z 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:123)
+2026-03-14T08:22:47.8392840Z 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+2026-03-14T08:22:48.2970200Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2026-03-14T08:22:48.5958790Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2026-03-14T08:22:49.1660340Z 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2026-03-14T08:22:50.0221270Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2026-03-14T08:22:50.3327390Z 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+2026-03-14T08:22:51.2064050Z 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+2026-03-14T08:22:51.8925060Z 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
+2026-03-14T08:22:52.5771590Z 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:123)
+2026-03-14T08:22:52.7025940Z 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+2026-03-14T08:22:53.5235850Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2026-03-14T08:22:54.1536650Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2026-03-14T08:22:54.5516110Z 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2026-03-14T08:22:54.6832640Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2026-03-14T08:22:55.1043520Z 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+2026-03-14T08:22:55.9872650Z 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+2026-03-14T08:22:56.0439730Z 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:750)
+2026-03-14T08:22:56.7285710Z 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:123)
+2026-03-14T08:22:57.3031630Z 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
+2026-03-14T08:22:57.4019160Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2026-03-14T08:22:58.2820180Z 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+2026-03-14T08:22:58.7757600Z 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2026-03-14T08:22:59.5576980Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+2026-03-14T08:22:59.9848510Z 	at com.acme.web.UserController.createUser(UserController.java:61)
+2026-03-14T08:23:00.7249530Z 	at com.acme.web.UserController.handleRequest(UserController.java:33)
+2026-03-14T08:23:01.3864750Z Caused by: java.lang.IllegalStateException: user context not initialized
+2026-03-14T08:23:01.4739020Z 	... 6 more
+2026-03-14T08:23:01.7029300Z ##[endgroup]
+
+2026-03-14T08:23:02.0445580Z ##[group]Cleanup
+2026-03-14T08:23:02.6569580Z Cleanup completed successfully.
+2026-03-14T08:23:02.9699310Z ##[endgroup]
+2026-03-14T08:23:03.0189170Z [coverage] finalizing report... 3%
+2026-03-14T08:23:03.6240340Z [34mPost job cleanup.[0m
+2026-03-14T08:23:04.5119390Z Removing temporary directory /home/runner/work/_temp/6563
+2026-03-14T08:23:04.8136270Z info: teardown step 4/41
+2026-03-14T08:23:04.9633090Z [coverage] finalizing report... 47%
+2026-03-14T08:23:05.8352790Z Post job cleanup.
+2026-03-14T08:23:06.1033480Z [2K[1ARemoving temporary directory /home/runner/work/_temp/2051
+2026-03-14T08:23:06.1445950Z info: teardown step 8/41
+2026-03-14T08:23:06.3684520Z [coverage] finalizing report... 91%
+2026-03-14T08:23:06.9378230Z Post job cleanup.
+2026-03-14T08:23:07.5317700Z Removing temporary directory /home/runner/work/_temp/2796
+2026-03-14T08:23:07.6026830Z [2Kinfo: teardown step 12/41
+2026-03-14T08:23:07.9574630Z [coverage] finalizing report... 35%
+2026-03-14T08:23:08.7505990Z Post job cleanup.
+2026-03-14T08:23:08.9109390Z Removing temporary directory /home/runner/work/_temp/5365
+2026-03-14T08:23:09.2107720Z info: teardown step 16/41
+2026-03-14T08:23:09.5573920Z [2K[1A[coverage] finalizing report... 79%
+2026-03-14T08:23:10.0520650Z Post job cleanup.
+2026-03-14T08:23:10.4164160Z [2K[1ARemoving temporary directory /home/runner/work/_temp/5271
+2026-03-14T08:23:10.6755660Z [2K[1Ainfo: teardown step 20/41
+2026-03-14T08:23:11.0932550Z [coverage] finalizing report... 23%
+2026-03-14T08:23:11.8918970Z Post job cleanup.
+2026-03-14T08:23:12.5222970Z Removing temporary directory /home/runner/work/_temp/7654
+2026-03-14T08:23:12.9086570Z info: teardown step 24/41
+2026-03-14T08:23:13.2236810Z [2K[1A[coverage] finalizing report... 67%
+2026-03-14T08:23:13.5697430Z [2K[1APost job cleanup.
+2026-03-14T08:23:14.3150310Z Removing temporary directory /home/runner/work/_temp/8983
+2026-03-14T08:23:14.9708280Z info: teardown step 28/41
+2026-03-14T08:23:15.1077330Z [coverage] finalizing report... 11%
+2026-03-14T08:23:15.8589310Z Post job cleanup.
+2026-03-14T08:23:16.5702540Z Removing temporary directory /home/runner/work/_temp/3509
+2026-03-14T08:23:16.7488940Z info: teardown step 32/41
+2026-03-14T08:23:17.4123130Z [coverage] finalizing report... 55%
+2026-03-14T08:23:18.2878070Z [1;33mPost job cleanup.[0m
+2026-03-14T08:23:18.6939770Z [32mRemoving temporary directory /home/runner/work/_temp/7460[0m
+2026-03-14T08:23:19.1787540Z info: teardown step 36/41
+2026-03-14T08:23:19.5071780Z [coverage] finalizing report... 99%
+2026-03-14T08:23:19.6714460Z Post job cleanup.
+2026-03-14T08:23:19.8700870Z Removing temporary directory /home/runner/work/_temp/4737
+2026-03-14T08:23:20.6924970Z info: teardown step 40/41
+2026-03-14T08:23:21.2534330Z [2K[1A[coverage] finalizing report... 43%
+2026-03-14T08:23:21.6200660Z ##[error]Process completed with exit code 1

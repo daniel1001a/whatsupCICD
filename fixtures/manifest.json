@@ -1,0 +1,174 @@
+{
+  "fixtures": [
+    {
+      "file": "01-typescript-tsc.log",
+      "language": "typescript",
+      "framework": "tsc",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 240,
+      "anchor_text": "2026-03-14T08:23:16.3359270Z src/api/handlers/profile.ts(45,18): error TS2339: Property 'map' does not exist on type 'never'.",
+      "total_lines": 320,
+      "notes": "標準情況。錨點後有 80 行可取，前有 30 行可取。",
+      "seeded_secrets": [
+        "fs_path_runner",
+        "bearer_token"
+      ]
+    },
+    {
+      "file": "02-jest-test-failure.log",
+      "language": "javascript",
+      "framework": "jest",
+      "expected_error_class": "E_TEST",
+      "anchor_line": 168,
+      "anchor_text": "2026-03-14T08:22:48.8057210Z   ● UserProfile component › renders avatar › updates src when prop changes",
+      "total_lines": 190,
+      "notes": "錨點靠尾端：後方只剩 22 行，視窗必須能處理「後 80 行不夠」。",
+      "seeded_secrets": [
+        "internal_ip",
+        "fs_path_mac"
+      ]
+    },
+    {
+      "file": "03-python-pytest.log",
+      "language": "python",
+      "framework": "pytest",
+      "expected_error_class": "E_TEST",
+      "anchor_line": 38,
+      "anchor_text": "2026-03-14T08:21:46.1777450Z E   AttributeError: 'NoneType' object has no attribute 'encode'",
+      "total_lines": 260,
+      "notes": "錨點靠開頭：前方只有 37 行，視窗必須能處理「前 30 行不夠」。",
+      "seeded_secrets": [
+        "db_connection_string",
+        "fs_path_runner"
+      ]
+    },
+    {
+      "file": "04-go-build-test.log",
+      "language": "go",
+      "framework": "go test",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 145,
+      "anchor_text": "2026-03-14T08:22:39.4325810Z cmd/server/main.go:34:12: undefined: config.LoadEnv",
+      "total_lines": 210,
+      "notes": "標準情況，但錯誤前後緊鄰 group 邊界。",
+      "seeded_secrets": [
+        "aws_access_key",
+        "internal_ip"
+      ]
+    },
+    {
+      "file": "05-rust-cargo.log",
+      "language": "rust",
+      "framework": "cargo",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 300,
+      "anchor_text": "2026-03-14T08:23:46.9157150Z error[E0308]: mismatched types",
+      "total_lines": 480,
+      "notes": "長檔。錨點前後都遠超過 30/80。含 OSC escape。",
+      "seeded_secrets": [
+        "aws_access_key",
+        "db_connection_string"
+      ]
+    },
+    {
+      "file": "06-java-maven.log",
+      "language": "java",
+      "framework": "maven",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 150,
+      "anchor_text": "2026-03-14T08:22:39.4014810Z [ERROR] COMPILATION ERROR :",
+      "total_lines": 240,
+      "notes": "Java stack trace ≥40 行，測第三方 frame 折疊（§6.4 C4）。",
+      "seeded_secrets": [
+        "fs_path_runner",
+        "fs_path_mac"
+      ]
+    },
+    {
+      "file": "07-npm-dependency.log",
+      "language": "javascript",
+      "framework": "npm",
+      "expected_error_class": "E_DEPENDENCY",
+      "anchor_line": 120,
+      "anchor_text": "2026-03-14T08:22:26.1781680Z npm ERR! ERESOLVE unable to resolve dependency tree",
+      "total_lines": 175,
+      "notes": "標準情況。",
+      "seeded_secrets": [
+        "bearer_token",
+        "internal_ip"
+      ]
+    },
+    {
+      "file": "08-docker-build.log",
+      "language": "dockerfile",
+      "framework": "docker buildkit",
+      "expected_error_class": "E_NETWORK",
+      "anchor_line": 160,
+      "anchor_text": "2026-03-14T08:22:40.5593270Z #7 ERROR: failed to solve: failed to fetch AWS credential",
+      "total_lines": 230,
+      "notes": "標準情況。",
+      "seeded_secrets": [
+        "aws_access_key",
+        "fs_path_runner"
+      ]
+    },
+    {
+      "file": "09-eslint-lint.log",
+      "language": "javascript",
+      "framework": "eslint",
+      "expected_error_class": "E_LINT",
+      "anchor_line": 700,
+      "anchor_text": "2026-03-14T08:26:41.9165230Z   12:3  error  'apiKey' is defined but never used  no-unused-vars",
+      "total_lines": 900,
+      "notes": "cascade 測試：≥180 條同型錯誤，第一筆（非最後一筆）為錨點。",
+      "seeded_secrets": [
+        "db_connection_string",
+        "bearer_token"
+      ]
+    },
+    {
+      "file": "10-infra-timeout.log",
+      "language": "shell",
+      "framework": "docker orchestration",
+      "expected_error_class": "E_TIMEOUT",
+      "anchor_line": 130,
+      "anchor_text": "2026-03-14T08:22:32.7674100Z Error: connect ETIMEDOUT 10.0.3.42:5432",
+      "total_lines": 200,
+      "notes": "E_INFRA/E_TIMEOUT，非人為失敗。",
+      "seeded_secrets": [
+        "internal_ip",
+        "aws_access_key"
+      ]
+    },
+    {
+      "file": "11-oversized-webpack.log",
+      "language": "javascript",
+      "framework": "webpack",
+      "expected_error_class": "E_COMPILE",
+      "anchor_line": 1900,
+      "anchor_text": "2026-03-14T08:35:45.7130350Z ERROR in ./src/index.js Module build failed: Error: Unexpected token in minified bundle",
+      "total_lines": 2600,
+      "notes": "壓縮階梯測試：30/80 視窗單獨即超過 4k tokens，且視窗內 ≥30 層 node_modules stack frame。",
+      "seeded_secrets": [
+        "fs_path_mac",
+        "db_connection_string",
+        "bearer_token"
+      ]
+    },
+    {
+      "file": "12-no-signature.log",
+      "language": "shell",
+      "framework": "unknown",
+      "expected_error_class": "E_UNKNOWN",
+      "anchor_line": null,
+      "anchor_text": null,
+      "total_lines": 150,
+      "notes": "失敗退路測試：無可辨識錯誤簽章，job 靜默 exit 1。",
+      "seeded_secrets": [
+        "fs_path_runner",
+        "internal_ip"
+      ],
+      "expected_signature_found": false
+    }
+  ]
+}

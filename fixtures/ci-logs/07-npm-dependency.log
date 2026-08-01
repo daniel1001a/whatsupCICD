@@ -1,0 +1,175 @@
+2026-03-14T08:21:33.2954840Z Current runner version: '2.309.0'
+2026-03-14T08:21:34.1527680Z Runner name: 'GitHub Actions 4'
+2026-03-14T08:21:34.9833170Z Authorization header sent: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.fake.signaturepayload
+2026-03-14T08:21:35.0814690Z Connecting to internal build cache at 10.0.3.42:9000
+2026-03-14T08:21:35.7744860Z ##[group]Run actions/checkout@v4
+2026-03-14T08:21:35.7979920Z remote: Compressing objects... 4%
+2026-03-14T08:21:35.9900870Z [31mremote: Compressing objects... 11%[0m
+2026-03-14T08:21:36.0477240Z info: processing step 3/110
+2026-03-14T08:21:36.8300450Z [2K[1ACache restored successfully (104 MB, key hit)
+2026-03-14T08:21:37.4412850Z [34mnpm WARN deprecated ini-parse-fast@8.17.14: this package is no longer maintained[0m
+2026-03-14T08:21:37.9318670Z [2K[1Aremote: Compressing objects... 39%
+2026-03-14T08:21:38.7674670Z [1;33minfo: processing step 7/110[0m
+2026-03-14T08:21:39.6285440Z [32mremote: Compressing objects... 53%[0m
+2026-03-14T08:21:40.0667140Z [36mremote: Compressing objects... 60%[0m
+2026-03-14T08:21:40.6762520Z info: processing step 10/110
+2026-03-14T08:21:40.7558350Z Cache restored successfully (664 MB, key hit)
+2026-03-14T08:21:41.6063030Z npm WARN deprecated proxy-agent-fake@8.4.15: this package is no longer maintained
+2026-03-14T08:21:41.6242070Z remote: Compressing objects... 88%
+2026-03-14T08:21:42.3022130Z info: processing step 14/110
+2026-03-14T08:21:42.7495220Z remote: Compressing objects... 100%
+2026-03-14T08:21:42.7588090Z remote: Compressing objects... 9%
+2026-03-14T08:21:43.5761940Z info: processing step 17/110
+2026-03-14T08:21:44.1668130Z [1;33mCache restored successfully (409 MB, key hit)[0m
+2026-03-14T08:21:44.2800340Z [2K[1Anpm WARN deprecated mini-glob@7.1.17: this package is no longer maintained
+2026-03-14T08:21:44.3884290Z remote: Compressing objects... 37%
+2026-03-14T08:21:44.6139270Z info: processing step 21/110
+2026-03-14T08:21:45.3068310Z remote: Compressing objects... 51%
+2026-03-14T08:21:45.3116110Z remote: Compressing objects... 58%
+2026-03-14T08:21:45.7666310Z info: processing step 24/110
+2026-03-14T08:21:46.3961670Z [31mCache restored successfully (111 MB, key hit)[0m
+2026-03-14T08:21:47.0137810Z npm WARN deprecated uuid-lite@8.16.12: this package is no longer maintained
+2026-03-14T08:21:47.8453880Z remote: Compressing objects... 86%
+2026-03-14T08:21:48.4319920Z info: processing step 28/110
+2026-03-14T08:21:48.7315330Z remote: Compressing objects... 100%
+2026-03-14T08:21:49.0903710Z remote: Compressing objects... 7%
+2026-03-14T08:21:49.9361860Z [2K[1Ainfo: processing step 31/110
+2026-03-14T08:21:50.4547270Z Cache restored successfully (604 MB, key hit)
+2026-03-14T08:21:50.6745000Z npm WARN deprecated har-validator-lite@9.13.1: this package is no longer maintained
+2026-03-14T08:21:51.4449670Z remote: Compressing objects... 35%
+2026-03-14T08:21:51.9538060Z info: processing step 35/110
+2026-03-14T08:21:52.2245580Z remote: Compressing objects... 49%
+2026-03-14T08:21:52.6184060Z remote: Compressing objects... 56%
+2026-03-14T08:21:53.3572510Z info: processing step 38/110
+2026-03-14T08:21:53.7441220Z [36mCache restored successfully (134 MB, key hit)[0m
+2026-03-14T08:21:54.3479280Z npm WARN deprecated stream-peek@9.8.13: this package is no longer maintained
+2026-03-14T08:21:55.1382350Z [34mremote: Compressing objects... 84%[0m
+2026-03-14T08:21:55.2044490Z info: processing step 42/110
+2026-03-14T08:21:55.2990790Z remote: Compressing objects... 98%
+2026-03-14T08:21:55.8304390Z remote: Compressing objects... 5%
+2026-03-14T08:21:56.0579890Z info: processing step 45/110
+2026-03-14T08:21:56.1246270Z Cache restored successfully (132 MB, key hit)
+2026-03-14T08:21:56.9046600Z [2K[1Anpm WARN deprecated har-validator-lite@2.20.5: this package is no longer maintained
+2026-03-14T08:21:57.0021790Z remote: Compressing objects... 33%
+2026-03-14T08:21:57.1874500Z info: processing step 49/110
+2026-03-14T08:21:58.0810260Z remote: Compressing objects... 47%
+2026-03-14T08:21:58.3327950Z [36mremote: Compressing objects... 54%[0m
+2026-03-14T08:21:58.9336460Z info: processing step 52/110
+2026-03-14T08:21:59.6078930Z [36mCache restored successfully (450 MB, key hit)[0m
+2026-03-14T08:22:00.2507030Z [1;33mnpm WARN deprecated colorz-cli@0.6.9: this package is no longer maintained[0m
+2026-03-14T08:22:00.5768240Z [1;33mremote: Compressing objects... 82%[0m
+2026-03-14T08:22:01.4464640Z info: processing step 56/110
+2026-03-14T08:22:02.0735320Z [1;33mremote: Compressing objects... 96%[0m
+2026-03-14T08:22:02.4323430Z [2K[1Aremote: Compressing objects... 100%
+2026-03-14T08:22:02.5691240Z info: processing step 59/110
+2026-03-14T08:22:02.9153360Z [1;33mCache restored successfully (407 MB, key hit)[0m
+2026-03-14T08:22:03.4438740Z npm WARN deprecated har-validator-lite@1.6.8: this package is no longer maintained
+2026-03-14T08:22:03.7416010Z remote: Compressing objects... 31%
+2026-03-14T08:22:04.6382300Z [31minfo: processing step 63/110[0m
+2026-03-14T08:22:05.1497400Z remote: Compressing objects... 45%
+2026-03-14T08:22:05.6349720Z remote: Compressing objects... 52%
+2026-03-14T08:22:06.3010690Z info: processing step 66/110
+2026-03-14T08:22:06.9824710Z Cache restored successfully (742 MB, key hit)
+2026-03-14T08:22:07.0513200Z [1;33mnpm WARN deprecated tar-stream-old@6.2.3: this package is no longer maintained[0m
+2026-03-14T08:22:07.2084250Z [33mremote: Compressing objects... 80%[0m
+2026-03-14T08:22:07.3787710Z info: processing step 70/110
+2026-03-14T08:22:07.4031790Z remote: Compressing objects... 94%
+2026-03-14T08:22:07.9018330Z remote: Compressing objects... 100%
+2026-03-14T08:22:08.3675040Z info: processing step 73/110
+2026-03-14T08:22:08.7291320Z [32mCache restored successfully (362 MB, key hit)[0m
+2026-03-14T08:22:08.9787280Z npm WARN deprecated chalk-min@7.13.13: this package is no longer maintained
+2026-03-14T08:22:09.6908890Z remote: Compressing objects... 29%
+2026-03-14T08:22:09.8031670Z [2K[1Ainfo: processing step 77/110
+2026-03-14T08:22:10.4233350Z remote: Compressing objects... 43%
+2026-03-14T08:22:11.2026570Z [1;33mremote: Compressing objects... 50%[0m
+2026-03-14T08:22:11.8704350Z info: processing step 80/110
+2026-03-14T08:22:12.5649290Z Cache restored successfully (148 MB, key hit)
+2026-03-14T08:22:12.6355590Z [32mnpm WARN deprecated har-validator-lite@8.2.8: this package is no longer maintained[0m
+2026-03-14T08:22:13.1112370Z remote: Compressing objects... 78%
+2026-03-14T08:22:13.1179540Z info: processing step 84/110
+2026-03-14T08:22:13.9125270Z [1;33mremote: Compressing objects... 92%[0m
+2026-03-14T08:22:14.0263320Z remote: Compressing objects... 99%
+2026-03-14T08:22:14.5275680Z [2K[1Ainfo: processing step 87/110
+2026-03-14T08:22:14.7407330Z [32mCache restored successfully (847 MB, key hit)[0m
+2026-03-14T08:22:15.0928400Z npm WARN deprecated json-safe-parse@6.13.1: this package is no longer maintained
+2026-03-14T08:22:15.2228250Z remote: Compressing objects... 27%
+2026-03-14T08:22:15.8199490Z [34minfo: processing step 91/110[0m
+2026-03-14T08:22:16.4682650Z remote: Compressing objects... 41%
+2026-03-14T08:22:16.7628900Z [1;33mremote: Compressing objects... 48%[0m
+2026-03-14T08:22:17.0932280Z [2K[1Ainfo: processing step 94/110
+2026-03-14T08:22:17.2237430Z [1;33mCache restored successfully (590 MB, key hit)[0m
+2026-03-14T08:22:17.6252090Z npm WARN deprecated har-validator-lite@5.8.14: this package is no longer maintained
+2026-03-14T08:22:17.8760640Z remote: Compressing objects... 76%
+2026-03-14T08:22:18.3079090Z info: processing step 98/110
+2026-03-14T08:22:19.0366640Z remote: Compressing objects... 90%
+2026-03-14T08:22:19.6689320Z remote: Compressing objects... 97%
+2026-03-14T08:22:19.8607250Z info: processing step 101/110
+2026-03-14T08:22:20.5136900Z Cache restored successfully (541 MB, key hit)
+2026-03-14T08:22:21.1223720Z npm WARN deprecated colorz-cli@3.19.15: this package is no longer maintained
+2026-03-14T08:22:21.6739360Z [34mremote: Compressing objects... 25%[0m
+2026-03-14T08:22:22.4809060Z [2K[1Ainfo: processing step 105/110
+2026-03-14T08:22:22.9802340Z remote: Compressing objects... 39%
+2026-03-14T08:22:23.4729340Z [2K[1Aremote: Compressing objects... 46%
+2026-03-14T08:22:23.5223400Z [33minfo: processing step 108/110[0m
+2026-03-14T08:22:23.8793080Z Cache restored successfully (132 MB, key hit)
+2026-03-14T08:22:24.6333050Z npm WARN deprecated json-safe-parse@6.12.9: this package is no longer maintained
+2026-03-14T08:22:24.7962590Z ##[endgroup]
+
+2026-03-14T08:22:25.6088640Z ##[group]Run npm ci
+2026-03-14T08:22:25.7413410Z > npm ci
+2026-03-14T08:22:26.1781680Z npm ERR! ERESOLVE unable to resolve dependency tree
+2026-03-14T08:22:26.2967800Z npm ERR!
+2026-03-14T08:22:26.6767210Z npm ERR! While resolving: acme-web@2.4.1
+2026-03-14T08:22:27.0925120Z npm ERR! Found: react@18.2.0
+2026-03-14T08:22:27.1377840Z npm ERR! node_modules/react
+2026-03-14T08:22:27.5599220Z npm ERR!   react@"^18.2.0" from the root project
+2026-03-14T08:22:27.8462610Z npm ERR!
+2026-03-14T08:22:28.5822410Z npm ERR! Could not resolve dependency:
+2026-03-14T08:22:28.6214820Z npm ERR! peer react@"^17.0.0" from some-old-lib@3.1.0
+2026-03-14T08:22:29.0012020Z npm ERR!
+2026-03-14T08:22:29.6650040Z npm ERR! A complete log of this run can be found in: /home/runner/.npm/_logs/2026-03-14T08_21_37_123Z-debug-0.log
+2026-03-14T08:22:30.3995040Z ##[endgroup]
+
+2026-03-14T08:22:30.9786510Z ##[group]Cleanup
+2026-03-14T08:22:31.6928990Z Cleanup completed successfully.
+2026-03-14T08:22:31.8976260Z ##[endgroup]
+2026-03-14T08:22:32.5463880Z [coverage] finalizing report... 3%
+2026-03-14T08:22:32.6398180Z Post job cleanup.
+2026-03-14T08:22:32.8254050Z [1;33mRemoving temporary directory /home/runner/work/_temp/7834[0m
+2026-03-14T08:22:33.4136280Z [1;33minfo: teardown step 4/39[0m
+2026-03-14T08:22:33.9534710Z [coverage] finalizing report... 47%
+2026-03-14T08:22:34.7544320Z Post job cleanup.
+2026-03-14T08:22:35.3025590Z [1;33mRemoving temporary directory /home/runner/work/_temp/5104[0m
+2026-03-14T08:22:35.3387660Z info: teardown step 8/39
+2026-03-14T08:22:35.8461890Z [coverage] finalizing report... 91%
+2026-03-14T08:22:36.2887120Z [34mPost job cleanup.[0m
+2026-03-14T08:22:36.5076600Z Removing temporary directory /home/runner/work/_temp/4029
+2026-03-14T08:22:36.8756950Z info: teardown step 12/39
+2026-03-14T08:22:37.5841140Z [coverage] finalizing report... 35%
+2026-03-14T08:22:38.3227750Z Post job cleanup.
+2026-03-14T08:22:39.0854570Z Removing temporary directory /home/runner/work/_temp/4435
+2026-03-14T08:22:39.3408370Z info: teardown step 16/39
+2026-03-14T08:22:39.6314960Z [coverage] finalizing report... 79%
+2026-03-14T08:22:39.6379890Z Post job cleanup.
+2026-03-14T08:22:40.1478690Z Removing temporary directory /home/runner/work/_temp/5225
+2026-03-14T08:22:40.9205210Z [36minfo: teardown step 20/39[0m
+2026-03-14T08:22:41.6282690Z [36m[coverage] finalizing report... 23%[0m
+2026-03-14T08:22:42.3308490Z Post job cleanup.
+2026-03-14T08:22:42.9813030Z Removing temporary directory /home/runner/work/_temp/3270
+2026-03-14T08:22:43.5395290Z info: teardown step 24/39
+2026-03-14T08:22:44.0329750Z [coverage] finalizing report... 67%
+2026-03-14T08:22:44.8266140Z [1;33mPost job cleanup.[0m
+2026-03-14T08:22:45.5622890Z Removing temporary directory /home/runner/work/_temp/8162
+2026-03-14T08:22:46.3580440Z [34minfo: teardown step 28/39[0m
+2026-03-14T08:22:46.7380380Z [coverage] finalizing report... 11%
+2026-03-14T08:22:46.9463720Z Post job cleanup.
+2026-03-14T08:22:47.7003040Z Removing temporary directory /home/runner/work/_temp/5766
+2026-03-14T08:22:48.3673250Z info: teardown step 32/39
+2026-03-14T08:22:48.6606170Z [coverage] finalizing report... 55%
+2026-03-14T08:22:48.7732930Z [1;33mPost job cleanup.[0m
+2026-03-14T08:22:49.3581890Z [36mRemoving temporary directory /home/runner/work/_temp/2741[0m
+2026-03-14T08:22:50.0981950Z [1;33minfo: teardown step 36/39[0m
+2026-03-14T08:22:50.9691180Z [coverage] finalizing report... 99%
+2026-03-14T08:22:51.6683910Z Post job cleanup.
+2026-03-14T08:22:52.4307070Z Removing temporary directory /home/runner/work/_temp/5139
+2026-03-14T08:22:53.1853220Z ##[error]Process completed with exit code 1

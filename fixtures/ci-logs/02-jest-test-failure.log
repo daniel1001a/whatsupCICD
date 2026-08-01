@@ -1,0 +1,190 @@
+2026-03-14T08:21:33.7713850Z Current runner version: '2.309.0'
+2026-03-14T08:21:34.1328330Z Runner name: 'GitHub Actions 7'
+2026-03-14T08:21:34.7793880Z Connecting to internal build cache at 10.0.3.42:9000
+2026-03-14T08:21:35.6530360Z Local cache mirror path: /Users/testuser/Library/Caches/pip/wheels
+2026-03-14T08:21:36.2285690Z ##[group]Run actions/checkout@v4
+2026-03-14T08:21:36.8129490Z [32mremote: Compressing objects... 4%[0m
+2026-03-14T08:21:37.3694850Z remote: Compressing objects... 11%
+2026-03-14T08:21:37.5491860Z info: processing step 3/78
+2026-03-14T08:21:38.1280010Z Cache restored successfully (873 MB, key hit)
+2026-03-14T08:21:38.3304060Z npm WARN deprecated semver-tiny@9.5.8: this package is no longer maintained
+2026-03-14T08:21:38.9670430Z remote: Compressing objects... 39%
+2026-03-14T08:21:39.1293700Z info: processing step 7/78
+2026-03-14T08:21:39.9965820Z remote: Compressing objects... 53%
+2026-03-14T08:21:40.7453360Z remote: Compressing objects... 60%
+2026-03-14T08:21:41.3110080Z info: processing step 10/78
+2026-03-14T08:21:41.8741650Z Cache restored successfully (336 MB, key hit)
+2026-03-14T08:21:42.2442990Z npm WARN deprecated fetch-lite@0.13.0: this package is no longer maintained
+2026-03-14T08:21:42.9322170Z remote: Compressing objects... 88%
+2026-03-14T08:21:43.0159000Z info: processing step 14/78
+2026-03-14T08:21:43.7061640Z remote: Compressing objects... 100%
+2026-03-14T08:21:44.2713180Z remote: Compressing objects... 9%
+2026-03-14T08:21:44.2806520Z info: processing step 17/78
+2026-03-14T08:21:44.5472420Z Cache restored successfully (725 MB, key hit)
+2026-03-14T08:21:45.0883570Z npm WARN deprecated mini-glob@7.8.13: this package is no longer maintained
+2026-03-14T08:21:45.5170050Z remote: Compressing objects... 37%
+2026-03-14T08:21:46.1305060Z info: processing step 21/78
+2026-03-14T08:21:46.8054080Z remote: Compressing objects... 51%
+2026-03-14T08:21:47.5788120Z remote: Compressing objects... 58%
+2026-03-14T08:21:47.6354640Z [36minfo: processing step 24/78[0m
+2026-03-14T08:21:47.7519140Z [2K[1ACache restored successfully (169 MB, key hit)
+2026-03-14T08:21:47.8260070Z npm WARN deprecated request-legacy@5.12.19: this package is no longer maintained
+2026-03-14T08:21:48.0027930Z remote: Compressing objects... 86%
+2026-03-14T08:21:48.2068580Z info: processing step 28/78
+2026-03-14T08:21:49.0208820Z remote: Compressing objects... 100%
+2026-03-14T08:21:49.6615660Z remote: Compressing objects... 7%
+2026-03-14T08:21:50.1109430Z info: processing step 31/78
+2026-03-14T08:21:50.5748770Z Cache restored successfully (239 MB, key hit)
+2026-03-14T08:21:50.9750170Z [33mnpm WARN deprecated fetch-lite@2.10.16: this package is no longer maintained[0m
+2026-03-14T08:21:51.7686380Z remote: Compressing objects... 35%
+2026-03-14T08:21:52.4612540Z info: processing step 35/78
+2026-03-14T08:21:53.1527920Z [1;33mremote: Compressing objects... 49%[0m
+2026-03-14T08:21:53.3329030Z [1;33mremote: Compressing objects... 56%[0m
+2026-03-14T08:21:53.4164250Z info: processing step 38/78
+2026-03-14T08:21:53.9124600Z Cache restored successfully (163 MB, key hit)
+2026-03-14T08:21:53.9141160Z npm WARN deprecated yaml-min@4.15.14: this package is no longer maintained
+2026-03-14T08:21:54.1802160Z remote: Compressing objects... 84%
+2026-03-14T08:21:54.5142800Z [2Kinfo: processing step 42/78
+2026-03-14T08:21:54.6476280Z remote: Compressing objects... 98%
+2026-03-14T08:21:54.9559720Z remote: Compressing objects... 5%
+2026-03-14T08:21:55.7531580Z info: processing step 45/78
+2026-03-14T08:21:56.3946900Z Cache restored successfully (366 MB, key hit)
+2026-03-14T08:21:56.9641270Z npm WARN deprecated stream-peek@6.17.17: this package is no longer maintained
+2026-03-14T08:21:57.4967700Z remote: Compressing objects... 33%
+2026-03-14T08:21:58.3377110Z info: processing step 49/78
+2026-03-14T08:21:59.0166040Z remote: Compressing objects... 47%
+2026-03-14T08:21:59.7615550Z remote: Compressing objects... 54%
+2026-03-14T08:22:00.1354060Z info: processing step 52/78
+2026-03-14T08:22:00.7976210Z Cache restored successfully (323 MB, key hit)
+2026-03-14T08:22:01.3243620Z npm WARN deprecated fetch-lite@3.15.20: this package is no longer maintained
+2026-03-14T08:22:01.3559870Z remote: Compressing objects... 82%
+2026-03-14T08:22:01.7501110Z info: processing step 56/78
+2026-03-14T08:22:01.8308800Z remote: Compressing objects... 96%
+2026-03-14T08:22:02.0079980Z remote: Compressing objects... 100%
+2026-03-14T08:22:02.2648820Z [1;33minfo: processing step 59/78[0m
+2026-03-14T08:22:03.0059630Z Cache restored successfully (302 MB, key hit)
+2026-03-14T08:22:03.1634230Z npm WARN deprecated yaml-min@7.17.10: this package is no longer maintained
+2026-03-14T08:22:03.6353120Z remote: Compressing objects... 31%
+2026-03-14T08:22:04.1211670Z info: processing step 63/78
+2026-03-14T08:22:04.5845960Z remote: Compressing objects... 45%
+2026-03-14T08:22:04.7631860Z remote: Compressing objects... 52%
+2026-03-14T08:22:05.0544740Z info: processing step 66/78
+2026-03-14T08:22:05.4690380Z Cache restored successfully (94 MB, key hit)
+2026-03-14T08:22:06.1105330Z npm WARN deprecated chalk-min@8.10.12: this package is no longer maintained
+2026-03-14T08:22:06.1530690Z remote: Compressing objects... 80%
+2026-03-14T08:22:06.2292400Z info: processing step 70/78
+2026-03-14T08:22:06.6185910Z remote: Compressing objects... 94%
+2026-03-14T08:22:07.1495010Z remote: Compressing objects... 100%
+2026-03-14T08:22:07.7811860Z info: processing step 73/78
+2026-03-14T08:22:08.0377800Z Cache restored successfully (846 MB, key hit)
+2026-03-14T08:22:08.2847030Z npm WARN deprecated har-validator-lite@1.0.11: this package is no longer maintained
+2026-03-14T08:22:08.9775410Z remote: Compressing objects... 29%
+2026-03-14T08:22:09.1460590Z info: processing step 77/78
+2026-03-14T08:22:09.6510380Z remote: Compressing objects... 43%
+2026-03-14T08:22:09.8136230Z ##[endgroup]
+
+2026-03-14T08:22:09.9634350Z ##[group]Run actions/setup-node@v4
+2026-03-14T08:22:10.0136180Z remote: Compressing objects... 4%
+2026-03-14T08:22:10.8276880Z remote: Compressing objects... 11%
+2026-03-14T08:22:11.4705350Z [31minfo: processing step 3/77[0m
+2026-03-14T08:22:11.7764890Z Cache restored successfully (434 MB, key hit)
+2026-03-14T08:22:12.0644970Z [2K[1Anpm WARN deprecated tar-stream-old@9.13.10: this package is no longer maintained
+2026-03-14T08:22:12.7870980Z [1;33mremote: Compressing objects... 39%[0m
+2026-03-14T08:22:12.9424750Z info: processing step 7/77
+2026-03-14T08:22:13.1171150Z remote: Compressing objects... 53%
+2026-03-14T08:22:13.8517750Z remote: Compressing objects... 60%
+2026-03-14T08:22:14.0426380Z info: processing step 10/77
+2026-03-14T08:22:14.6394030Z Cache restored successfully (507 MB, key hit)
+2026-03-14T08:22:14.8351860Z npm WARN deprecated retry-once@4.8.2: this package is no longer maintained
+2026-03-14T08:22:15.6329810Z remote: Compressing objects... 88%
+2026-03-14T08:22:16.2996110Z info: processing step 14/77
+2026-03-14T08:22:16.9271850Z remote: Compressing objects... 100%
+2026-03-14T08:22:17.4965180Z remote: Compressing objects... 9%
+2026-03-14T08:22:17.5424820Z info: processing step 17/77
+2026-03-14T08:22:18.2916560Z Cache restored successfully (87 MB, key hit)
+2026-03-14T08:22:18.7774650Z npm WARN deprecated retry-once@4.3.20: this package is no longer maintained
+2026-03-14T08:22:19.2403880Z [2K[1Aremote: Compressing objects... 37%
+2026-03-14T08:22:20.0408110Z [32minfo: processing step 21/77[0m
+2026-03-14T08:22:20.8069570Z remote: Compressing objects... 51%
+2026-03-14T08:22:21.1906100Z remote: Compressing objects... 58%
+2026-03-14T08:22:21.1980960Z info: processing step 24/77
+2026-03-14T08:22:21.6385020Z Cache restored successfully (139 MB, key hit)
+2026-03-14T08:22:21.6687500Z npm WARN deprecated yaml-min@4.12.7: this package is no longer maintained
+2026-03-14T08:22:21.7567980Z remote: Compressing objects... 86%
+2026-03-14T08:22:22.2845610Z info: processing step 28/77
+2026-03-14T08:22:23.1511180Z remote: Compressing objects... 100%
+2026-03-14T08:22:23.8858050Z remote: Compressing objects... 7%
+2026-03-14T08:22:24.7645060Z info: processing step 31/77
+2026-03-14T08:22:25.1243230Z Cache restored successfully (593 MB, key hit)
+2026-03-14T08:22:25.7164340Z npm WARN deprecated tar-stream-old@8.7.3: this package is no longer maintained
+2026-03-14T08:22:26.4928380Z remote: Compressing objects... 35%
+2026-03-14T08:22:26.7400870Z info: processing step 35/77
+2026-03-14T08:22:27.3194470Z remote: Compressing objects... 49%
+2026-03-14T08:22:27.5785860Z remote: Compressing objects... 56%
+2026-03-14T08:22:28.3504100Z [2K[1Ainfo: processing step 38/77
+2026-03-14T08:22:28.8973810Z Cache restored successfully (495 MB, key hit)
+2026-03-14T08:22:29.1973980Z npm WARN deprecated colorz-cli@4.15.20: this package is no longer maintained
+2026-03-14T08:22:29.8534630Z remote: Compressing objects... 84%
+2026-03-14T08:22:29.9104460Z info: processing step 42/77
+2026-03-14T08:22:30.0964640Z remote: Compressing objects... 98%
+2026-03-14T08:22:30.3233960Z remote: Compressing objects... 5%
+2026-03-14T08:22:30.9984420Z info: processing step 45/77
+2026-03-14T08:22:31.4961510Z Cache restored successfully (557 MB, key hit)
+2026-03-14T08:22:32.2514560Z [32mnpm WARN deprecated tar-stream-old@1.2.20: this package is no longer maintained[0m
+2026-03-14T08:22:32.9514140Z [32mremote: Compressing objects... 33%[0m
+2026-03-14T08:22:33.3360070Z info: processing step 49/77
+2026-03-14T08:22:33.3728930Z remote: Compressing objects... 47%
+2026-03-14T08:22:33.6865090Z remote: Compressing objects... 54%
+2026-03-14T08:22:33.8949670Z info: processing step 52/77
+2026-03-14T08:22:34.1318050Z Cache restored successfully (281 MB, key hit)
+2026-03-14T08:22:35.0237850Z npm WARN deprecated yaml-min@0.19.4: this package is no longer maintained
+2026-03-14T08:22:35.8277400Z remote: Compressing objects... 82%
+2026-03-14T08:22:36.0227620Z info: processing step 56/77
+2026-03-14T08:22:36.1770330Z remote: Compressing objects... 96%
+2026-03-14T08:22:36.9329030Z remote: Compressing objects... 100%
+2026-03-14T08:22:37.1295900Z info: processing step 59/77
+2026-03-14T08:22:37.2658160Z [1;33mCache restored successfully (653 MB, key hit)[0m
+2026-03-14T08:22:37.8857250Z npm WARN deprecated retry-once@5.10.7: this package is no longer maintained
+2026-03-14T08:22:38.6597920Z remote: Compressing objects... 31%
+2026-03-14T08:22:39.4559890Z info: processing step 63/77
+2026-03-14T08:22:39.5094140Z remote: Compressing objects... 45%
+2026-03-14T08:22:39.9158300Z remote: Compressing objects... 52%
+2026-03-14T08:22:40.6852980Z info: processing step 66/77
+2026-03-14T08:22:41.2461410Z Cache restored successfully (722 MB, key hit)
+2026-03-14T08:22:41.8838620Z npm WARN deprecated glob-walker@1.9.18: this package is no longer maintained
+2026-03-14T08:22:42.7112290Z remote: Compressing objects... 80%
+2026-03-14T08:22:43.3499270Z info: processing step 70/77
+2026-03-14T08:22:43.4459590Z remote: Compressing objects... 94%
+2026-03-14T08:22:44.0472150Z remote: Compressing objects... 100%
+2026-03-14T08:22:44.4265070Z info: processing step 73/77
+2026-03-14T08:22:45.1748980Z Cache restored successfully (358 MB, key hit)
+2026-03-14T08:22:46.0360210Z npm WARN deprecated querystring-es3@4.3.0: this package is no longer maintained
+2026-03-14T08:22:46.8415680Z remote: Compressing objects... 29%
+2026-03-14T08:22:47.4321680Z info: processing step 77/77
+2026-03-14T08:22:47.5780760Z ##[endgroup]
+
+2026-03-14T08:22:47.5933810Z ##[group]Run test
+2026-03-14T08:22:47.9680000Z > jest --ci --runInBand
+2026-03-14T08:22:48.8057210Z   ● UserProfile component › renders avatar › updates src when prop changes
+2026-03-14T08:22:49.0771060Z     expect(received).toEqual(expected) // deep equality
+2026-03-14T08:22:49.7667410Z 
+2026-03-14T08:22:50.0427060Z     Expected: "https://cdn.example.com/avatars/new.png"
+2026-03-14T08:22:50.1067470Z     Received: "https://cdn.example.com/avatars/old.png"
+2026-03-14T08:22:50.3218870Z 
+2026-03-14T08:22:50.6136440Z       42 |   expect(img.src).toEqual(newSrc);
+2026-03-14T08:22:50.9815000Z Tests:       1 failed, 27 passed, 28 total
+2026-03-14T08:22:51.3211570Z ##[endgroup]
+
+2026-03-14T08:22:51.9525820Z ##[group]Cleanup
+2026-03-14T08:22:52.5114700Z Cleanup completed successfully.
+2026-03-14T08:22:53.0876140Z ##[endgroup]
+2026-03-14T08:22:53.6356900Z [coverage] finalizing report... 3%
+2026-03-14T08:22:53.8116310Z Post job cleanup.
+2026-03-14T08:22:54.0565770Z Removing temporary directory /home/runner/work/_temp/7193
+2026-03-14T08:22:54.6062520Z info: teardown step 4/9
+2026-03-14T08:22:55.2806160Z [coverage] finalizing report... 47%
+2026-03-14T08:22:55.4568260Z Post job cleanup.
+2026-03-14T08:22:55.6466100Z Removing temporary directory /home/runner/work/_temp/9411
+2026-03-14T08:22:56.0868480Z info: teardown step 8/9
+2026-03-14T08:22:56.2865480Z [2K[1A[coverage] finalizing report... 91%
+2026-03-14T08:22:56.3799810Z ##[error]Process completed with exit code 1

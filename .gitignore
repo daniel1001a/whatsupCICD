@@ -1,0 +1,23 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# 資料庫與備份（R2：絕不進 repo）
+*.sqlite
+*.sqlite-*
+*.db
+data/
+
+# secret 一律從環境變數注入，不進 repo
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+
+# 抓下來的 log 絕不落地，但萬一有人手動存了，這裡擋一道
+*.log
+!fixtures/ci-logs/*.log
+
+.DS_Store
