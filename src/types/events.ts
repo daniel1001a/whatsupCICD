@@ -40,6 +40,11 @@ export interface GitHubWorkflowRunEvent {
     readonly id: number;
     readonly name: string;
     readonly updated_at: string; // ISO-8601
+    /**
+     * 每次重跑單調遞增的穩定整數（從 1 開始）。THREAT_MODEL.md §5.2 層 2 的
+     * 重放防禦冪等鍵 = `(id, run_attempt)`，理由見 `migrations/0002_run_attempt.sql`。
+     */
+    readonly run_attempt: number;
     readonly conclusion: 'success' | 'failure' | 'cancelled' | 'skipped' | 'timed_out' | null;
     readonly run_number: number;
     readonly event: string;

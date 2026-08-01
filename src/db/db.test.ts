@@ -65,6 +65,7 @@ function seedEvent(db: Database.Database, installationId: string, deliveryId: st
     eventType: 'workflow_run',
     repoFullName: 'acme/widgets',
     runId: seedEventCounter,
+    runAttempt: 1,
     runUpdatedAt: `2026-07-29T00:00:${String(seedEventCounter % 60).padStart(2, '0')}.000Z`,
     receivedAt: '2026-07-29T00:00:00.000Z',
     rawBody: Buffer.from('{}'),
@@ -154,6 +155,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run' as const,
       repoFullName: 'acme/widgets',
       runId: 1,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{"first":true}'),
@@ -187,6 +189,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 2,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from(JSON.stringify({ secret: canary })),
@@ -210,6 +213,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 10,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{}'),
@@ -220,6 +224,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 11,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:01.000Z',
       receivedAt: '2026-07-29T00:00:01.000Z',
       rawBody: Buffer.from('{}'),
@@ -249,6 +254,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 20,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{}'),
@@ -279,6 +285,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 30,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{}'),
@@ -301,6 +308,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 40,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{}'),
@@ -327,6 +335,7 @@ describe('EventRepository', () => {
       eventType: 'workflow_run',
       repoFullName: 'acme/widgets',
       runId: 50,
+      runAttempt: 1,
       runUpdatedAt: '2026-07-29T00:00:00.000Z',
       receivedAt: '2026-07-29T00:00:00.000Z',
       rawBody: Buffer.from('{}'),
@@ -338,6 +347,86 @@ describe('EventRepository', () => {
     const row = expectDefined(repo.findById(claimed.id), 'after markDead');
     expect(row.status).toBe('dead');
     expect(row.completed_at).toBe('2026-07-29T03:00:00.000Z');
+  });
+
+  it('RT1-02 回歸（docs/redteam/P1-09-webhook-replay.md）：run_id/run_attempt 撞到 idx_events_run 時回 duplicate，不拋出例外', () => {
+    const db = freshDb();
+    const installationId = seedInstallation(db, 8);
+    const repo = new EventRepository(db);
+
+    const first = repo.insertPending({
+      deliveryId: 'run-collide-a',
+      installationId,
+      eventType: 'workflow_run',
+      repoFullName: 'acme/widgets',
+      runId: 999,
+      runAttempt: 1,
+      runUpdatedAt: '2026-07-29T00:00:00.000Z',
+      receivedAt: '2026-07-29T00:00:00.000Z',
+      rawBody: Buffer.from('{}'),
+    });
+    expect(first).toBe('accepted');
+
+    // 不同 delivery_id（層 1 不會擋），但同一個 (run_id, run_attempt)——
+    // 原本 `ON CONFLICT(delivery_id)` 只命名了一個仲裁目標，不涵蓋
+    // `idx_events_run`，這裡曾經直接拋出 SqliteError，被 `createEnqueue`
+    // 的 catch-all 誤判成「佇列不可用」（503），而不是「已經處理過了」（200）。
+    let thrown: unknown;
+    let second: unknown;
+    try {
+      second = repo.insertPending({
+        deliveryId: 'run-collide-b',
+        installationId,
+        eventType: 'workflow_run',
+        repoFullName: 'acme/widgets',
+        runId: 999,
+        runAttempt: 1,
+        runUpdatedAt: '2026-07-29T00:05:00.000Z',
+        receivedAt: '2026-07-29T00:05:00.000Z',
+        rawBody: Buffer.from('{}'),
+      });
+    } catch (err) {
+      thrown = err;
+    }
+
+    expect(thrown).toBeUndefined();
+    expect(second).toBe('duplicate');
+
+    const row = db.prepare<[], { readonly n: number }>(`SELECT COUNT(*) as n FROM events`).get();
+    expect(row?.n).toBe(1);
+  });
+
+  it('不同 run_id 或不同 run_attempt 不會撞到 idx_events_run（正常情況下都能落庫）', () => {
+    const db = freshDb();
+    const installationId = seedInstallation(db, 9);
+    const repo = new EventRepository(db);
+
+    expect(
+      repo.insertPending({
+        deliveryId: 'distinct-a',
+        installationId,
+        eventType: 'workflow_run',
+        repoFullName: 'acme/widgets',
+        runId: 100,
+        runAttempt: 1,
+        runUpdatedAt: '2026-07-29T00:00:00.000Z',
+        receivedAt: '2026-07-29T00:00:00.000Z',
+        rawBody: Buffer.from('{}'),
+      }),
+    ).toBe('accepted');
+    expect(
+      repo.insertPending({
+        deliveryId: 'distinct-b',
+        installationId,
+        eventType: 'workflow_run',
+        repoFullName: 'acme/widgets',
+        runId: 100,
+        runAttempt: 2, // 同 run_id、不同 attempt（合法重跑）
+        runUpdatedAt: '2026-07-29T00:05:00.000Z',
+        receivedAt: '2026-07-29T00:05:00.000Z',
+        rawBody: Buffer.from('{}'),
+      }),
+    ).toBe('accepted');
   });
 });
 
@@ -454,6 +543,7 @@ describe('外鍵約束', () => {
         eventType: 'workflow_run',
         repoFullName: 'acme/widgets',
         runId: 1,
+        runAttempt: 1,
         runUpdatedAt: '2026-07-29T00:00:00.000Z',
         receivedAt: '2026-07-29T00:00:00.000Z',
         rawBody: Buffer.from('{}'),

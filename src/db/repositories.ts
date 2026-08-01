@@ -62,12 +62,34 @@ export interface NewEventInput {
   readonly eventType: GitHubEventType;
   readonly repoFullName: string | null;
   readonly runId: number | null;
+  /** 冪等鍵第二分量。見 `types/db.ts` `EventRow.run_attempt` 的說明。 */
+  readonly runAttempt: number | null;
   readonly runUpdatedAt: string | null;
   readonly receivedAt: string;
   readonly rawBody: Buffer;
 }
 
 export type InsertPendingOutcome = 'accepted' | 'duplicate';
+
+/**
+ * P1-09 redteam RT1-02 修補：`ON CONFLICT(delivery_id)` 只命名了一個仲裁目標，
+ * 不會攔截 `idx_events_run`（`run_id`, `run_attempt`）上的唯一鍵衝突——那是一個
+ * *不同*的唯一索引，SQLite 對它照樣拋出 `SQLITE_CONSTRAINT_UNIQUE`。
+ *
+ * 這個衝突是預期內、確定性的事件（同一個 run 真的被送達了兩次），不是資料庫
+ * 不可用。用訊息內容判斷衝突是否來自 `idx_events_run`（而非其他未來可能新增的
+ * 唯一索引），是才吞掉回傳 `'duplicate'`；不是就照原樣往外拋，讓呼叫端
+ * （`enqueue.ts`）的既有 catch-all 走 R4 的 `'unavailable'` 路徑，不掩蓋真正未知的錯誤。
+ */
+function isRunAttemptConflict(err: unknown): boolean {
+  return (
+    err instanceof Error &&
+    'code' in err &&
+    (err as { code?: unknown }).code === 'SQLITE_CONSTRAINT_UNIQUE' &&
+    err.message.includes('events.run_id') &&
+    err.message.includes('events.run_attempt')
+  );
+}
 
 export class EventRepository {
   constructor(private readonly db: Database.Database) {}
@@ -83,28 +105,37 @@ export class EventRepository {
     const digest = createHash('sha256').update(input.rawBody).digest('hex');
     const id = ulid();
 
-    const result = this.db
-      .prepare(
-        `INSERT INTO events (
-           id, delivery_id, installation_id, event_type, repo_full_name,
-           run_id, run_updated_at, received_at, status, attempts,
-           next_attempt_at, last_error, payload_digest, completed_at
-         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', 0, NULL, NULL, ?, NULL)
-         ON CONFLICT(delivery_id) DO NOTHING`,
-      )
-      .run(
-        id,
-        input.deliveryId,
-        input.installationId,
-        input.eventType,
-        input.repoFullName,
-        input.runId,
-        input.runUpdatedAt,
-        input.receivedAt,
-        digest,
-      );
+    try {
+      const result = this.db
+        .prepare(
+          `INSERT INTO events (
+             id, delivery_id, installation_id, event_type, repo_full_name,
+             run_id, run_attempt, run_updated_at, received_at, status, attempts,
+             next_attempt_at, last_error, payload_digest, completed_at
+           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 0, NULL, NULL, ?, NULL)
+           ON CONFLICT(delivery_id) DO NOTHING`,
+        )
+        .run(
+          id,
+          input.deliveryId,
+          input.installationId,
+          input.eventType,
+          input.repoFullName,
+          input.runId,
+          input.runAttempt,
+          input.runUpdatedAt,
+          input.receivedAt,
+          digest,
+        );
 
-    return result.changes > 0 ? 'accepted' : 'duplicate';
+      return result.changes > 0 ? 'accepted' : 'duplicate';
+    } catch (err) {
+      // RT1-02：idx_events_run 衝突是預期內的重放/重送，不是 DB 故障。
+      if (isRunAttemptConflict(err)) {
+        return 'duplicate';
+      }
+      throw err;
+    }
   }
 
   /**

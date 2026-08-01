@@ -25,13 +25,15 @@ export interface WebhookDeps {
   /**
    * 落庫並排入佇列。
    *
-   * @returns `'accepted'` 新事件已落庫｜`'duplicate'` delivery_id 已存在｜
+   * @returns `'accepted'` 新事件已落庫｜`'duplicate'` delivery_id 或
+   *          `(run_id, run_attempt)` 已存在（THREAT_MODEL.md §5.2 層 1/2）｜
+   *          `'stale'` workflow_run.updated_at 早於新鮮度視窗（同 §5.2 層 3）｜
    *          `'skipped'` 不需處理｜`'unavailable'` 佇列或 DB 暫時不可用
    */
   readonly enqueue: (event: IncomingEvent) => Promise<EnqueueOutcome> | EnqueueOutcome;
 }
 
-export type EnqueueOutcome = 'accepted' | 'duplicate' | 'skipped' | 'unavailable';
+export type EnqueueOutcome = 'accepted' | 'duplicate' | 'stale' | 'skipped' | 'unavailable';
 
 export interface IncomingEvent {
   readonly deliveryId: string;
@@ -127,12 +129,15 @@ export function registerWebhookRoutes(app: FastifyInstance, deps: WebhookDeps): 
       return reply.code(200).send({ status: 'skipped' });
     }
 
-    // ── 4. 落庫 + 去重（由 events 表的 UNIQUE(delivery_id) 保證）────────
-    // ⚠️ 去重發生在 `enqueue` 內（events 表的 UNIQUE 約束），不是這一層。
-    // `SPEC.md` §4 的圖把「去重」畫在 ① 步驟裡容易讓人以為 handler 自己做，
-    // 實際上 handler 只是把它委派出去。P1-06 接上真正的 queue 之前，
-    // 重放防護是**完全空的**——這一點已記在 STATE.md，不要被
-    // 「webhook 測試都過了」誤導成攻擊面已覆蓋。
+    // ── 4. 落庫 + 去重（由 `enqueue` 內部委派，見 `src/queue/enqueue.ts`）──
+    // ⚠️ 去重不是這一層做的。`SPEC.md` §4 的圖把「去重」畫在 ① 步驟裡容易讓人
+    // 以為 handler 自己做，實際上 handler 只是把它委派出去。三層防護
+    // （THREAT_MODEL.md §5.2）全部實作於 `enqueue.ts`/`repositories.ts`：
+    // 層 1 delivery_id UNIQUE（冪等性，非安全）、層 2 (run_id, run_attempt)
+    // UNIQUE（真正的防重放主力，鍵來自受簽章保護的 payload 內容）、
+    // 層 3 新鮮度視窗（拒絕 15 分鐘前的 workflow_run.updated_at）。
+    // 見 docs/redteam/P1-09-webhook-replay.md RT1-01：這三層曾經只有層 1
+    // 真的在跑，層 2/3 的資料庫索引存在但從未被寫入非 NULL 值。
     let outcome: EnqueueOutcome;
     try {
       outcome = await deps.enqueue({

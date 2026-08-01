@@ -45,7 +45,13 @@ export interface EventRow {
   /** 可為 null，同 `installation_id`：落庫時尚未 parse payload。 */
   readonly repo_full_name: string | null;
   readonly run_id: number | null;
-  readonly run_updated_at: string | null; // ISO-8601 UTC
+  /**
+   * 冪等鍵的第二個分量（THREAT_MODEL.md §5.2 層 2：`(run_id, run_attempt)`）。
+   * 可為 null，理由同 `run_id`——落庫時尚未 parse payload，或非 workflow_run 事件。
+   * `migrations/0002_run_attempt.sql` 新增；見該檔說明為何不用 `run_updated_at` 當鍵。
+   */
+  readonly run_attempt: number | null;
+  readonly run_updated_at: string | null; // ISO-8601 UTC，僅供除錯／新鮮度視窗參考，不再是唯一鍵的一部分
   readonly received_at: string; // ISO-8601 UTC
   readonly status: EventStatus;
   readonly attempts: number; // DEFAULT 0
