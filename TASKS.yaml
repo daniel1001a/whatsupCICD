@@ -7,10 +7,15 @@
 
 meta:
   version: 1
-  updated: 2026-07-29
+  updated: 2026-08-01
   current_phase: 1
+  # PO 於 2026-08-01 拍板 Q1-Q7，全部採 Tech Lead 建議（見 STATE.md「目前狀態」）：
+  #   Q1=A 自架優先 / Q2=A opt_out+tone 走 Slack 側、不申請 Contents:Read /
+  #   Q3=A SC03 預設關 / Q4=A anonymous 預設 false、公開卡不出現人名 /
+  #   Q5=做 llm.enabled:false（解除 P3-13 阻塞）/ Q6=architect 版分享按鈕觸發 /
+  #   Q7=全部同意（安全優先、不給調鬆開關）
   gate_status:
-    P0: approved # PO 於 2026-07-29 批准。Q1-Q7 尚未回答，不擋 Phase 1 實作
+    P0: approved # PO 於 2026-07-29 批准；Q1-Q7 於 2026-08-01 拍板
     P1: in_progress
     P2: not_started
     P3: not_started
@@ -150,7 +155,7 @@ phase_1:
     level: L1
     outputs: [.github/workflows/ci.yml, scripts/check-app-permissions.ts]
     dod: [四關皆跑; app-manifest 出現 SPEC.md §5 之外的權限即失敗; Dependabot 設定]
-    status: todo
+    status: done # 2026-08-01 併入 main 後驗證：ci.yml + check-app-permissions.ts + check-safe-regex.ts + dependabot.yml 皆在，4 關綠燈
 
   - id: P1-03
     desc: 型別定義骨架 — 公訴詞 JSON、設定檔、事件、error_class、場景等所有共用型別
@@ -163,7 +168,7 @@ phase_1:
     outputs: [src/types/*.ts]
     dod: [型別與 SPEC.md §7/§8/§9/§10 一致; 無 any; 通過 typecheck]
     forbidden: [不碰 sanitizer, 不碰擷取器]
-    status: todo
+    status: done # 2026-08-01：src/types/{index,config,events,verdict,scene,db}.ts 皆在，typecheck 過
 
   - id: P1-04
     desc: Fastify 骨架 + webhook 路由 + HMAC-SHA256 驗簽（raw body、timing-safe）+ X-GitHub-Delivery 去重
@@ -179,7 +184,7 @@ phase_1:
       - 缺簽章 → 401（不是略過）
       - 重複 delivery_id → 200 no-op
       - 假 webhook 端到端 < 3 秒回 200
-    status: todo
+    status: done # 2026-08-01：server.ts + routes/webhook.ts + security/verify-signature.ts 皆在，e2e/webhook.test.ts 21 tests 綠。★ 注意 delivery_id 去重要靠 P1-06 的 enqueue 才生效
     notes: 安全關鍵路徑，L2 自己做
 
   - id: P1-05
@@ -193,7 +198,7 @@ phase_1:
     outputs: [migrations/0001_init.sql, src/db/*.ts]
     dod:
       [表定義與 SPEC.md §10 完全一致; 全 STRICT; migration 可重跑冪等; 無 SQLite 專屬語法於查詢層]
-    status: todo
+    status: done # 2026-08-01：migrations/0001_init.sql + src/db/* 皆在，db.test.ts 19 tests 綠。EventRepository 已備 claimNext/reclaimOrphans/markFailed/markDead 等佇列原語
 
   - id: P1-06
     desc: 持久化 queue — events 表驅動的 in-process worker、開機掃描孤兒事件、next_attempt_at 退避
@@ -218,8 +223,8 @@ phase_1:
       - ≥8 種語言/框架
       - 每份記錄來源 repo / run URL / 取得日期
       - 入庫前已人工目視確認無真實敏感資訊
-    blocked_by_question: Q7
-    status: todo
+    blocked_by_question: Q7 # 已解除（Q7 於 2026-08-01 拍板）
+    status: done # 2026-08-01：fixtures/ci-logs/ 有 12 份（generate.py 合成，非真實客戶 log）+ manifest.json + README
 
   - id: P1-08
     desc: pino 結構化日誌 + redaction 設定 + 健康檢查端點

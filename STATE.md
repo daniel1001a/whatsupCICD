@@ -8,15 +8,21 @@
 
 | 項目 | 值 |
 |---|---|
-| **Phase** | **0 — 規格與威脅模型** |
-| **狀態** | 產出完成，**等待產品負責人批准** |
-| 分支 | `claude/whatsupcicd-project-init-ig43iw` |
-| 最後更新 | 2026-07-29 |
-| 下一步 | PO 回答 `RISKS.md` 的 7 個問題 → 說 approved → 進 Phase 1 |
+| **Phase** | **1 — 骨架** |
+| **狀態** | 進行中。P1-01/02/03/04/05/07 已完成並在 `main`，剩 P1-06/08/09/10 |
+| 分支 | `main`（feature 分支已用 `--allow-unrelated-histories` 併入並推送） |
+| 最後更新 | 2026-08-01 |
+| 下一步 | P1-06 佇列 → P1-08 canary 測試 → P1-09 redteam 一輪 → P1-10 驗收 |
 
-**阻塞項**：`RISKS.md` Q1（hosted vs 自架）會改變 Phase 1 的部署設計與 Phase 5 的安裝流程，
-Q2（Contents:Read）會改變 GitHub App manifest。這兩題在 Phase 1 開工前必須有答案。
-Q3–Q7 可以在 Phase 1 期間回答，不阻塞。
+**PO 已於 2026-08-01 拍板 Q1–Q7（全部採 Tech Lead 建議）：**
+- **Q1 = A 自架優先**：使用者 `fly deploy` 自己的實例、填自己的 Anthropic key，資料不經過我方。
+- **Q2 = A + architect 補強**：`opt_out` 與 `tone.level`（會影響到別人的欄位）只走 Slack 側設定；
+  其餘純 repo 偏好留在 `.prosecutor.yml`。**GitHub App 維持 `actions:read` + `metadata:read`，不申請 `Contents:Read`**（D-06 → accepted）。
+- **Q3 = A**：保留 `SC03` 但預設關閉、改陪伴調性、標題禁提時間。
+- **Q4 = A**：`privacy.anonymous` 預設 `false`；但公開迷因卡／分享頁一律不出現人名；`actor_login` 保存但永不做起訴排行榜。
+- **Q5 = 做**：加 `llm.enabled:false` template-only 模式（同時是外洩時的 kill switch），排 Phase 3（P3-13 解除 Q5 阻塞）。
+- **Q6 = architect 版**：分享連結按鈕觸發、unlisted、卡片預設不顯示 repo 名；保留期 v1 固定（判決 90 天／事件 30 天）；解除安裝不代刪 Slack 訊息。
+- **Q7 = 全部同意**：安全優先且不給調鬆開關；DB 名遮罩但保留 `env=` 環境提示；Slack 顯示「已遮罩 N 處」；PII v1 = 信用卡(Luhn)+台灣身分證+美國 SSN；fallback 只給一句人話原因。
 
 ---
 

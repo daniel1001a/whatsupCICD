@@ -21,3 +21,4 @@ data/
 !fixtures/ci-logs/*.log
 
 .DS_Store
+.DS_Store
