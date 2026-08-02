@@ -255,6 +255,22 @@ Phase 3 同時要做 LLM 層、Slack 渲染、回饋按鈕、場景庫、選擇�
 
 ---
 
+### R-15 · webhook 端無 per-installation rate limit，單一 repo 可餓死同伺服器上其他租戶的佇列
+**可能性 M · 影響 3**
+
+`P1-09` redteam（`docs/redteam/P1-09-webhook-replay.md` RT1-03）發現：任何對受監控 repo 有 commit 權的人，不需要知道 webhook secret，就能用合法簽章的方式大量觸發 `workflow_run` 事件（例如迴圈呼叫 `workflow_dispatch`），而 `EventRepository.claimNext` 是單一全域 FIFO，沒有依 `installation_id` 分流或限流——這足以讓一個租戶的積壓事件排在另一個租戶前面，餓死後者的處理順位。`THREAT_MODEL.md` §5.3(d) 已把每 installation 限流列為多租戶系統的基本要求，但目前尚未實作。
+
+**為何現在不修**：Q1 已拍板「自架優先」——每個客戶跑自己的 Fly 實例，不是我方代管的多租戶服務。在這個部署形態下，RT1-03 的爆炸半徑限縮在**同一個客戶自己的 repo 之間**，而不是跨客戶——影響仍然真實（一個吵鬧的 repo 可以拖慢同帳號下其他 repo 的通知），但不是 R-01 那個等級的「一次事件專案就結束」。`critic`（P1-10 驗收）同意這個判斷，認為現階段不修是可辯護的，不是把關卡放水。
+
+**對策**
+1. `TASKS.yaml` `P4-01` 的 DoD 已明列「webhook 端有 per-installation 限流」——不是新排入，是本來就在 Phase 4 範圍內，這裡把它從「順便做」提升成「這條風險登記表明確追蹤的項目」，避免像 RT1-01 一樣悄悄被忽略到有人重新發現。
+2. Phase 4 實作 token bucket（20/min，burst 40，依 `installation_id`）+ `events` 表的 bounded queue depth（100，超過 shed-and-count），規格已在 `THREAT_MODEL.md` §5.3(c)/(d)。
+3. 在 P4-01 落地前，`claimNext` 仍是全域 FIFO——若某次自架部署真的觀察到單一 repo 洗版其他 repo 的通知，這是明確的訊號要提前這個任務的優先序。
+
+**負責 Phase**：1（發現並記錄）· 4（修補）
+
+---
+
 ## 待產品負責人拍板的問題
 
 > 每題附我的建議答案與理由。

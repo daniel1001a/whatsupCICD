@@ -16,7 +16,7 @@ meta:
   #   Q7=全部同意（安全優先、不給調鬆開關）
   gate_status:
     P0: approved # PO 於 2026-07-29 批准；Q1-Q7 於 2026-08-01 拍板
-    P1: in_progress
+    P1: accepted # inspector+critic 皆 PASS（2026-08-01）；等 PO 批准進 Phase 2
     P2: not_started
     P3: not_started
     P4: not_started
@@ -261,7 +261,10 @@ phase_1:
     model: haiku-4.5, sonnet-5
     effort: low, high
     dod: [Gate P1 逐條打勾]
-    status: todo
+    status: done # 2026-08-01：inspector PASS（逐條打勾零缺漏）；critic PASS（獨立重驗 ef24b02 的修補，非只信報告）。
+      # critic 4 項 should-fix：#1（Phase 2 該有 Worker 接管線的 DoD 追蹤）已補進 P2-10；
+      # #2（RT1-03 殘餘風險應入 RISKS.md）已補 R-15；#4（idempotency-key 退化路徑無觀測）已補進 P4-06；
+      # #3（isRunAttemptConflict 字串比對無錨定）判斷現階段 schema 規模下優先度低，暫不動
 
 # ══════════════════════════════════════════════════════════════════
 # PHASE 2 — 管線（全部確定性、全測試）
@@ -411,7 +414,15 @@ phase_2:
     agent: inspector, critic
     model: haiku-4.5, sonnet-5
     effort: low, high
-    dod: [Gate P2 逐條打勾]
+    dod:
+      - Gate P2 逐條打勾
+      - >-
+        ★ P1-10 critic 追蹤項：確認 src/main.ts 已把 src/queue/worker.ts 的
+        Worker 接上真正的 EventHandler（Phase 2 管線完成後才有東西可接）。
+        這條 DoD 存在的理由：main.ts 曾經連 enqueue 都沒接上，導致所有修補
+        在真正跑起來的伺服器上完全不生效，直到 P1-09 redteam 才意外發現。
+        不希望同一種「佇列收了事件但沒東西處理」的遺漏在 Worker 接管線這步
+        重演又要靠意外發現。
     status: todo
 
 # ══════════════════════════════════════════════════════════════════
@@ -713,9 +724,14 @@ phase_4:
     effort: medium
     level: L1
     dod:
-      [
-        error tracker 有 scrubbing hook（THREAT_MODEL.md §6）; 有測試證明 log 與 error report 皆不含 raw 內容,
-      ]
+      - error tracker 有 scrubbing hook（THREAT_MODEL.md §6）; 有測試證明 log 與 error report 皆不含 raw 內容
+      - >-
+        ★ P1-10 critic 追蹤項：src/queue/enqueue.ts 的 extractWorkflowRunKey
+        在 workflow_run 事件解析失敗時（畸形/欄位缺漏/未來 GitHub payload
+        改版）會靜默退化成只靠 delivery_id 去重，目前沒有任何 log/metric。
+        這是防禦深度的一環（THREAT_MODEL.md §5.2 層 2/3），退化本身若無人
+        察覺，等於在生產環境悄悄少了一層重放防禦卻沒人知道。補一個
+        metadata-only 的 warn log 或 /stats 可查的計數器（不含 payload 內容）。
     status: todo
 
   - id: P4-07

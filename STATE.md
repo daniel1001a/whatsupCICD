@@ -9,10 +9,27 @@
 | 項目 | 值 |
 |---|---|
 | **Phase** | **1 — 骨架** |
-| **狀態** | 進行中。P1-01/02/03/04/05/07 已完成並在 `main`，剩 P1-06/08/09/10 |
+| **狀態** | **全部完成，Gate P1 驗收通過（inspector + critic 皆 PASS），等待 PO 批准進 Phase 2** |
 | 分支 | `main`（feature 分支已用 `--allow-unrelated-histories` 併入並推送） |
 | 最後更新 | 2026-08-01 |
-| 下一步 | P1-06 佇列 → P1-08 canary 測試 → P1-09 redteam 一輪 → P1-10 驗收 |
+| 下一步 | PO 批准 → 進 Phase 2（sanitizer + 錯誤擷取器，Tech Lead 親自實作，R1 不外派） |
+
+**P1-10 驗收結果**：
+- `inspector`（haiku-4.5, low）：逐條打勾 Gate P1 四項 + P1-01～P1-09 每項 DoD，**零缺漏**。12 個 fixture（≥8 要求）、151/151 測試、webhook 387ms（<3s 要求）、`npm run dev` 可一鍵起。
+- `critic`（sonnet-5, high）：**PASS**。獨立重驗 `ef24b02`（不只信報告）：重跑 `git show`、typecheck/lint/test/build、並獨立重現 SQLite 錯誤訊息格式驗證 `isRunAttemptConflict` 的比對邏輯。確認 RT1-01/02/04 修補是真的生效，不是表面掩蓋；確認 R2/R4 在整條 queue/webhook 路徑上都成立（grep 過所有 log 呼叫點，無 payload 內容外洩）；確認 RT1-03 展延到 Phase 4 的判斷成立（Q1 自架優先，爆炸半徑限縮在同一客戶內）。
+  4 項 should-fix（非阻塞）已處置：
+  1. Phase 2 應有明確 DoD 追蹤「Worker 接上真正 EventHandler」，避免重演 main.ts 曾經沒接 enqueue 卻沒人發現的情況 → 已補進 `P2-10`
+  2. RT1-03 殘餘風險應寫進 `RISKS.md` 而非只留在 redteam 報告 → 已補 `R-15`
+  3. `isRunAttemptConflict` 字串比對無錨定，未來若有更多複合唯一索引可能誤判 → 判斷現階段 schema 規模下優先度低，暫不處理
+  4. `extractWorkflowRunKey` 解析失敗退化路徑無 log/metric，觀測不到防禦層悄悄降級 → 已補進 `P4-06`
+
+**P1-09 redteam 一輪重點**：4 個發現（1 critical / 1 high / 1 med / 1 low）。critical（RT1-01
+重放防禦層 2/3 從未真正運作，攻擊者側錄一次合法 webhook 可無限重放）、high（RT1-02 idx_events_run
+衝突誤判成 DB 不可用）、low（RT1-04 冪等鍵型別誤用）皆已由 Tech Lead 修補並以 9 條新回歸測試釘住
+（`ef24b02`）；medium（RT1-03 無 per-installation rate limit）展延至 `P4-01`（已在其 DoD 範圍內，
+非 Gate P1 要求）。同時發現並修補一個相鄰 bug：`main.ts` 從未把 `enqueue` 接上 `buildServer`，
+實際跑起來的伺服器不論上述修補與否都會對每個 webhook 回 503。完整報告：
+`docs/redteam/P1-09-webhook-replay.md`。
 
 **PO 已於 2026-08-01 拍板 Q1–Q7（全部採 Tech Lead 建議）：**
 - **Q1 = A 自架優先**：使用者 `fly deploy` 自己的實例、填自己的 Anthropic key，資料不經過我方。
