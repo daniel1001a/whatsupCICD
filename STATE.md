@@ -8,11 +8,11 @@
 
 | 項目 | 值 |
 |---|---|
-| **Phase** | **1 — 骨架** |
-| **狀態** | **全部完成，Gate P1 驗收通過（inspector + critic 皆 PASS），等待 PO 批准進 Phase 2** |
+| **Phase** | **2 — 管線** |
+| **狀態** | 進行中。PO 於 2026-08-01 批准 Phase 1 並同意進 Phase 2 |
 | 分支 | `main`（feature 分支已用 `--allow-unrelated-histories` 併入並推送） |
 | 最後更新 | 2026-08-01 |
-| 下一步 | PO 批准 → 進 Phase 2（sanitizer + 錯誤擷取器，Tech Lead 親自實作，R1 不外派） |
+| 下一步 | Sanitizer 核心（P2-01，Tech Lead 親自實作）+ 三個並行 builder task（P2-04/P2-06/P2-07） |
 
 **P1-10 驗收結果**：
 - `inspector`（haiku-4.5, low）：逐條打勾 Gate P1 四項 + P1-01～P1-09 每項 DoD，**零缺漏**。12 個 fixture（≥8 要求）、151/151 測試、webhook 387ms（<3s 要求）、`npm run dev` 可一鍵起。

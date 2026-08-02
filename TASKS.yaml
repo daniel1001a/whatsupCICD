@@ -8,7 +8,7 @@
 meta:
   version: 1
   updated: 2026-08-01
-  current_phase: 1
+  current_phase: 2
   # PO 於 2026-08-01 拍板 Q1-Q7，全部採 Tech Lead 建議（見 STATE.md「目前狀態」）：
   #   Q1=A 自架優先 / Q2=A opt_out+tone 走 Slack 側、不申請 Contents:Read /
   #   Q3=A SC03 預設關 / Q4=A anonymous 預設 false、公開卡不出現人名 /
@@ -16,8 +16,8 @@ meta:
   #   Q7=全部同意（安全優先、不給調鬆開關）
   gate_status:
     P0: approved # PO 於 2026-07-29 批准；Q1-Q7 於 2026-08-01 拍板
-    P1: accepted # inspector+critic 皆 PASS（2026-08-01）；等 PO 批准進 Phase 2
-    P2: not_started
+    P1: approved # PO 於 2026-08-01 批准，同時批准進 Phase 2
+    P2: in_progress
     P3: not_started
     P4: not_started
     P5: not_started
